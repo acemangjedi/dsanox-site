@@ -9,6 +9,9 @@ interface Props {
 	canonical?: string;
 	robots?: string;
 	ogType?: "website" | "article";
+	// What a share shows, when it is not the title and description.
+	ogTitle?: string;
+	ogDescription?: string;
 	ogImage?: string;
 	ogImageAlt?: string;
 	articlePublishedTime?: string;
@@ -23,6 +26,8 @@ const {
 	canonical = abs(Astro.url.pathname),
 	robots = "index, follow, max-image-preview:large",
 	ogType = "website",
+	ogTitle = title,
+	ogDescription = description,
 	ogImage = abs(site.org.ogImage),
 	ogImageAlt = site.name,
 	articlePublishedTime,
@@ -45,8 +50,8 @@ const ogImageType = ogImage.endsWith(".webp")
 <meta property="og:type" content={ogType} />
 <meta property="og:locale" content={site.lang.replace("-", "_")} />
 <meta property="og:site_name" content={site.name} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:type" content={ogImageType} />

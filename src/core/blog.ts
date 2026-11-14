@@ -15,6 +15,15 @@ export const blog = defineCollection({
 		draft: z.boolean().default(false),
 		image: z.object({ src: z.string(), alt: z.string() }).optional(),
 		canonical: z.url().optional(),
+		// Written in the panel's "Google e partilha"; each falls back to the article's own.
+		metaTitle: z.string().optional(),
+		ogTitle: z.string().optional(),
+		ogDescription: z.string().optional(),
+		ogImage: z.string().optional(),
+		noindex: z.boolean().default(false),
+		jsonLd: z
+			.union([z.record(z.string(), z.unknown()), z.array(z.unknown())])
+			.optional(),
 	}),
 });
 
@@ -23,3 +32,16 @@ export const getPosts = async () =>
 	(await getCollection("blog", ({ data }) => !data.draft)).sort(
 		(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 	);
+
+// The article's extra JSON-LD as nodes to add to the page's graph.
+export const extraNodes = (jsonLd: unknown): object[] => {
+	if (!jsonLd) return [];
+	if (Array.isArray(jsonLd)) return jsonLd as object[];
+	const {
+		"@context": _,
+		"@graph": nodes,
+		...rest
+	} = jsonLd as Record<string, unknown>;
+	if (Array.isArray(nodes)) return nodes as object[];
+	return [rest];
+};

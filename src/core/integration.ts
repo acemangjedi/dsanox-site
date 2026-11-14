@@ -57,12 +57,25 @@ function lastmodFor(url: string) {
 	return date || undefined;
 }
 
+// An article the client asked to keep out of Google stays out of the sitemap too.
+export function noindexed(pathname: string): boolean {
+	const m = pathname.match(/^\/blog\/([^/]+)\/?$/);
+	const file = m && `src/content/blog/${m[1]}.md`;
+	return Boolean(
+		file &&
+			existsSync(file) &&
+			/^noindex: true$/m.test(readFileSync(file, "utf8")),
+	);
+}
+
 // Everything every site does at build time: sitemap, robots.txt and the post-build steps.
 export default function core(site: SiteConfig): AstroIntegration[] {
 	const hidden = [...HIDDEN, ...site.hidden];
 	return [
 		sitemap({
-			filter: (page) => !hidden.some((p) => new URL(page).pathname === p),
+			filter: (page) =>
+				!hidden.some((p) => new URL(page).pathname === p) &&
+				!noindexed(new URL(page).pathname),
 			serialize: (item) => ({ ...item, lastmod: lastmodFor(item.url) }),
 		}),
 		{

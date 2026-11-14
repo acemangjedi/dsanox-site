@@ -2,7 +2,7 @@
 import { render } from "astro:content";
 import site from "../../../site.config";
 import Article from "../../components/Article.astro";
-import { getPosts } from "../../core/blog";
+import { extraNodes, getPosts } from "../../core/blog";
 import Seo from "../../core/components/Seo.astro";
 import { abs, breadcrumb, graph, orgRef } from "../../core/schema";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -19,6 +19,7 @@ const { Content } = await render(post);
 const { data } = post;
 const canonical = data.canonical ?? abs(`/blog/${post.id}/`);
 const image = abs(data.image?.src ?? site.org.ogImage);
+const shareImage = data.ogImage ? abs(data.ogImage) : image;
 const published = data.pubDate.toISOString();
 const modified = data.updatedDate?.toISOString();
 ---
@@ -26,11 +27,14 @@ const modified = data.updatedDate?.toISOString();
 <BaseLayout>
 	<Seo
 		slot="head"
-		title={`${data.title} — ${site.name}`}
+		title={data.metaTitle ?? `${data.title} — ${site.name}`}
 		description={data.description}
 		canonical={canonical}
+		robots={data.noindex ? "noindex, follow" : undefined}
 		ogType="article"
-		ogImage={image}
+		ogTitle={data.ogTitle ?? data.title}
+		ogDescription={data.ogDescription ?? data.description}
+		ogImage={shareImage}
 		ogImageAlt={data.image?.alt ?? data.title}
 		articlePublishedTime={published}
 		articleModifiedTime={modified}
@@ -54,6 +58,7 @@ const modified = data.updatedDate?.toISOString();
 				["Artigos", "/blog/"],
 				[data.title, `/blog/${post.id}/`],
 			]),
+			...extraNodes(data.jsonLd),
 		)}
 	/>
 
