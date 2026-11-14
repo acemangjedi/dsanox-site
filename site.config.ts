@@ -4,7 +4,7 @@ import { defineSite } from "./src/core/config";
 // The build stops with a clear message if a field is missing or wrong.
 export default defineSite({
 	name: "Horizonte Consultoria",
-	url: "https://www.exemplo.pt/",
+	url: "https://demo-hostinger.simplelife.uno/",
 	lang: "pt-PT",
 	org: {
 		type: "ProfessionalService",
@@ -34,9 +34,9 @@ export default defineSite({
 	blog: true,
 	panel: {
 		url: "https://painel.simplelife.uno",
-		siteKey: "demo",
+		siteKey: "XPHFL70YEW8FGTSTcp6x5g",
 	},
 	forms: {
-		contactos: "demo.formulario",
+		contactos: "XPHFL70YEW8FGTSTcp6x5g.c38rBb_mtkY_",
 	},
 });
