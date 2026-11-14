@@ -1721,6 +1721,13 @@ html:not(.reveal-ready) .reveal {
 	gap: var(--s-8);
 	align-items: center;
 }
+.two-col.top {
+	align-items: start;
+}
+.h3 {
+	font-size: 1.25rem;
+	margin-bottom: var(--s-3);
+}
 .two-col.tight {
 	gap: var(--s-7);
 }
