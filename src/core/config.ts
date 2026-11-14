@@ -67,6 +67,8 @@ export const siteSchema = z.object({
 	}),
 	// Form name in the site → form key from the panel.
 	forms: z.record(z.string(), z.string().min(1)),
+	// Old address → new address, as permanent (301) redirects on both hosts.
+	redirects: z.record(z.string().startsWith("/"), z.string()).default({}),
 });
 
 export type SiteConfig = z.output<typeof siteSchema>;

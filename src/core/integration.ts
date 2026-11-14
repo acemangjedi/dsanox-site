@@ -1,10 +1,17 @@
 import { execSync } from "node:child_process";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import sitemap from "@astrojs/sitemap";
 import type { AstroIntegration } from "astro";
 import { externalizeInlineStyles } from "./build/externalize-inline-styles.mjs";
 import { formatSitemaps } from "./build/format-sitemaps.mjs";
+import type { SiteConfig } from "./config";
+import {
+	cloudflareHeaders,
+	cloudflareRedirects,
+	htaccessFiles,
+} from "./hosting";
 
 // Pages that are not for search engines.
 const HIDDEN = ["/obrigado/", "/404/", "/_preview/"];
@@ -34,7 +41,7 @@ function lastmodFor(url: string) {
 }
 
 // Everything every site does at build time: sitemap, robots.txt and the post-build steps.
-export default function core(siteUrl: string): AstroIntegration[] {
+export default function core(site: SiteConfig): AstroIntegration[] {
 	return [
 		sitemap({
 			filter: (page) => !HIDDEN.some((p) => new URL(page).pathname === p),
@@ -47,10 +54,16 @@ export default function core(siteUrl: string): AstroIntegration[] {
 					const dist = fileURLToPath(dir);
 					externalizeInlineStyles(dist);
 					formatSitemaps(dist);
-					writeFileSync(
-						`${dist}/robots.txt`,
-						`User-agent: *\nAllow: /\n${HIDDEN.map((p) => `Disallow: ${p}`).join("\n")}\n\nSitemap: ${siteUrl}sitemap-index.xml\n`,
-					);
+					const files: Record<string, string> = {
+						"robots.txt": `User-agent: *\nAllow: /\n${HIDDEN.map((p) => `Disallow: ${p}`).join("\n")}\n\nSitemap: ${site.url}sitemap-index.xml\n`,
+						_headers: cloudflareHeaders(site),
+						_redirects: cloudflareRedirects(site),
+						...htaccessFiles(site),
+					};
+					for (const [path, text] of Object.entries(files)) {
+						mkdirSync(dirname(join(dist, path)), { recursive: true });
+						writeFileSync(join(dist, path), text);
+					}
 				},
 			},
 		},

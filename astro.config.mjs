@@ -14,5 +14,5 @@ export default defineConfig({
 			assetsInlineLimit: 0,
 		},
 	},
-	integrations: [core(site.url)],
+	integrations: [core(site)],
 });
