@@ -1,0 +1,92 @@
+---
+import { render } from "astro:content";
+import site from "../../../site.config";
+import { getPosts } from "../../core/blog";
+import Seo from "../../core/components/Seo.astro";
+import { abs, breadcrumb, graph, orgRef } from "../../core/schema";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+	return (await getPosts()).map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { data } = post;
+const canonical = data.canonical ?? abs(`/blog/${post.id}/`);
+const image = abs(data.image?.src ?? site.org.ogImage);
+const published = data.pubDate.toISOString();
+const modified = data.updatedDate?.toISOString();
+const day = (d: Date) =>
+	d.toLocaleDateString(site.lang, {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
+---
+
+<BaseLayout>
+	<Seo
+		slot="head"
+		title={`${data.title} — ${site.name}`}
+		description={data.description}
+		canonical={canonical}
+		ogType="article"
+		ogImage={image}
+		ogImageAlt={data.image?.alt ?? data.title}
+		articlePublishedTime={published}
+		articleModifiedTime={modified}
+		articleAuthor={data.author}
+		jsonLd={graph(
+			{
+				"@type": "Article",
+				"@id": `${canonical}#article`,
+				headline: data.title,
+				description: data.description,
+				datePublished: published,
+				...(modified ? { dateModified: modified } : {}),
+				inLanguage: site.lang,
+				author: { "@type": "Person", name: data.author },
+				publisher: orgRef,
+				mainEntityOfPage: canonical,
+				image,
+			},
+			breadcrumb([
+				["Início", "/"],
+				["Artigos", "/blog/"],
+				[data.title, `/blog/${post.id}/`],
+			]),
+		)}
+	/>
+
+	<main>
+		<section class="page-hero">
+			<div class="container">
+				<nav class="breadcrumb" aria-label="Breadcrumb">
+					<a href="/">Início</a><span class="breadcrumb-sep">/</span>
+					<a href="/blog/">Artigos</a><span class="breadcrumb-sep">/</span>
+					<span>{data.title}</span>
+				</nav>
+				<h1>{data.title}</h1>
+				<p class="lead">{data.description}</p>
+				<div class="article-meta">
+					<time datetime={published}>{day(data.pubDate)}</time>
+					<span class="article-meta-sep" aria-hidden="true">·</span>
+					<span>{data.author}</span>
+					{data.updatedDate && <><span class="article-meta-sep" aria-hidden="true">·</span><span>Atualizado em {day(data.updatedDate)}</span></>}
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="container">
+				<article class="article">
+					<Content />
+				</article>
+			</div>
+		</section>
+	</main>
+</BaseLayout>

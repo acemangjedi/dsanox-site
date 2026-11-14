@@ -1,0 +1,119 @@
+---
+import site from "../../site.config";
+import CtaBanner from "../components/CtaBanner.astro";
+import Faq from "../components/Faq.astro";
+import { getPosts } from "../core/blog";
+import Seo from "../core/components/Seo.astro";
+import { graph, organization } from "../core/schema";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const services = [
+	{
+		title: "Processos",
+		text: "Mapeamos como o trabalho circula na empresa e tiramos os passos que não acrescentam valor.",
+	},
+	{
+		title: "Finanças",
+		text: "Orçamento, tesouraria e indicadores mensais que se leem em cinco minutos.",
+	},
+	{
+		title: "Equipas",
+		text: "Funções claras, reuniões curtas e objetivos que todos conhecem.",
+	},
+];
+const faq = [
+	{
+		q: "Trabalham com empresas de que dimensão?",
+		a: "Sobretudo com empresas de 5 a 100 pessoas, em qualquer setor.",
+	},
+	{
+		q: "Quanto tempo dura um projeto?",
+		a: "Um diagnóstico demora duas semanas. Um projeto completo, entre dois e seis meses.",
+	},
+	{
+		q: "Fazem reuniões à distância?",
+		a: "Sim. A maior parte do acompanhamento é feita por videochamada, com visitas quando fazem falta.",
+	},
+];
+const latest = site.blog ? (await getPosts()).slice(0, 3) : [];
+---
+
+<BaseLayout>
+	<Seo
+		slot="head"
+		title={`${site.name} — Consultoria de gestão para PME`}
+		description={site.org.description}
+		jsonLd={graph(organization())}
+	/>
+
+	<main>
+		<section class="hero">
+			<div class="container">
+				<div class="reveal">
+					<span class="eyebrow">Consultoria de gestão</span>
+					<h1>Empresas mais simples de <span class="accent-text">gerir</span>.</h1>
+					<p class="lead">Ajudamos pequenas e médias empresas a organizar processos, finanças e equipas, com planos curtos e resultados que se medem.</p>
+					<div class="hero-actions">
+						<a href="/contactos/" class="btn btn-accent btn-lg">Pedir proposta</a>
+						<a href="/servicos/" class="btn btn-outline btn-lg">Ver serviços</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section bg-surface">
+			<div class="container">
+				<div class="section-header reveal">
+					<div>
+						<span class="eyebrow">Serviços</span>
+						<h2 class="section-title">Três áreas, um só plano</h2>
+					</div>
+				</div>
+				<div class="grid grid-3">
+					{services.map((s) => (
+						<div class="card reveal">
+							<h3>{s.title}</h3>
+							<p class="text-muted">{s.text}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		{latest.length > 0 && (
+			<section class="section">
+				<div class="container">
+					<div class="section-header reveal">
+						<div>
+							<span class="eyebrow">Artigos</span>
+							<h2 class="section-title">Últimos artigos</h2>
+						</div>
+					</div>
+					<div class="grid grid-3">
+						{latest.map((post) => (
+							<a href={`/blog/${post.id}/`} class="card card-link reveal">
+								<h3>{post.data.title}</h3>
+								<p class="text-muted">{post.data.description}</p>
+							</a>
+						))}
+					</div>
+				</div>
+			</section>
+		)}
+
+		<Faq items={faq} title="Perguntas frequentes" eyebrow="Dúvidas" />
+
+		<section class="section-tight">
+			<div class="container">
+				<CtaBanner
+					title="Vamos falar sobre a sua empresa?"
+					text="A primeira conversa é gratuita e sem compromisso."
+					primaryHref="/contactos/"
+					primaryLabel="Pedir proposta"
+					secondaryHref="/servicos/"
+					secondaryLabel="Ver serviços"
+				/>
+			</div>
+		</section>
+	</main>
+</BaseLayout>

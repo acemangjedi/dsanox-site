@@ -1,0 +1,36 @@
+---
+interface Props {
+	title: string;
+	text: string;
+	primaryHref: string;
+	primaryLabel: string;
+	secondaryHref: string;
+	secondaryLabel: string;
+	secondaryExternal?: boolean;
+}
+
+const {
+	title,
+	text,
+	primaryHref,
+	primaryLabel,
+	secondaryHref,
+	secondaryLabel,
+	secondaryExternal = false,
+} = Astro.props;
+
+const secondaryAttrs = secondaryExternal
+	? { target: "_blank", rel: "noopener noreferrer" }
+	: {};
+---
+
+<div class="cta-banner reveal">
+	<div>
+		<h2 set:html={title}></h2>
+		<p>{text}</p>
+	</div>
+	<div class="cta-actions">
+		<a href={primaryHref} class="btn btn-accent btn-lg">{primaryLabel}</a>
+		<a href={secondaryHref} class="btn btn-outline btn-lg" {...secondaryAttrs}>{secondaryLabel}</a>
+	</div>
+</div>

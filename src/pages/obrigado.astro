@@ -1,0 +1,21 @@
+---
+import site from "../../site.config";
+import Seo from "../core/components/Seo.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout variant="minimal">
+	<Seo slot="head" title={`Mensagem enviada — ${site.name}`} description="A sua mensagem foi enviada." robots="noindex, nofollow" />
+	<main>
+		<section class="section">
+			<div class="container text-center">
+				<span class="eyebrow">Mensagem recebida</span>
+				<h1>Obrigado pelo seu contacto.</h1>
+				<p class="lead">Respondemos no próprio dia útil. Veja também a pasta de spam, por precaução.</p>
+				<div class="hero-actions">
+					<a href="/" class="btn btn-accent btn-lg">Voltar ao início</a>
+				</div>
+			</div>
+		</section>
+	</main>
+</BaseLayout>

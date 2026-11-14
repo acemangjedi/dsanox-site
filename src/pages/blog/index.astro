@@ -1,0 +1,57 @@
+---
+import site from "../../../site.config";
+import { getPosts } from "../../core/blog";
+import Seo from "../../core/components/Seo.astro";
+import { breadcrumb, graph, orgRef } from "../../core/schema";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = await getPosts();
+const url = new URL("/blog/", site.url).href;
+---
+
+<BaseLayout>
+	<Seo
+		slot="head"
+		title={`Artigos — ${site.name}`}
+		description="Artigos sobre gestão de pequenas e médias empresas: processos, finanças e equipas."
+		jsonLd={graph(
+			{ "@type": "Blog", "@id": `${url}#blog`, url, name: `Artigos — ${site.name}`, inLanguage: site.lang, publisher: orgRef },
+			breadcrumb([
+				["Início", "/"],
+				["Artigos", "/blog/"],
+			]),
+		)}
+	/>
+
+	<main>
+		<section class="page-hero">
+			<div class="container">
+				<nav class="breadcrumb" aria-label="Breadcrumb">
+					<a href="/">Início</a><span class="breadcrumb-sep">/</span><span>Artigos</span>
+				</nav>
+				<h1>Artigos</h1>
+				<p class="lead">Notas práticas sobre gestão, escritas por quem acompanha empresas todos os dias.</p>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="container">
+				{posts.length === 0 ? (
+					<p class="text-muted">Ainda não há artigos publicados.</p>
+				) : (
+					<div class="grid grid-3">
+						{posts.map((post) => (
+							<a href={`/blog/${post.id}/`} class="card card-link reveal">
+								<h2 class="h3">{post.data.title}</h2>
+								<p class="text-muted">{post.data.description}</p>
+								<time datetime={post.data.pubDate.toISOString()} class="text-muted">
+									{post.data.pubDate.toLocaleDateString(site.lang, { year: "numeric", month: "short", day: "numeric" })}
+								</time>
+							</a>
+						))}
+					</div>
+				)}
+			</div>
+		</section>
+	</main>
+</BaseLayout>

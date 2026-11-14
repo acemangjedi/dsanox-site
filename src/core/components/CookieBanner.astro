@@ -1,0 +1,326 @@
+---
+// Bump when the cookie policy changes, so visitors are asked again.
+const POLICY_VERSION = "1.0";
+---
+
+<div id="cookie-banner" role="region" aria-label="Aviso de cookies" hidden data-policy-version={POLICY_VERSION}>
+	<div class="cb-bar">
+		<p>
+			Utilizamos cookies para melhorar a sua experiência. Pode aceitar todos, rejeitar ou personalizar as suas preferências.
+			<a href="/politica-de-cookies/">Política de cookies</a>.
+		</p>
+		<div class="cb-actions">
+			<button id="cb-reject" type="button">Rejeitar todos</button>
+			<button id="cb-accept" type="button">Aceitar todos</button>
+			<button id="cb-customize" type="button">Personalizar definições</button>
+		</div>
+	</div>
+</div>
+
+<div id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cm-title" hidden>
+	<div class="cm-overlay"></div>
+	<div class="cm-box">
+		<div class="cm-header">
+			<h2 id="cm-title">Definições de cookies</h2>
+			<button id="cm-close" type="button" class="cm-close" aria-label="Fechar definições de cookies">
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+			</button>
+		</div>
+		<div class="cm-toggles">
+			<div class="cm-toggle-row">
+				<div class="cm-toggle-info">
+					<span class="cm-toggle-name">Necessários</span>
+					<span class="cm-toggle-desc">Essenciais para o funcionamento do site. Não requerem consentimento.</span>
+				</div>
+				<button role="switch" aria-checked="true" disabled class="cm-switch cm-switch--on" aria-label="Cookies necessários">
+					<span class="cm-switch-thumb"></span>
+				</button>
+			</div>
+			<div class="cm-toggle-row">
+				<div class="cm-toggle-info">
+					<span class="cm-toggle-name">Análise</span>
+					<span class="cm-toggle-desc">Google Analytics e Microsoft Clarity — dados anónimos sobre páginas visitadas e comportamento de navegação.</span>
+				</div>
+				<button id="toggle-analytics" role="switch" aria-checked="false" class="cm-switch" aria-label="Cookies de análise">
+					<span class="cm-switch-thumb"></span>
+				</button>
+			</div>
+			<div class="cm-toggle-row">
+				<div class="cm-toggle-info">
+					<span class="cm-toggle-name">Marketing</span>
+					<span class="cm-toggle-desc">Reservado para uso futuro. Não são utilizados atualmente.</span>
+				</div>
+				<button id="toggle-marketing" role="switch" aria-checked="false" class="cm-switch" aria-label="Cookies de marketing">
+					<span class="cm-switch-thumb"></span>
+				</button>
+			</div>
+		</div>
+		<div class="cm-footer">
+			<button id="cm-reject-all" type="button">Rejeitar todos</button>
+			<button id="cm-accept-all" type="button">Aceitar todos</button>
+			<button id="cm-save" type="button">Guardar escolhas</button>
+		</div>
+	</div>
+</div>
+
+<script src="../scripts/cookie-banner.js"></script>
+
+<style>
+	/* ── Bottom bar ── */
+	#cookie-banner {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 9000;
+		background: var(--bg-deep);
+		border-top: 1px solid var(--accent-border);
+	}
+
+	.cb-bar {
+		display: flex;
+		align-items: center;
+		gap: var(--s-4);
+		padding: var(--s-4) var(--s-5);
+		flex-wrap: wrap;
+	}
+
+	.cb-bar p {
+		flex: 1;
+		min-width: 200px;
+		margin: 0;
+		font-size: 0.875rem;
+		color: var(--ink-faint);
+		line-height: 1.5;
+	}
+
+	.cb-bar p a {
+		color: var(--accent);
+		text-decoration: underline;
+	}
+
+	.cb-actions {
+		display: flex;
+		gap: var(--s-2);
+		flex-wrap: wrap;
+		flex-shrink: 0;
+	}
+
+	#cb-accept {
+		background: var(--accent);
+		color: var(--bg-deep);
+		border: none;
+		padding: 0.5rem 1.25rem;
+		border-radius: var(--r-sm);
+		font-size: 0.875rem;
+		font-weight: 600;
+		cursor: pointer;
+		font-family: inherit;
+	}
+
+	#cb-reject {
+		background: transparent;
+		color: var(--ink);
+		border: 1px solid var(--border-strong);
+		padding: 0.5rem 1.25rem;
+		border-radius: var(--r-sm);
+		font-size: 0.875rem;
+		font-weight: 600;
+		cursor: pointer;
+		font-family: inherit;
+	}
+
+	#cb-customize {
+		background: transparent;
+		color: var(--muted);
+		border: none;
+		padding: 0.5rem 0.75rem;
+		font-size: 0.875rem;
+		cursor: pointer;
+		text-decoration: underline;
+		font-family: inherit;
+	}
+
+	/* ── Modal ── */
+	#cookie-modal {
+		position: fixed;
+		inset: 0;
+		z-index: 9001;
+	}
+
+	.cm-overlay {
+		position: absolute;
+		inset: 0;
+		background: color-mix(in srgb, var(--bg-deep) 75%, transparent);
+	}
+
+	.cm-box {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: var(--surface);
+		border: 1px solid var(--accent-border);
+		border-radius: var(--r-lg);
+		padding: var(--s-5);
+		width: calc(100% - 2rem);
+		max-width: 480px;
+		max-height: 90vh;
+		overflow-y: auto;
+		box-shadow: var(--sh-lg);
+	}
+
+	.cm-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: var(--s-5);
+	}
+
+	.cm-header h2 {
+		margin: 0;
+		font-size: 1.125rem;
+		color: var(--ink);
+	}
+
+	.cm-close {
+		background: none;
+		border: none;
+		color: var(--muted);
+		cursor: pointer;
+		padding: var(--s-1);
+		border-radius: var(--r-sm);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+	}
+
+	.cm-close:hover {
+		color: var(--ink);
+	}
+
+	.cm-toggles {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.cm-toggle-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--s-4);
+		padding: var(--s-3) 0;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.cm-toggle-row:last-child {
+		border-bottom: none;
+	}
+
+	.cm-toggle-info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+
+	.cm-toggle-name {
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--ink);
+	}
+
+	.cm-toggle-desc {
+		font-size: 0.8rem;
+		color: var(--muted);
+		line-height: 1.4;
+	}
+
+	.cm-switch {
+		width: 44px;
+		height: 24px;
+		border-radius: var(--r-full);
+		background: var(--surface-2);
+		border: 1px solid var(--border-strong);
+		cursor: pointer;
+		position: relative;
+		flex-shrink: 0;
+		transition: background 0.2s, border-color 0.2s;
+		padding: 0;
+	}
+
+	.cm-switch--on {
+		background: var(--accent);
+		border-color: var(--accent);
+	}
+
+	.cm-switch:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+
+	.cm-switch-thumb {
+		position: absolute;
+		top: 3px;
+		left: 3px;
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		background: var(--muted);
+		transition: transform 0.2s, background 0.2s;
+	}
+
+	.cm-switch--on .cm-switch-thumb {
+		transform: translateX(20px);
+		background: var(--bg-deep);
+	}
+
+	.cm-footer {
+		display: flex;
+		gap: var(--s-2);
+		justify-content: flex-end;
+		margin-top: var(--s-5);
+		flex-wrap: wrap;
+	}
+
+	#cm-accept-all,
+	#cm-save {
+		background: var(--accent);
+		color: var(--bg-deep);
+		border: none;
+		padding: 0.5rem 1.25rem;
+		border-radius: var(--r-sm);
+		font-size: 0.875rem;
+		font-weight: 600;
+		cursor: pointer;
+		font-family: inherit;
+	}
+
+	#cm-reject-all {
+		background: transparent;
+		color: var(--ink);
+		border: 1px solid var(--border-strong);
+		padding: 0.5rem 1.25rem;
+		border-radius: var(--r-sm);
+		font-size: 0.875rem;
+		font-weight: 600;
+		cursor: pointer;
+		font-family: inherit;
+	}
+
+	@media (max-width: 500px) {
+		.cb-bar {
+			padding: var(--s-3) var(--s-4);
+		}
+
+		.cb-actions {
+			width: 100%;
+		}
+
+		#cb-accept,
+		#cb-reject {
+			flex: 1;
+			text-align: center;
+		}
+	}
+</style>

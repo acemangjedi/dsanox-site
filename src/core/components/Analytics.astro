@@ -1,0 +1,13 @@
+---
+import site from "../../../site.config";
+
+// Google Analytics (Consent Mode v2) and Clarity, from site.config.ts. Clarity loads only
+// after consent. Nothing is added when the site has neither.
+const { ga, clarity } = site.analytics;
+---
+{(ga || clarity) && (
+	<>
+		<meta name="analytics" data-ga={ga} data-clarity={clarity} />
+		<script src="../scripts/analytics.js"></script>
+	</>
+)}

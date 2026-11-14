@@ -1,0 +1,33 @@
+{
+	"name": "modelo-site",
+	"type": "module",
+	"version": "0.0.1",
+	"private": true,
+	"engines": {
+		"node": ">=22.12.0"
+	},
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"check": "astro check",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"test": "vitest run",
+		"ci": "biome ci . && astro check && vitest run"
+	},
+	"dependencies": {
+		"@astrojs/sitemap": "3.7.4",
+		"astro": "7.4.11",
+		"sharp": "0.35.5",
+		"zod": "4.6.7"
+	},
+	"devDependencies": {
+		"@astrojs/check": "0.9.12",
+		"@biomejs/biome": "2.6.7",
+		"@playwright/test": "1.65.0",
+		"tsx": "4.23.15",
+		"typescript": "5.9.3",
+		"vitest": "5.1.0"
+	}
+}
