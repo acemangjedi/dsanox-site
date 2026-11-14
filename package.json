@@ -16,7 +16,8 @@
 		"test": "vitest run",
 		"ci": "biome ci . && astro check && vitest run",
 		"build:local": "astro build",
-		"test:e2e": "playwright test --trace off"
+		"test:e2e": "playwright test --trace off",
+		"core:update": "git fetch modelo main && git restore --source=modelo/main --staged --worktree src/core && git status --short src/core"
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "3.7.4",
