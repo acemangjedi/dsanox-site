@@ -52,6 +52,13 @@ PANEL_BUILD_TOKEN=<token> pnpm build  # vai buscar os artigos ao painel e gera d
   Connect GitHub; build `pnpm build`, deploy `npx wrangler deploy`, variável de
   build `PANEL_BUILD_TOKEN`. Usa `_headers` e `_redirects`.
 
+**Botão Publicar do painel.** Quando o alojamento faz o build a partir do
+repositório (Hostinger com auto-deploy, Cloudflare Workers Builds), escolha no
+painel, em Publicação, "GitHub, por commit". Crie no GitHub um token
+fine-grained só para este repositório, com Contents: Read and write, e cole-o
+lá. Cada Publicar grava a data em `.publicado` e o push faz o build. Antes de
+enviar alterações suas, faça `git pull`, porque o painel também faz commits.
+
 ## 5. Atualizar o núcleo
 
 Quando o modelo tiver correções em `src/core/`:
