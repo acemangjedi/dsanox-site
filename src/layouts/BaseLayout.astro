@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Analytics from "../core/components/Analytics.astro";
 import CookieBanner from "../core/components/CookieBanner.astro";
+import Utm from "../core/components/Utm.astro";
 import cssUrl from "../styles/style.css?url";
 
 interface Props {
@@ -36,6 +37,7 @@ const { variant = "full" } = Astro.props;
 </div>
 <Footer variant={variant} />
 <CookieBanner />
+<Utm />
 <script src="../scripts/main.js"></script>
 </body>
 </html>

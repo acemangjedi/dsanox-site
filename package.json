@@ -15,7 +15,8 @@
 		"lint:fix": "biome check --write .",
 		"test": "vitest run",
 		"ci": "biome ci . && astro check && vitest run",
-		"build:local": "astro build"
+		"build:local": "astro build",
+		"test:e2e": "playwright test --trace off"
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "3.7.4",
