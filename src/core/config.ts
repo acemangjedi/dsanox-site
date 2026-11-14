@@ -67,6 +67,8 @@ export const siteSchema = z.object({
 	}),
 	// Form name in the site → form key from the panel.
 	forms: z.record(z.string(), z.string().min(1)),
+	// Pages left out of the sitemap and robots.txt, besides the core's own.
+	hidden: z.array(z.string().startsWith("/")).default([]),
 	// Old address → new address, as permanent (301) redirects on both hosts.
 	redirects: z.record(z.string().startsWith("/"), z.string()).default({}),
 });

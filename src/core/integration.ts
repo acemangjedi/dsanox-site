@@ -13,8 +13,19 @@ import {
 	htaccessFiles,
 } from "./hosting";
 
-// Pages that are not for search engines.
+// Pages that are not for search engines (plus the site's own, in site.config.ts).
 const HIDDEN = ["/obrigado/", "/404/", "/_preview/"];
+
+// Writes the build's files, except those the site ships itself in public/ (already in
+// dist/): a site moved to this template keeps its own .htaccess or robots.txt.
+export function writeMissing(dist: string, files: Record<string, string>) {
+	for (const [path, text] of Object.entries(files)) {
+		const file = join(dist, path);
+		if (existsSync(file)) continue;
+		mkdirSync(dirname(file), { recursive: true });
+		writeFileSync(file, text);
+	}
+}
 
 // lastmod: for an article, its updatedDate or pubDate (the files come from the panel,
 // not from git); for a page, the date of the last commit of its source file.
@@ -42,9 +53,10 @@ function lastmodFor(url: string) {
 
 // Everything every site does at build time: sitemap, robots.txt and the post-build steps.
 export default function core(site: SiteConfig): AstroIntegration[] {
+	const hidden = [...HIDDEN, ...site.hidden];
 	return [
 		sitemap({
-			filter: (page) => !HIDDEN.some((p) => new URL(page).pathname === p),
+			filter: (page) => !hidden.some((p) => new URL(page).pathname === p),
 			serialize: (item) => ({ ...item, lastmod: lastmodFor(item.url) }),
 		}),
 		{
@@ -61,16 +73,12 @@ export default function core(site: SiteConfig): AstroIntegration[] {
 					const dist = fileURLToPath(dir);
 					externalizeInlineStyles(dist);
 					formatSitemaps(dist);
-					const files: Record<string, string> = {
-						"robots.txt": `User-agent: *\nAllow: /\n${HIDDEN.map((p) => `Disallow: ${p}`).join("\n")}\n\nSitemap: ${site.url}sitemap-index.xml\n`,
+					writeMissing(dist, {
+						"robots.txt": `User-agent: *\nAllow: /\n${hidden.map((p) => `Disallow: ${p}`).join("\n")}\n\nSitemap: ${site.url}sitemap-index.xml\n`,
 						_headers: cloudflareHeaders(site),
 						_redirects: cloudflareRedirects(site),
 						...htaccessFiles(site),
-					};
-					for (const [path, text] of Object.entries(files)) {
-						mkdirSync(dirname(join(dist, path)), { recursive: true });
-						writeFileSync(join(dist, path), text);
-					}
+					});
 				},
 			},
 		},

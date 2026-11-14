@@ -27,6 +27,7 @@ describe("site.config.ts", () => {
 		const s = defineSite(valid);
 		expect(s.analytics).toEqual({});
 		expect(s.org.sameAs).toEqual([]);
+		expect(s.hidden).toEqual([]);
 	});
 
 	it("names each missing or wrong field in the error", () => {

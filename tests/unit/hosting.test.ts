@@ -1,3 +1,6 @@
+import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import site from "../../site.config";
 import { defineSite } from "../../src/core/config";
@@ -6,6 +9,7 @@ import {
 	cloudflareRedirects,
 	htaccessFiles,
 } from "../../src/core/hosting";
+import { writeMissing } from "../../src/core/integration";
 
 // What a browser gets for a path on each host, read back from the generated files.
 function fromCloudflare(text: string, path: string) {
@@ -93,6 +97,23 @@ describe("hosting files", () => {
 		expect(cloudflareRedirects(s)).toBe("/antigo/ /novo/ 301\n");
 		expect(htaccessFiles(s)[".htaccess"]).toContain(
 			"Redirect 301 /antigo/ /novo/",
+		);
+	});
+});
+
+describe("writeMissing", () => {
+	it("writes the build's files but keeps those the site ships itself", () => {
+		const dist = mkdtempSync(join(tmpdir(), "dist-"));
+		writeFileSync(join(dist, ".htaccess"), "# the site's own\n");
+		writeMissing(dist, {
+			".htaccess": "# core\n",
+			"_preview/.htaccess": "# preview\n",
+		});
+		expect(readFileSync(join(dist, ".htaccess"), "utf8")).toBe(
+			"# the site's own\n",
+		);
+		expect(readFileSync(join(dist, "_preview/.htaccess"), "utf8")).toBe(
+			"# preview\n",
 		);
 	});
 });
