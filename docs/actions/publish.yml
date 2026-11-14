@@ -1,0 +1,45 @@
+# Copy to .github/workflows/ to turn on (each run uses GitHub Actions minutes).
+# Builds the site with the panel's articles and publishes dist/ to the branch
+# hostinger-deploy, which Hostinger deploys on every push.
+name: Publicar
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [panel-publish]
+  workflow_dispatch:
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the sitemap's lastmod comes from git
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run ci
+      - run: pnpm build
+        env:
+          PANEL_BUILD_TOKEN: ${{ secrets.PANEL_BUILD_TOKEN }}
+      - name: Publish dist/ to hostinger-deploy
+        working-directory: dist
+        run: |
+          git init -q -b hostinger-deploy
+          git add -A
+          git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com \
+            commit -qm "Build ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" hostinger-deploy

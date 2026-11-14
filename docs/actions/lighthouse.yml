@@ -1,0 +1,35 @@
+# Copy to .github/workflows/ to turn on (each run uses GitHub Actions minutes).
+# Fails below 100 in SEO, Best Practices or Accessibility, or below 95 in Performance,
+# on a phone, for the home page, an inner page, contacts, the blog list and an article.
+name: Lighthouse
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+        env:
+          PANEL_BUILD_TOKEN: ${{ secrets.PANEL_BUILD_TOKEN }}
+      - name: Lighthouse
+        run: |
+          article=$(ls dist/blog | grep -v '\.html$' | head -1)
+          pnpm dlx @lhci/cli@0.15.1 autorun --config=docs/actions/lighthouserc.json \
+            --collect.url=http://localhost/ \
+            --collect.url=http://localhost/servicos/ \
+            --collect.url=http://localhost/contactos/ \
+            --collect.url=http://localhost/blog/ \
+            --collect.url=http://localhost/blog/$article/

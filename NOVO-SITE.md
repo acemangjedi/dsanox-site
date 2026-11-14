@@ -62,3 +62,18 @@ git commit -am "Atualizar o núcleo"
 Se o núcleo novo precisar de outra dependência, o `ci` falha a dizer qual;
 copie a versão do `package.json` do modelo. Se o modelo mudar de conta no
 GitHub, basta `git remote set-url modelo <endereço novo>`.
+
+## 6. Publicação automática e Lighthouse (por ativar)
+
+`docs/actions/` tem os dois workflows prontos, ainda desligados porque gastam
+minutos do GitHub Actions:
+
+- `publish.yml`: em cada push, a pedido do painel (botão Publicar) ou à mão,
+  faz o build e publica `dist/` no ramo `hostinger-deploy`, que o Hostinger
+  publica sozinho. Precisa do segredo `PANEL_BUILD_TOKEN` no repositório e, no
+  painel, do repositório e de um token do GitHub na configuração de publicação.
+- `lighthouse.yml` e `lighthouserc.json`: falha abaixo de 100 em SEO, Boas
+  Práticas e Acessibilidade, ou abaixo de 95 em Performance.
+
+Para ligar, copie os `.yml` para `.github/workflows/`. No Cloudflare Pages não é
+preciso workflow: o Cloudflare faz o build e o painel usa o deploy hook.
