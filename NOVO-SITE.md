@@ -46,8 +46,11 @@ PANEL_BUILD_TOKEN=<token> pnpm build  # vai buscar os artigos ao painel e gera d
 
 - **Hostinger**: publica a pasta `dist/` (inclui `.htaccess` com cabeçalhos de
   segurança, cache e redirecionamentos).
-- **Cloudflare Pages**: comando de build `pnpm build`, pasta `dist`, variável
-  `PANEL_BUILD_TOKEN` (usa `_headers` e `_redirects`).
+- **Cloudflare (Workers)**: junte ao repositório um `wrangler.jsonc` com
+  `"assets": { "directory": "./dist", "not_found_handling": "404-page" }`
+  (ver o repositório demo-cloudflare). No Cloudflare: Workers & Pages → Create →
+  Connect GitHub; build `pnpm build`, deploy `npx wrangler deploy`, variável de
+  build `PANEL_BUILD_TOKEN`. Usa `_headers` e `_redirects`.
 
 ## 5. Atualizar o núcleo
 
