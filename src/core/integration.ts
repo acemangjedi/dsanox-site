@@ -29,6 +29,12 @@ export function writeMissing(dist: string, files: Record<string, string>) {
 
 // lastmod: for an article, its updatedDate or pubDate (the files come from the panel,
 // not from git); for a page, the date of the last commit of its source file.
+// Hosts that build from the repo (Hostinger, Cloudflare) clone only the last commit,
+// which would give every page the date of the last publish: then pages get none.
+const shallow =
+	execSync("git rev-parse --is-shallow-repository").toString().trim() ===
+	"true";
+
 function lastmodFor(url: string) {
 	const path = new URL(url).pathname.replace(/^\/|\/$/g, "");
 	if (path.startsWith("blog/")) {
@@ -44,7 +50,7 @@ function lastmodFor(url: string) {
 		`src/pages/${path}/index.astro`,
 	];
 	const file = candidates.find((f) => existsSync(f));
-	if (!file) return undefined;
+	if (!file || shallow) return undefined;
 	const date = execSync(`git log -1 --format=%cI -- "${file}"`)
 		.toString()
 		.trim();
