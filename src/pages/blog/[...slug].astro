@@ -1,6 +1,7 @@
 ---
 import { render } from "astro:content";
 import site from "../../../site.config";
+import Article from "../../components/Article.astro";
 import { getPosts } from "../../core/blog";
 import Seo from "../../core/components/Seo.astro";
 import { abs, breadcrumb, graph, orgRef } from "../../core/schema";
@@ -20,12 +21,6 @@ const canonical = data.canonical ?? abs(`/blog/${post.id}/`);
 const image = abs(data.image?.src ?? site.org.ogImage);
 const published = data.pubDate.toISOString();
 const modified = data.updatedDate?.toISOString();
-const day = (d: Date) =>
-	d.toLocaleDateString(site.lang, {
-		year: "numeric",
-		month: "long",
-		day: "numeric",
-	});
 ---
 
 <BaseLayout>
@@ -62,31 +57,13 @@ const day = (d: Date) =>
 		)}
 	/>
 
-	<main>
-		<section class="page-hero">
-			<div class="container">
-				<nav class="breadcrumb" aria-label="Breadcrumb">
-					<a href="/">Início</a><span class="breadcrumb-sep">/</span>
-					<a href="/blog/">Artigos</a><span class="breadcrumb-sep">/</span>
-					<span>{data.title}</span>
-				</nav>
-				<h1>{data.title}</h1>
-				<p class="lead">{data.description}</p>
-				<div class="article-meta">
-					<time datetime={published}>{day(data.pubDate)}</time>
-					<span class="article-meta-sep" aria-hidden="true">·</span>
-					<span>{data.author}</span>
-					{data.updatedDate && <><span class="article-meta-sep" aria-hidden="true">·</span><span>Atualizado em {day(data.updatedDate)}</span></>}
-				</div>
-			</div>
-		</section>
-
-		<section class="section">
-			<div class="container">
-				<article class="article">
-					<Content />
-				</article>
-			</div>
-		</section>
-	</main>
+	<Article
+		title={data.title}
+		description={data.description}
+		pubDate={data.pubDate}
+		updatedDate={data.updatedDate}
+		author={data.author}
+	>
+		<Content />
+	</Article>
 </BaseLayout>

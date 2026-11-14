@@ -1,0 +1,7 @@
+---
+import site from "../../../site.config";
+
+// For the preview page: shows the article the panel's editor sends to this frame.
+---
+<div hidden data-preview-panel={new URL(site.panel.url).origin}></div>
+<script src="../scripts/preview.js"></script>

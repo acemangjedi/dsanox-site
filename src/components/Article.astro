@@ -1,0 +1,48 @@
+---
+import site from "../../site.config";
+
+// The article as visitors see it. Also used by the preview page, which fills the
+// [data-article] parts with the text sent by the panel's editor.
+interface Props {
+	title: string;
+	description: string;
+	pubDate: Date;
+	updatedDate?: Date;
+	author: string;
+}
+const { title, description, pubDate, updatedDate, author } = Astro.props;
+const day = (d: Date) =>
+	d.toLocaleDateString(site.lang, {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
+---
+
+<main>
+	<section class="page-hero">
+		<div class="container">
+			<nav class="breadcrumb" aria-label="Breadcrumb">
+				<a href="/">Início</a><span class="breadcrumb-sep">/</span>
+				<a href="/blog/">Artigos</a><span class="breadcrumb-sep">/</span>
+				<span data-article="title">{title}</span>
+			</nav>
+			<h1 data-article="title">{title}</h1>
+			<p class="lead" data-article="description">{description}</p>
+			<div class="article-meta">
+				<time datetime={pubDate.toISOString()} data-article="pubDate">{day(pubDate)}</time>
+				<span class="article-meta-sep" aria-hidden="true">·</span>
+				<span data-article="author">{author}</span>
+				<span data-article="updated" hidden={!updatedDate}><span class="article-meta-sep" aria-hidden="true">·</span><span>Atualizado em <time data-article="updatedDate">{updatedDate && day(updatedDate)}</time></span></span>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<article class="article" data-article="body">
+				<slot />
+			</article>
+		</div>
+	</section>
+</main>

@@ -50,6 +50,13 @@ export default function core(site: SiteConfig): AstroIntegration[] {
 		{
 			name: "site-core",
 			hooks: {
+				// The site's own src/preview.astro: the article page that the panel's editor fills.
+				"astro:config:setup": ({ injectRoute }) => {
+					injectRoute({
+						pattern: "/_preview",
+						entrypoint: "./src/preview.astro",
+					});
+				},
 				"astro:build:done": ({ dir }) => {
 					const dist = fileURLToPath(dir);
 					externalizeInlineStyles(dist);

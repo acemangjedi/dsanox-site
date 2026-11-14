@@ -19,7 +19,7 @@ const ANALYTICS = {
 	],
 };
 
-function csp(site: SiteConfig, frameAncestors: string): string {
+function csp(site: SiteConfig, frameAncestors: string, img = ""): string {
 	const panel = new URL(site.panel.url).origin;
 	const a = site.analytics.ga || site.analytics.clarity;
 	const list = (...v: (string | false | undefined)[]) =>
@@ -28,7 +28,7 @@ function csp(site: SiteConfig, frameAncestors: string): string {
 		"default-src 'self'",
 		`script-src ${list("'self'", a && ANALYTICS.script.join(" "))}`,
 		"style-src 'self'",
-		`img-src ${list("'self'", "data:", a && ANALYTICS.img.join(" "))}`,
+		`img-src ${list("'self'", "data:", img, a && ANALYTICS.img.join(" "))}`,
 		"font-src 'self'",
 		`connect-src ${list("'self'", panel, a && ANALYTICS.connect.join(" "))}`,
 		`form-action 'self' ${panel}`,
@@ -53,11 +53,15 @@ export function headerRules(
 				"Content-Security-Policy": csp(site, "'none'"),
 			},
 		],
-		// The panel's editor shows this page in a frame.
+		// The panel's editor shows this page in a frame and sends new images as blobs.
 		[
 			"/_preview/",
 			{
-				"Content-Security-Policy": csp(site, new URL(site.panel.url).origin),
+				"Content-Security-Policy": csp(
+					site,
+					new URL(site.panel.url).origin,
+					"blob:",
+				),
 			},
 		],
 		// Hashed file names: they never change.
