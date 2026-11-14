@@ -4,3 +4,7 @@ dist/
 test-results/
 playwright-report/
 .env
+# Written by the sync from the panel before each build.
+src/content/blog/*.md
+public/assets/img/blog/
+public/build.json

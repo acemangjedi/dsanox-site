@@ -8,13 +8,14 @@
 	},
 	"scripts": {
 		"dev": "astro dev",
-		"build": "astro build",
+		"build": "tsx src/core/build/sync.ts && astro build",
 		"preview": "astro preview",
 		"check": "astro check",
 		"lint": "biome check .",
 		"lint:fix": "biome check --write .",
 		"test": "vitest run",
-		"ci": "biome ci . && astro check && vitest run"
+		"ci": "biome ci . && astro check && vitest run",
+		"build:local": "astro build"
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "3.7.4",

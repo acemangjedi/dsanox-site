@@ -36,9 +36,9 @@ describe("site.config.ts", () => {
 		expect(() =>
 			defineSite({ ...valid, url: "http://www.empresa.pt" }),
 		).toThrow(/- url: must start with https:\/\/ and end with \//);
-		expect(() =>
-			defineSite({ ...valid, contacts: { email: "x" } }),
-		).toThrow(/- contacts\.email: /);
+		expect(() => defineSite({ ...valid, contacts: { email: "x" } })).toThrow(
+			/- contacts\.email: /,
+		);
 		expect(() =>
 			defineSite({
 				...valid,

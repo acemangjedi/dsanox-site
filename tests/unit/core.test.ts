@@ -7,7 +7,10 @@ const walk = (d: string): string[] =>
 	readdirSync(d, { withFileTypes: true }).flatMap((e) =>
 		e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)],
 	);
-const core = walk("src/core").map((f) => ({ f, text: readFileSync(f, "utf8") }));
+const core = walk("src/core").map((f) => ({
+	f,
+	text: readFileSync(f, "utf8"),
+}));
 
 // src/core/ is copied into every site: it reads the site's details from site.config.ts
 // and its colours from the site's CSS variables.
