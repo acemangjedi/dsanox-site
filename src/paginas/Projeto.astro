@@ -1,0 +1,77 @@
+---
+// One project: what was done, where, and its photographs.
+import { render } from "astro:content";
+import Chamada from "../components/Chamada.astro";
+import Mapa from "../components/Mapa.astro";
+import Figure from "../core/blocks/Figure.astro";
+import type { Lang } from "../core/i18n";
+import Layout from "../layouts/Site.astro";
+import { projetosDe, versoesDe } from "../projetos";
+import { textosDe } from "../textos";
+import { areas, rotas } from "../textos/rotas";
+
+interface Props {
+	lang: Lang;
+	slug: string;
+}
+const { lang, slug } = Astro.props;
+const t = textosDe(lang);
+const projetos = await projetosDe(lang);
+const i = projetos.findIndex((p) => p.data.slug === slug);
+const projeto = projetos[i];
+const seguinte = projetos[(i + 1) % projetos.length];
+const d = projeto.data;
+const { Content } = await render(projeto);
+---
+
+<Layout lang={lang} title={`${d.title}, ${d.place} | DS Anox`} description={d.description} alternates={await versoesDe(d.key)}>
+	<section class="topo sem-linha">
+		<div class="limite">
+			<a class="ligacao" href={rotas.projects[lang]}>{t.projects.back}</a>
+			<h1 class="mt-6 longo">{d.title}</h1>
+			<p>{d.description}</p>
+		</div>
+	</section>
+	<div class="limite">
+		<Figure class="capa" src={d.cover} alt={d.coverAlt} priority widths={[560, 900, 1400, 1800]} sizes="(max-width: 768px) 75vw, (min-width: 1440px) 1360px, 100vw" />
+	</div>
+	<section class="seccao">
+		<div class="limite projeto">
+			<div>
+				<dl>
+					<div>
+						<dt>{t.projects.labels.place}</dt>
+						<dd>{d.place}, {d.country}</dd>
+					</div>
+					<div>
+						<dt>{t.projects.labels.year}</dt>
+						<dd>{d.year}</dd>
+					</div>
+					<div>
+						<dt>{t.projects.labels.area}</dt>
+						<dd><a href={rotas[areas[d.area]][lang]}>{t.services.areas[d.area].name}</a></dd>
+					</div>
+				</dl>
+				<Mapa label={`${d.place}, ${d.country}`} places={[d]} />
+				{d.demo && <p class="nota">{t.projects.demoNote}</p>}
+			</div>
+			<div class="prosa">
+				<Content />
+			</div>
+		</div>
+	</section>
+	<section class="pb-20 md:pb-32">
+		<div class="limite">
+			<h2 class="sr-only">{t.projects.photos}</h2>
+			<ul class="galeria">
+				{d.gallery.map((g) => (
+					<li class="revela"><Figure src={g.src} alt={g.alt} widths={[480, 800, 1100]} sizes="(min-width: 768px) 48vw, 100vw" /></li>
+				))}
+			</ul>
+			<ul class="outras md:mt-20">
+				<li><a href={seguinte.href}><span class="rotulo">{t.projects.next}</span>{seguinte.data.title}</a></li>
+			</ul>
+		</div>
+	</section>
+	<Chamada lang={lang} />
+</Layout>

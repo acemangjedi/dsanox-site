@@ -1,0 +1,21 @@
+---
+// The world in dots, with one mark for each place given. The marks come from the
+// projects, so the map follows them.
+import { land, STEP, TOP } from "../dados/mundo";
+
+interface Props {
+	label: string;
+	places: { lat: number; lng: number }[];
+}
+const { label, places } = Astro.props;
+---
+
+<svg class="mapa" viewBox="-2 -2 148 58" role="img" aria-label={label}>
+	<path class="terra" d={land} />
+	{places.map((p) => (
+		<g transform={`translate(${(p.lng + 180) / STEP} ${(TOP - p.lat) / STEP})`}>
+			<circle class="halo" r="2.2" />
+			<circle class="pino" r="0.9" />
+		</g>
+	))}
+</svg>

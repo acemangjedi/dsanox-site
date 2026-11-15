@@ -34,6 +34,7 @@ const pt = {
 		home: "DS Anox, início",
 		about: "Sobre nós",
 		services: "Serviços",
+		projects: "Projetos",
 		team: "Equipa",
 		contact: "Contactos",
 	},
@@ -242,6 +243,25 @@ const pt = {
 	},
 	teamPage: {
 		title: "Soldadores, tubistas e montadores.",
+	},
+	projects: {
+		seoTitle: "Projetos | Tubagem, estruturas e montagem industrial",
+		seoDescription:
+			"Projetos da DS Anox em Portugal e no estrangeiro: tubagem industrial, estruturas metálicas, pré-fabricação e montagem em obra, com a localização de cada um.",
+		title: "Projetos em Portugal e no estrangeiro.",
+		intro:
+			"Uma seleção de trabalhos de tubagem, estruturas metálicas, pré-fabricação e montagem, cada um com o que foi feito e onde.",
+		homeTitle: "Onde trabalhamos",
+		homeText:
+			"Cada ponto do mapa é um projeto. A lista leva à descrição e às fotografias de cada um.",
+		all: "Ver todos os projetos",
+		back: "Todos os projetos",
+		next: "Projeto seguinte",
+		photos: "Fotografias do projeto",
+		map: "Mapa-mundo com a localização dos projetos",
+		labels: { place: "Localização", year: "Ano", area: "Área" },
+		demo: "Exemplo",
+		demoNote: "Projeto de demonstração, com dados fictícios.",
 	},
 	cta: {
 		title: "Tem um projeto para orçamentar?",

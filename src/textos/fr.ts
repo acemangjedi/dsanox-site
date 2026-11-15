@@ -37,6 +37,7 @@ const fr: Textos = {
 		home: "DS Anox, accueil",
 		about: "À propos",
 		services: "Services",
+		projects: "Projets",
 		team: "Équipe",
 		contact: "Contact",
 	},
@@ -245,6 +246,25 @@ const fr: Textos = {
 	},
 	teamPage: {
 		title: "Soudeurs, tuyauteurs et monteurs.",
+	},
+	projects: {
+		seoTitle: "Projets | Tuyauterie, charpente métallique et montage",
+		seoDescription:
+			"Les projets de DS Anox au Portugal et à l'étranger : tuyauterie industrielle, structures métalliques, préfabrication et montage sur chantier, avec leur localisation.",
+		title: "Des projets au Portugal et à l'étranger.",
+		intro:
+			"Une sélection de travaux de tuyauterie, de structures métalliques, de préfabrication et de montage, avec pour chacun ce qui a été fait et où.",
+		homeTitle: "Où nous travaillons",
+		homeText:
+			"Chaque point de la carte est un projet. La liste mène à la description et aux photographies de chacun.",
+		all: "Voir tous les projets",
+		back: "Tous les projets",
+		next: "Projet suivant",
+		photos: "Photographies du projet",
+		map: "Carte du monde avec la localisation des projets",
+		labels: { place: "Localisation", year: "Année", area: "Métier" },
+		demo: "Exemple",
+		demoNote: "Projet de démonstration, avec des données fictives.",
 	},
 	cta: {
 		title: "Un projet à chiffrer ?",

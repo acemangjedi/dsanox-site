@@ -6,9 +6,11 @@ import f09 from "../assets/fotos/foto-09.jpg";
 import f12 from "../assets/fotos/foto-12.jpg";
 import f11 from "../assets/fotos/topo/foto-11.jpg";
 import Contacto from "../components/Contacto.astro";
+import Mapa from "../components/Mapa.astro";
 import Figure from "../core/blocks/Figure.astro";
 import type { Lang } from "../core/i18n";
 import Layout from "../layouts/Site.astro";
+import { projetosDe } from "../projetos";
 import { textosDe } from "../textos";
 import { areas, rotas } from "../textos/rotas";
 
@@ -17,6 +19,7 @@ interface Props {
 }
 const { lang } = Astro.props;
 const t = textosDe(lang);
+const projetos = await projetosDe(lang);
 const n = (i: number) => String(i + 1).padStart(2, "0");
 const areaPhotos = [
 	{ src: f02, alt: t.alts.plant },
@@ -90,6 +93,30 @@ const areaPhotos = [
 						<span class="num" aria-hidden="true">{n(i)}</span>
 						<h3>{s.name}</h3>
 						<p>{s.text}</p>
+					</li>
+				))}
+			</ol>
+		</div>
+	</section>
+
+	<section class="seccao onde">
+		<div class="limite">
+			<div class="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+				<h2 class="revela">{t.projects.homeTitle}</h2>
+				<div>
+					<p class="max-w-[48ch] text-ink-2">{t.projects.homeText}</p>
+					<a class="ligacao mt-5" href={rotas.projects[lang]}>{t.projects.all}</a>
+				</div>
+			</div>
+			<Mapa label={t.projects.map} places={projetos.map((p) => p.data)} />
+			<ol class="locais">
+				{projetos.map((p) => (
+					<li>
+						<a href={p.href}>
+							<span class="lugar">{p.data.place}</span>
+							<span class="pais">{p.data.country}</span>
+							<span class="obra">{p.data.title}</span>
+						</a>
 					</li>
 				))}
 			</ol>

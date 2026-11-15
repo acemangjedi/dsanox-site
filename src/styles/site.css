@@ -575,6 +575,114 @@
 		@apply text-ink underline underline-offset-4;
 	}
 
+	/* The projects: the world in dots, a red mark on each place. */
+	.mapa {
+		@apply block h-auto w-full;
+	}
+	.mapa .terra {
+		fill: none;
+		stroke: #5f646c;
+		stroke-width: 0.44;
+		stroke-linecap: round;
+	}
+	.mapa .pino {
+		fill: var(--color-accent);
+		stroke: var(--color-ink);
+		stroke-width: 0.22;
+	}
+	.mapa .halo {
+		fill: color-mix(in srgb, var(--color-accent) 28%, transparent);
+	}
+	.onde .mapa {
+		@apply mt-12 md:mt-16;
+	}
+	.locais {
+		@apply mt-10 grid border-t border-line md:mt-14 md:grid-cols-2 md:gap-x-10 lg:grid-cols-3;
+	}
+	.locais a {
+		@apply grid min-h-11 grid-cols-[1fr_auto] items-baseline gap-x-4 border-b border-line py-5;
+	}
+	.locais .lugar {
+		@apply font-display text-[2rem] uppercase leading-[0.95] underline-offset-[6px] md:text-[2.5rem];
+	}
+	.locais a:hover .lugar {
+		@apply underline decoration-accent decoration-2;
+	}
+	.locais .pais,
+	.projetos .local {
+		@apply text-[0.8125rem] font-bold tracking-[0.12em] text-ink-2 uppercase;
+	}
+	.locais .obra {
+		@apply col-span-2 mt-1 text-[1.0625rem] text-ink-2;
+	}
+	/* A project's title is a sentence: a size down. */
+	.topo h1.longo {
+		@apply max-w-[26ch] md:text-[4.25rem];
+	}
+	.topo.sem-linha {
+		@apply border-0 pb-12 md:pb-16;
+	}
+	.projetos {
+		@apply grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-20;
+	}
+	.projetos .figure {
+		@apply aspect-square;
+	}
+	.projetos .figure img {
+		@apply transition-transform duration-700 ease-out;
+	}
+	.projetos a:hover .figure img {
+		@apply scale-105;
+	}
+	.projetos h2 {
+		@apply mt-5 text-[2rem] underline-offset-[6px] md:text-[2.25rem];
+	}
+	.projetos a:hover h2 {
+		@apply underline decoration-accent decoration-2;
+	}
+	.projetos .local {
+		@apply mt-3 flex flex-wrap items-center gap-x-3 gap-y-1;
+	}
+	.exemplo {
+		@apply border border-line px-2 py-0.5 text-[0.75rem];
+	}
+	.capa {
+		@apply aspect-[4/3] md:aspect-[21/9];
+	}
+	.projeto {
+		@apply grid gap-14 lg:grid-cols-[1fr_1.3fr] lg:gap-24;
+	}
+	.projeto dl {
+		@apply border-t border-line;
+	}
+	.projeto dl div {
+		@apply grid grid-cols-[8rem_1fr] gap-4 border-b border-line py-4;
+	}
+	.projeto dt {
+		@apply text-[0.8125rem] font-bold tracking-[0.12em] text-ink-2 uppercase;
+	}
+	.projeto dd a {
+		@apply underline decoration-accent decoration-2 underline-offset-[6px];
+	}
+	.projeto .mapa {
+		@apply mt-10;
+	}
+	.projeto .nota {
+		@apply mt-6 text-[0.9375rem] text-ink-2;
+	}
+	.projeto .prosa p:first-child {
+		@apply mt-0 text-[1.375rem] leading-snug text-ink;
+	}
+	.galeria {
+		@apply grid gap-6 md:grid-cols-2 md:gap-10;
+	}
+	.galeria .figure {
+		@apply aspect-[4/3];
+	}
+	.outras .rotulo {
+		@apply mr-6 font-body text-[0.8125rem] font-bold tracking-[0.12em] text-ink-2 normal-case uppercase;
+	}
+
 	.rodape {
 		@apply border-t border-line py-12 text-[0.9375rem] text-ink-2;
 	}

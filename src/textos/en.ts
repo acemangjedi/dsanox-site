@@ -37,6 +37,7 @@ const en: Textos = {
 		home: "DS Anox, home",
 		about: "About",
 		services: "Services",
+		projects: "Projects",
 		team: "Team",
 		contact: "Contact",
 	},
@@ -242,6 +243,25 @@ const en: Textos = {
 	},
 	teamPage: {
 		title: "Welders, pipefitters and assemblers.",
+	},
+	projects: {
+		seoTitle: "Projects | Piping, steel structures and assembly",
+		seoDescription:
+			"DS Anox projects in Portugal and abroad: industrial piping, steel structures, prefabrication and on-site assembly, with the location of each one.",
+		title: "Projects in Portugal and abroad.",
+		intro:
+			"A selection of piping, steel structure, prefabrication and assembly work, each with what was done and where.",
+		homeTitle: "Where we work",
+		homeText:
+			"Each point on the map is a project. The list leads to the description and photographs of each one.",
+		all: "See all projects",
+		back: "All projects",
+		next: "Next project",
+		photos: "Photographs of the project",
+		map: "World map with the location of the projects",
+		labels: { place: "Location", year: "Year", area: "Area" },
+		demo: "Example",
+		demoNote: "Demonstration project, with fictitious data.",
 	},
 	cta: {
 		title: "Have a project to quote?",

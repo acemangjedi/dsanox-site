@@ -21,6 +21,7 @@ export const rotas = {
 		en: "/en/services/industrial-construction/",
 		fr: "/fr/services/construction-industrielle/",
 	},
+	projects: { pt: "/projetos/", en: "/en/projects/", fr: "/fr/projets/" },
 	contact: { pt: "/contactos/", en: "/en/contact/", fr: "/fr/contact/" },
 	privacy: {
 		pt: "/politica-de-privacidade/",

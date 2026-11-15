@@ -1,0 +1,41 @@
+---
+// The projects, as a grid of square photographs: the title and the place under each.
+import Chamada from "../components/Chamada.astro";
+import Figure from "../core/blocks/Figure.astro";
+import type { Lang } from "../core/i18n";
+import Layout from "../layouts/Site.astro";
+import { projetosDe } from "../projetos";
+import { textosDe } from "../textos";
+
+interface Props {
+	lang: Lang;
+}
+const { lang } = Astro.props;
+const t = textosDe(lang).projects;
+const projetos = await projetosDe(lang);
+---
+
+<Layout lang={lang} title={t.seoTitle} description={t.seoDescription} pagina="projects">
+	<section class="topo sem-linha">
+		<div class="limite">
+			<h1>{t.title}</h1>
+			<p>{t.intro}</p>
+		</div>
+	</section>
+	<section class="pb-20 md:pb-32">
+		<div class="limite">
+			<ul class="projetos">
+				{projetos.map((p, i) => (
+					<li class="revela">
+						<a href={p.href}>
+							<Figure src={p.data.cover} alt={p.data.coverAlt} priority={i === 0} widths={[360, 480, 640, 900]} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 60vw" />
+							<h2>{p.data.title}</h2>
+						</a>
+						<p class="local">{p.data.place}, {p.data.country}{p.data.demo && <span class="exemplo">{t.demo}</span>}</p>
+					</li>
+				))}
+			</ul>
+		</div>
+	</section>
+	<Chamada lang={lang} />
+</Layout>

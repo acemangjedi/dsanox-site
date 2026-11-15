@@ -18,6 +18,8 @@ interface Props {
 	description: string;
 	// The page, to link it to itself in the other languages.
 	pagina?: Pagina;
+	// Or its addresses in the other languages, when it is not one of the fixed pages.
+	alternates?: Partial<Record<Lang, string>>;
 	robots?: string;
 	// The first screen is a photograph: the header sits on top of it.
 	sobreposto?: boolean;
@@ -27,11 +29,11 @@ const {
 	title,
 	description,
 	pagina,
+	alternates = pagina ? rotas[pagina] : undefined,
 	robots,
 	sobreposto = false,
 } = Astro.props;
 const t = textosDe(lang);
-const alternates = pagina ? rotas[pagina] : undefined;
 ---
 
 <!DOCTYPE html>

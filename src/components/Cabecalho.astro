@@ -9,12 +9,14 @@ import { rotas } from "../textos/rotas";
 
 interface Props {
 	lang: Lang;
-	alternates?: Record<Lang, string>;
+	alternates?: Partial<Record<Lang, string>>;
 	sobreposto: boolean;
 }
 const { lang, alternates, sobreposto } = Astro.props;
 const t = textosDe(lang);
-const links = (["about", "services", "team", "contact"] as const).map((k) => ({
+const links = (
+	["about", "services", "projects", "team", "contact"] as const
+).map((k) => ({
 	href: rotas[k][lang],
 	label: t.nav[k],
 }));
@@ -25,13 +27,13 @@ const here = Astro.url.pathname;
 	<div class="limite">
 		<a class="marca" href={rotas.home[lang]} aria-label={t.nav.home}><Image src={logo} alt="" width={200} loading="eager" /></a>
 		<nav class="principal" aria-label={t.nav.label}>
-			{links.map((l) => <a href={l.href} aria-current={here === l.href ? "page" : undefined}>{l.label}</a>)}
+			{links.map((l) => <a href={l.href} aria-current={here.startsWith(l.href) ? "page" : undefined}>{l.label}</a>)}
 		</nav>
 		<LangSwitch class="linguas" alternates={alternates} />
 		<a class="botao botao-cheio pedir" href={rotas.contact[lang]}>{t.cta.button}</a>
 		<Menu id="menu" label={t.nav.menu}>
 			<nav aria-label={t.nav.menu}>
-				{links.map((l) => <a href={l.href} aria-current={here === l.href ? "page" : undefined}>{l.label}</a>)}
+				{links.map((l) => <a href={l.href} aria-current={here.startsWith(l.href) ? "page" : undefined}>{l.label}</a>)}
 			</nav>
 			<LangSwitch alternates={alternates} />
 		</Menu>
