@@ -406,9 +406,12 @@
 	.form textarea {
 		@apply min-h-12 w-full border border-line bg-steel px-4 py-3 text-ink;
 	}
+	/* A field in use: the red of the site on its own edge, no second line around it. */
 	.form input:not([type="checkbox"]):focus-visible,
 	.form textarea:focus-visible {
-		@apply border-ink;
+		@apply border-accent-soft;
+		outline: 1px solid var(--color-accent-soft);
+		outline-offset: 0;
 	}
 	.form textarea {
 		@apply min-h-36 resize-y;
