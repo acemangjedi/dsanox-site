@@ -15,7 +15,8 @@ import type { SiteConfig } from "../config";
 
 type Content = {
 	contentVersion: number;
-	articles: { slug: string; markdown: string }[];
+	// lang: on a site with languages, the one this article is in.
+	articles: { slug: string; lang?: string; markdown: string }[];
 	media: { filename: string; sha256: string }[];
 };
 
@@ -40,12 +41,16 @@ export async function sync(opts: {
 
 	const posts = join(root, "src/content/blog");
 	mkdirSync(posts, { recursive: true });
-	for (const f of readdirSync(posts).filter((f) => f.endsWith(".md"))) {
-		rmSync(join(posts, f));
+	// Articles of a site with languages go in a folder for each: blog/en/<slug>.md.
+	for (const f of readdirSync(posts, { recursive: true, encoding: "utf8" })) {
+		if (f.endsWith(".md")) rmSync(join(posts, f));
 	}
 	for (const a of content.articles) {
 		if (!SLUG.test(a.slug)) throw new Error(`bad article slug: ${a.slug}`);
-		writeFileSync(join(posts, `${a.slug}.md`), a.markdown);
+		if (a.lang && !/^[a-z]{2}$/.test(a.lang))
+			throw new Error(`bad article language: ${a.lang}`);
+		mkdirSync(join(posts, a.lang ?? ""), { recursive: true });
+		writeFileSync(join(posts, a.lang ?? "", `${a.slug}.md`), a.markdown);
 	}
 
 	const images = join(root, "public/assets/img/blog");

@@ -4,7 +4,7 @@ import { projetosDe } from "../../../projetos";
 
 export async function getStaticPaths() {
 	return (await projetosDe("en")).map((p) => ({
-		params: { slug: p.data.slug },
+		params: { slug: p.slug },
 	}));
 }
 const { slug } = Astro.params;

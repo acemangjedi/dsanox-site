@@ -99,29 +99,31 @@ const areaPhotos = [
 		</div>
 	</section>
 
+	{projetos.length > 0 && (
 	<section class="seccao onde">
-		<div class="limite">
-			<div class="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-				<h2 class="revela">{t.projects.homeTitle}</h2>
-				<div>
-					<p class="max-w-[48ch] text-ink-2">{t.projects.homeText}</p>
-					<a class="ligacao mt-5" href={rotas.projects[lang]}>{t.projects.all}</a>
+			<div class="limite">
+				<div class="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+					<h2 class="revela">{t.projects.homeTitle}</h2>
+					<div>
+						<p class="max-w-[48ch] text-ink-2">{t.projects.homeText}</p>
+						<a class="ligacao mt-5" href={rotas.projects[lang]}>{t.projects.all}</a>
+					</div>
 				</div>
+				<Mapa label={t.projects.map} places={projetos.flatMap((p) => p.coords ?? [])} />
+				<ol class="locais">
+					{projetos.map((p) => (
+						<li>
+							<a href={p.href}>
+								<span class="lugar">{p.place ?? p.title}</span>
+								<span class="pais">{p.country}</span>
+								{p.place && <span class="obra">{p.title}</span>}
+							</a>
+						</li>
+					))}
+				</ol>
 			</div>
-			<Mapa label={t.projects.map} places={projetos.map((p) => p.data)} />
-			<ol class="locais">
-				{projetos.map((p) => (
-					<li>
-						<a href={p.href}>
-							<span class="lugar">{p.data.place}</span>
-							<span class="pais">{p.data.country}</span>
-							<span class="obra">{p.data.title}</span>
-						</a>
-					</li>
-				))}
-			</ol>
-		</div>
-	</section>
+		</section>
+	)}
 
 	<section class="seccao bg-steel">
 		<div class="limite equipa">

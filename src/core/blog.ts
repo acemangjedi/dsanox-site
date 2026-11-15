@@ -24,6 +24,25 @@ export const blog = defineCollection({
 		jsonLd: z
 			.union([z.record(z.string(), z.unknown()), z.array(z.unknown())])
 			.optional(),
+		// On a site with languages: which one this file is in, and the article it is
+		// a version of (the same key in every language).
+		lang: z.string().optional(),
+		key: z.string().optional(),
+		// The article's photographs and where it asks for them: a carousel at the top
+		// or a gallery at the end.
+		photos: z.array(z.object({ src: z.string(), alt: z.string() })).default([]),
+		photosAt: z.enum(["top", "end"]).default("end"),
+		// The extra fields the site declared in the panel, by their keys.
+		extra: z
+			.record(
+				z.string(),
+				z.union([
+					z.string(),
+					z.number(),
+					z.object({ lat: z.number(), lng: z.number() }),
+				]),
+			)
+			.default({}),
 	}),
 });
 

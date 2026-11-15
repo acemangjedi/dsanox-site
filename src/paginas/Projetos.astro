@@ -28,10 +28,12 @@ const projetos = await projetosDe(lang);
 				{projetos.map((p, i) => (
 					<li class="revela">
 						<a href={p.href}>
-							<Figure src={p.data.cover} alt={p.data.coverAlt} priority={i === 0} widths={[360, 480, 640, 900]} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 60vw" />
-							<h2>{p.data.title}</h2>
+							{p.cover ? (
+								<Figure src={p.cover.src} alt={p.cover.alt} priority={i === 0} widths={[360, 480, 640, 900]} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 60vw" />
+							) : <div class="figure sem-foto" />}
+							<h2>{p.title}</h2>
 						</a>
-						<p class="local">{p.data.place}, {p.data.country}{p.data.demo && <span class="exemplo">{t.demo}</span>}</p>
+						<p class="local">{[p.place, p.country].filter(Boolean).join(", ")}{p.demo && <span class="exemplo">{t.demo}</span>}</p>
 					</li>
 				))}
 			</ul>
