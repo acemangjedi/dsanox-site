@@ -21,9 +21,11 @@
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "3.7.4",
+		"@tailwindcss/vite": "4.3.5",
 		"astro": "7.4.11",
 		"marked": "18.2.0",
 		"sharp": "0.35.5",
+		"tailwindcss": "4.3.5",
 		"zod": "4.6.7"
 	},
 	"devDependencies": {

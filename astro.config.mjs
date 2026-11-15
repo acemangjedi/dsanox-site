@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import site from "./site.config";
 import core from "./src/core/integration";
@@ -10,6 +11,7 @@ export default defineConfig({
 		inlineStylesheets: "never",
 	},
 	vite: {
+		plugins: [tailwindcss()],
 		build: {
 			assetsInlineLimit: 0,
 		},

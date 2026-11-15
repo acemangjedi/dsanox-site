@@ -1,0 +1,83 @@
+---
+// Tabs, following the WAI-ARIA tabs pattern. No look of its own: the site styles
+// [role="tab"], [aria-selected="true"] and [role="tabpanel"].
+// Adapted from accessible-astro-components (MIT, see NOTICE.md).
+//
+// <Tabs id="planos" labels={["Mensal", "Anual"]}>
+//   <p slot="0">…</p>
+//   <p slot="1">…</p>
+// </Tabs>
+interface Props {
+	id: string;
+	labels: string[];
+	class?: string;
+}
+const { id, labels, class: className } = Astro.props;
+const panels = await Promise.all(
+	labels.map((_, i) => Astro.slots.render(String(i))),
+);
+---
+
+<div class:list={["tabs", className]} data-tabs>
+	<div role="tablist">
+		{labels.map((label, i) => (
+			<button
+				type="button"
+				role="tab"
+				id={`${id}-tab-${i}`}
+				aria-controls={`${id}-panel-${i}`}
+				aria-selected={i === 0 ? "true" : "false"}
+				tabindex={i === 0 ? "0" : "-1"}
+			>{label}</button>
+		))}
+	</div>
+	{panels.map((html, i) => (
+		<div
+			role="tabpanel"
+			id={`${id}-panel-${i}`}
+			aria-labelledby={`${id}-tab-${i}`}
+			tabindex="0"
+			hidden={i !== 0}
+			set:html={html}
+		/>
+	))}
+</div>
+
+<script>
+	for (const root of document.querySelectorAll<HTMLElement>("[data-tabs]")) {
+		const tabs = [...root.querySelectorAll<HTMLElement>('[role="tab"]')];
+		const select = (next: HTMLElement) => {
+			for (const tab of tabs) {
+				const on = tab === next;
+				tab.setAttribute("aria-selected", String(on));
+				tab.tabIndex = on ? 0 : -1;
+				const panel = document.getElementById(
+					tab.getAttribute("aria-controls") ?? "",
+				);
+				if (panel) panel.hidden = !on;
+			}
+		};
+		for (const tab of tabs) tab.addEventListener("click", () => select(tab));
+		root
+			.querySelector('[role="tablist"]')
+			?.addEventListener("keydown", (e) => {
+				const key = (e as KeyboardEvent).key;
+				const i = tabs.indexOf(document.activeElement as HTMLElement);
+				const n = tabs.length;
+				const to =
+					key === "ArrowRight"
+						? (i + 1) % n
+						: key === "ArrowLeft"
+							? (i - 1 + n) % n
+							: key === "Home"
+								? 0
+								: key === "End"
+									? n - 1
+									: -1;
+				if (i < 0 || to < 0) return;
+				e.preventDefault();
+				tabs[to].focus();
+				select(tabs[to]);
+			});
+	}
+</script>
