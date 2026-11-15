@@ -49,7 +49,9 @@ Cada direção tem:
 - **Imagem:** que fotografias usa, em que tamanho e com que tratamento. Com
   boas fotografias do cliente, a direção pode viver delas. Sem elas, vive de
   letra, cor e desenho em SVG; fotografia de banco a encher não substitui.
-- **Movimento:** o que se mexe, quando e porquê. Pouco e com intenção.
+- **Movimento:** o que se mexe, o que o provoca e porquê, no nível que o
+  dono do projeto pediu ou que as referências mostram. Sempre com intenção:
+  cada movimento ajuda a ler, a perceber ou a lembrar.
 - **Um elemento próprio:** aquilo de que alguém se lembra no dia seguinte
   (uma numeração de secções como numa folha de obra, um título enorme cortado
   pela fotografia, uma linha de cota). Um por direção.
@@ -76,12 +78,58 @@ a página, sem recomeçar a direção.
 
 ## Sites de referência
 
-Abre cada um, tira capturas a 1280 e 390 px e escreve o que lá funciona em
-termos de princípios: densidade, ritmo entre secções, hierarquia das letras,
-uso de fotografia, navegação. São os princípios que passam para o DESIGN.md.
-Cores, composições e textos de outro site ficam com ele: o objetivo é perceber
-porque o cliente gosta daquilo, e dar-lhe essa qualidade num desenho que é
-dele.
+Quem indica um site de que gosta raramente sabe dizer porquê. Muitas vezes
+gosta do que o site faz, e isso não se vê numa imagem parada: o que entra ao
+deslizar, o que reage ao rato, como muda uma página para a outra. Por isso um
+site de referência usa-se antes de se fotografar.
+
+Para cada um:
+
+1. **Usa-o.** Abre-o no browser a 1280 px, desliza devagar do topo ao fim,
+   passa o rato pelos títulos, imagens, cartões e botões, abre o menu, muda de
+   página. Repete a 390 px, a tocar em vez de apontar.
+2. **Regista o que se move,** com
+   `node .claude/skills/site-direcoes/movimento.mjs <endereço>`: guarda uma
+   sequência de imagens da página a entrar, a deslizar e a reagir ao rato, e
+   lista as animações, transições e bibliotecas de movimento que encontrou.
+   Vê as imagens pela ordem; a lista só diz onde olhar.
+3. **Escreve o que observaste,** em quatro partes:
+   - **Movimento:** o que se mexe, o que o provoca (carregar a página,
+     deslizar, passar o rato, a posição do cursor, o clique), quanto dura e
+     para que serve. «Os títulos entram palavra a palavra ao deslizar, em
+     cerca de 0,6 s»; «a fotografia do herói segue o cursor com atraso»; «o
+     cursor passa a um círculo com "Ver" por cima dos projetos».
+   - **Composição:** densidade, ritmo entre secções, grelha, margens.
+   - **Letra e cor:** hierarquia, tamanhos, quantas cores e para quê.
+   - **Imagem e navegação:** tamanho e tratamento das fotografias, como se
+     anda no site.
+4. **Diz o que as referências têm em comum.** É isso que o dono do projeto
+   está a pedir. Três sites com muito movimento e resposta ao rato são um
+   pedido de movimento, mesmo que ele só tenha dito «gosto destes».
+
+Das referências saem os valores de partida de **ousadia**, **movimento** e
+**densidade**, e as três direções propõem-se à volta deles. Se as referências
+vivem de movimento, as três direções têm movimento a sério, cada uma à sua
+maneira, e o dono do projeto vê-as a funcionar na pré-visualização, e não
+só em capturas.
+
+O que passa para o DESIGN.md são os princípios e o nível de cada coisa. As
+cores, as composições, os textos e os efeitos copiados à letra ficam com o
+site de origem: o objetivo é dar ao cliente aquela qualidade num desenho que
+é dele.
+
+### Movimento que se pode publicar
+
+Movimento ambicioso cabe nos portões quando é feito com cuidado:
+
+- anima `transform` e `opacity`, que não mexem no resto da página;
+- o conteúdo está no HTML e vê-se sem JavaScript; o movimento melhora-o;
+- com `prefers-reduced-motion` o site fica parado e completo;
+- os efeitos de rato têm um equivalente no telemóvel e no teclado, ou não
+  fazem falta lá;
+- CSS primeiro (`transition`, `animation`, `animation-timeline: view()`);
+  uma biblioteca só quando o efeito a pede, carregada depois do primeiro
+  ecrã.
 
 ## Construir as três
 
@@ -95,14 +143,16 @@ dele.
    fotografias verdadeiros, na língua principal. Segue a skill
    `site-construir` no que toca a blocos, texto e imagens.
 3. Tira capturas de página inteira a 1280 e 390 px com
-   `node .claude/skills/site-construir/capturas.mjs`. Olha para elas como o
+   `node .claude/skills/site-construir/capturas.mjs` e, se a direção tiver
+   movimento, a sequência de `movimento.mjs`. Olha para elas como o
    cliente olharia. O primeiro ecrã diz o que a empresa faz e oferece uma
    ação? No telemóvel continua a ser a mesma direção, ou ficou uma pilha de
    blocos? Corrige antes de mostrar.
 
 ## Mostrar
 
-Um quadro com as três, lado a lado: as capturas, o nome, a ideia, o par de
+Um quadro com as três, lado a lado: as capturas (e o endereço da
+pré-visualização, havendo movimento), o nome, a ideia, o par de
 letras, as cores, o elemento próprio e o risco. Diz qual recomendas e porquê,
 numa frase. A escolha é do dono do projeto.
 

@@ -23,7 +23,7 @@ tabela, e regista o resultado.
 | 2 | Tiques de IA | `impeccable detect` sobre cada página aberta num browser (a página tem de estar renderizada), mais as frases de `frases.txt` procuradas no texto de `dist/` | Não encontra nenhum. |
 | 3 | Desenho | `npx @google/design.md lint DESIGN.md` | Sem erros nem avisos de contraste. |
 | 4 | Factos | Cada número, preço, nome de cliente, testemunho e certificação das páginas tem origem em `docs/briefing.md` ou `docs/inventario.md` | Todos têm origem. |
-| 5 | Remake | O texto do inventário está todo no site e cada endereço antigo responde ou redireciona | As diferenças foram aceites pelo dono do projeto. |
+| 5 | Remake | Os factos e as ideias do inventário estão todos no site, não há factos novos, e cada endereço antigo responde ou redireciona | O que mudou no texto está nas Propostas, aceite pelo dono do projeto. |
 | 6 | Lighthouse | Em telemóvel, todas as páginas | Desempenho 95 ou mais; as outras notas a 100. |
 | 7 | Acessibilidade | axe em todas as páginas e teclado nos blocos usados | Zero violações. |
 | 8 | Crítico | Ver abaixo | Todas as categorias com 8 ou mais. |
