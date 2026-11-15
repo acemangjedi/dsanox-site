@@ -1,18 +1,23 @@
 ---
+import site from "../../../site.config";
+import { langOf, pathOf, t } from "../i18n";
+
 // Bump when the cookie policy changes, so visitors are asked again.
 const POLICY_VERSION = "1.0";
+const lang = langOf(Astro.url.pathname, site);
+const w = t(lang);
 ---
 
-<div id="cookie-banner" role="region" aria-label="Aviso de cookies" hidden data-policy-version={POLICY_VERSION}>
+<div id="cookie-banner" role="region" aria-label={w.cookieRegion} hidden data-policy-version={POLICY_VERSION}>
 	<div class="cb-bar">
 		<p>
-			Utilizamos cookies para melhorar a sua experiência. Pode aceitar todos, rejeitar ou personalizar as suas preferências.
-			<a href="/politica-de-cookies/">Política de cookies</a>.
+			{w.cookieText}
+			<a href={pathOf("cookies", lang, site)}>{w.cookieLink}</a>.
 		</p>
 		<div class="cb-actions">
-			<button id="cb-reject" type="button">Rejeitar todos</button>
-			<button id="cb-accept" type="button">Aceitar todos</button>
-			<button id="cb-customize" type="button">Personalizar definições</button>
+			<button id="cb-reject" type="button">{w.rejectAll}</button>
+			<button id="cb-accept" type="button">{w.acceptAll}</button>
+			<button id="cb-customize" type="button">{w.customize}</button>
 		</div>
 	</div>
 </div>
@@ -21,44 +26,44 @@ const POLICY_VERSION = "1.0";
 	<div class="cm-overlay"></div>
 	<div class="cm-box">
 		<div class="cm-header">
-			<h2 id="cm-title">Definições de cookies</h2>
-			<button id="cm-close" type="button" class="cm-close" aria-label="Fechar definições de cookies">
+			<h2 id="cm-title">{w.cookieSettings}</h2>
+			<button id="cm-close" type="button" class="cm-close" aria-label={w.closeSettings}>
 				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
 			</button>
 		</div>
 		<div class="cm-toggles">
 			<div class="cm-toggle-row">
 				<div class="cm-toggle-info">
-					<span class="cm-toggle-name">Necessários</span>
-					<span class="cm-toggle-desc">Essenciais para o funcionamento do site. Não requerem consentimento.</span>
+					<span class="cm-toggle-name">{w.necessary}</span>
+					<span class="cm-toggle-desc">{w.necessaryDesc}</span>
 				</div>
-				<button role="switch" aria-checked="true" disabled class="cm-switch cm-switch--on" aria-label="Cookies necessários">
+				<button role="switch" aria-checked="true" disabled class="cm-switch cm-switch--on" aria-label={w.necessaryLabel}>
 					<span class="cm-switch-thumb"></span>
 				</button>
 			</div>
 			<div class="cm-toggle-row">
 				<div class="cm-toggle-info">
-					<span class="cm-toggle-name">Análise</span>
-					<span class="cm-toggle-desc">Google Analytics e Microsoft Clarity — dados anónimos sobre páginas visitadas e comportamento de navegação.</span>
+					<span class="cm-toggle-name">{w.analytics}</span>
+					<span class="cm-toggle-desc">{w.analyticsDesc}</span>
 				</div>
-				<button id="toggle-analytics" role="switch" aria-checked="false" class="cm-switch" aria-label="Cookies de análise">
+				<button id="toggle-analytics" role="switch" aria-checked="false" class="cm-switch" aria-label={w.analyticsLabel}>
 					<span class="cm-switch-thumb"></span>
 				</button>
 			</div>
 			<div class="cm-toggle-row">
 				<div class="cm-toggle-info">
-					<span class="cm-toggle-name">Marketing</span>
-					<span class="cm-toggle-desc">Reservado para uso futuro. Não são utilizados atualmente.</span>
+					<span class="cm-toggle-name">{w.marketing}</span>
+					<span class="cm-toggle-desc">{w.marketingDesc}</span>
 				</div>
-				<button id="toggle-marketing" role="switch" aria-checked="false" class="cm-switch" aria-label="Cookies de marketing">
+				<button id="toggle-marketing" role="switch" aria-checked="false" class="cm-switch" aria-label={w.marketingLabel}>
 					<span class="cm-switch-thumb"></span>
 				</button>
 			</div>
 		</div>
 		<div class="cm-footer">
-			<button id="cm-reject-all" type="button">Rejeitar todos</button>
-			<button id="cm-accept-all" type="button">Aceitar todos</button>
-			<button id="cm-save" type="button">Guardar escolhas</button>
+			<button id="cm-reject-all" type="button">{w.rejectAll}</button>
+			<button id="cm-accept-all" type="button">{w.acceptAll}</button>
+			<button id="cm-save" type="button">{w.save}</button>
 		</div>
 	</div>
 </div>

@@ -23,7 +23,14 @@ export const siteSchema = z.object({
 	url: z.url().refine((u) => u.startsWith("https://") && u.endsWith("/"), {
 		message: "must start with https:// and end with /",
 	}),
-	lang: z.string().regex(/^[a-z]{2}-[A-Z]{2}$/, "use a code like pt-PT"),
+	// The core has its words in pt, en and fr.
+	lang: z
+		.string()
+		.regex(/^(pt|en|fr)-[A-Z]{2}$/, "use a code like pt-PT, en-GB or fr-FR"),
+	// Other languages of the site, each under its own prefix (en-GB → /en/).
+	locales: z
+		.array(z.string().regex(/^(pt|en|fr)-[A-Z]{2}$/, "use pt-, en- or fr-"))
+		.default([]),
 	org: z.object({
 		// schema.org type, e.g. Organization, LocalBusiness, ProfessionalService.
 		type: z.string().min(1),

@@ -1,0 +1,39 @@
+---
+// Modal on native <dialog>: the browser keeps focus inside, closes on Escape and gives
+// focus back to the button that opened it. Any button with data-modal="<id>" opens it.
+// No look of its own: the site styles .modal, ::backdrop and .modal-close.
+import site from "../../../site.config";
+import { langOf, t } from "../i18n";
+
+interface Props {
+	id: string;
+	title: string;
+	class?: string;
+}
+const { id, title, class: className } = Astro.props;
+const close = t(langOf(Astro.url.pathname, site)).close;
+---
+
+<dialog id={id} class:list={["modal", className]} aria-labelledby={`${id}-title`}>
+	<h2 id={`${id}-title`}>{title}</h2>
+	<slot />
+	<button type="button" class="modal-close" data-modal-close>{close}</button>
+</dialog>
+
+<script>
+	for (const button of document.querySelectorAll<HTMLElement>("[data-modal]")) {
+		const dialog = document.getElementById(button.dataset.modal ?? "");
+		if (!(dialog instanceof HTMLDialogElement)) continue;
+		button.setAttribute("aria-haspopup", "dialog");
+		button.addEventListener("click", () => dialog.showModal());
+	}
+	for (const dialog of document.querySelectorAll<HTMLDialogElement>("dialog.modal")) {
+		dialog
+			.querySelector("[data-modal-close]")
+			?.addEventListener("click", () => dialog.close());
+		// A click on the backdrop lands on the dialog itself.
+		dialog.addEventListener("click", (e) => {
+			if (e.target === dialog) dialog.close();
+		});
+	}
+</script>

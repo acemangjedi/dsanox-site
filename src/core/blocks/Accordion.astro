@@ -1,0 +1,31 @@
+---
+// Accordion on native <details>: works without JavaScript, keyboard and screen readers
+// included. No look of its own: the site styles .accordion, summary and the panel.
+//
+// <Accordion labels={["Pergunta 1", "Pergunta 2"]} single>
+//   <p slot="0">…</p>
+//   <p slot="1">…</p>
+// </Accordion>
+interface Props {
+	labels: string[];
+	// Only one item open at a time.
+	single?: boolean;
+	class?: string;
+}
+const { labels, single = false, class: className } = Astro.props;
+const group = single
+	? `accordion-${crypto.randomUUID().slice(0, 8)}`
+	: undefined;
+const panels = await Promise.all(
+	labels.map((_, i) => Astro.slots.render(String(i))),
+);
+---
+
+<div class:list={["accordion", className]}>
+	{labels.map((label, i) => (
+		<details name={group}>
+			<summary>{label}</summary>
+			<div set:html={panels[i]} />
+		</details>
+	))}
+</div>

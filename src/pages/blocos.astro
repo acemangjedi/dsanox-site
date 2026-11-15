@@ -1,0 +1,85 @@
+---
+// Every core block on one page, styled with Tailwind as a new site would do.
+// The e2e tests check keyboard use and accessibility here.
+import site from "../../site.config";
+import exemplo from "../assets/exemplo.jpg";
+import Accordion from "../core/blocks/Accordion.astro";
+import Figure from "../core/blocks/Figure.astro";
+import Menu from "../core/blocks/Menu.astro";
+import Modal from "../core/blocks/Modal.astro";
+import Slider from "../core/blocks/Slider.astro";
+import Tabs from "../core/blocks/Tabs.astro";
+import LeadForm from "../core/components/LeadForm.astro";
+import Seo from "../core/components/Seo.astro";
+import Blocos from "../layouts/Blocos.astro";
+
+const wrap = "mx-auto max-w-6xl px-6";
+const btn =
+	"inline-flex items-center whitespace-nowrap rounded-full px-6 py-3 font-semibold";
+const h2 = "font-display text-4xl font-extrabold";
+---
+
+<Blocos>
+	<Seo slot="head" title={`${site.name} — Blocos`} description={site.org.description} robots="noindex" />
+
+	<header class="border-b border-line">
+		<div class={`${wrap} flex h-18 items-center justify-between`}>
+			<a href="/" class="font-display text-xl font-extrabold md:text-2xl">{site.name}</a>
+			<Menu id="menu-blocos" label="Menu">
+				<nav aria-label="Menu principal">
+					<ul class="flex flex-col gap-4 p-6">
+						<li><a href="/servicos/">Serviços</a></li>
+						<li><a href="/sobre/">Sobre</a></li>
+						<li><a href="/contactos/">Contactos</a></li>
+					</ul>
+				</nav>
+			</Menu>
+		</div>
+	</header>
+
+	<main id="main" tabindex="-1">
+		<section class={`${wrap} py-16`}>
+			<h1 class="font-display text-5xl font-extrabold">Blocos do core</h1>
+			<Figure src={exemplo} alt="Imagem de exemplo do site" caption="Figura com legenda" credit="Autor da fotografia" creditUrl="https://unsplash.com/" priority sizes="(min-width: 1152px) 1104px, 100vw" class="mt-10" />
+		</section>
+
+		<section class={`${wrap} pb-16`}>
+			<h2 class={h2}>Separadores</h2>
+			<Tabs id="como" labels={["Diagnóstico", "Plano", "Acompanhamento"]} class="mt-8 max-w-3xl">
+				<p slot="0">Duas semanas de entrevistas e números.</p>
+				<p slot="1">Um plano curto, que cabe numa página.</p>
+				<p slot="2">Uma reunião por mês.</p>
+			</Tabs>
+		</section>
+
+		<section class={`${wrap} pb-16`}>
+			<h2 class={h2}>Acordeão</h2>
+			<Accordion labels={["Primeira pergunta", "Segunda pergunta"]} single class="mt-8 max-w-3xl">
+				<p slot="0">Primeira resposta.</p>
+				<p slot="1">Segunda resposta.</p>
+			</Accordion>
+		</section>
+
+		<section class={`${wrap} pb-16`}>
+			<h2 class={h2}>Slider</h2>
+			<Slider label="Exemplos" class="mt-8">
+				{["Um", "Dois", "Três", "Quatro", "Cinco"].map((n) => (
+					<li class="w-72 rounded-2xl border border-line p-8"><p class="font-display text-2xl font-extrabold">{n}</p></li>
+				))}
+			</Slider>
+		</section>
+
+		<section class={`${wrap} pb-16`}>
+			<h2 class={h2}>Modal</h2>
+			<button type="button" class={`${btn} mt-8 bg-accent text-accent-ink`} data-modal="modal-exemplo">Abrir janela</button>
+			<Modal id="modal-exemplo" title="Janela de exemplo">
+				<p class="mt-4 text-ink-2">Escape ou o botão fecham a janela.</p>
+			</Modal>
+		</section>
+
+		<section class={`${wrap} pb-24`}>
+			<h2 class={h2}>Formulário</h2>
+			<div class="mt-8 max-w-2xl"><LeadForm form="contactos" /></div>
+		</section>
+	</main>
+</Blocos>

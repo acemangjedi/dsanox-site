@@ -39,4 +39,6 @@ export default defineSite({
 	forms: {
 		contactos: "XPHFL70YEW8FGTSTcp6x5g.c38rBb_mtkY_",
 	},
+	// Page that shows the core blocks; not for visitors.
+	hidden: ["/blocos/"],
 });
