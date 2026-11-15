@@ -404,7 +404,7 @@
 	}
 	.form input:not([type="checkbox"]),
 	.form textarea {
-		@apply min-h-12 w-full border border-line bg-steel px-4 py-3 text-ink;
+		@apply min-h-12 w-full border border-transparent bg-[#23262b] px-4 py-3 text-ink;
 	}
 	/* A field in use: the red of the site on its own edge, no second line around it. */
 	.form input:not([type="checkbox"]):focus-visible,
