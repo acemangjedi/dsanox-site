@@ -1,0 +1,27 @@
+---
+// The first screen of an inner page: its photograph, a stretch of the arc, the title on it.
+import Figure from "../core/blocks/Figure.astro";
+
+interface Props {
+	src: ImageMetadata;
+	alt: string;
+	title: string;
+	text: string;
+}
+const { src, alt, title, text } = Astro.props;
+---
+
+<section class="heroi interior">
+	<div class="fundo">
+		<Figure class="h-full" src={src} alt={alt} priority widths={[560, 900, 1400, 1800]} sizes="(max-width: 768px) 75vw, 100vw" />
+	</div>
+	<svg class="arco" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+		<path d="M 40 104 C 62 80, 84 52, 102 12" />
+	</svg>
+	<div class="limite">
+		<h1>{title}</h1>
+	</div>
+</section>
+<div class="limite entrada">
+	<p>{text}</p>
+</div>

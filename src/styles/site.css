@@ -120,6 +120,9 @@
 	.lang-switch a[aria-current="page"] {
 		@apply text-ink underline decoration-accent decoration-2 underline-offset-[6px];
 	}
+	.cabecalho.sobreposto .lang-switch a {
+		@apply text-ink;
+	}
 	.cabecalho .linguas,
 	.cabecalho .pedir {
 		@apply hidden lg:flex;
@@ -160,8 +163,10 @@
 	.figure {
 		@apply m-0 overflow-hidden;
 	}
+	/* One treatment for every photograph: no colour, the whites held back. */
 	.figure img {
-		@apply block h-full w-full object-cover grayscale;
+		@apply block h-full w-full object-cover;
+		filter: grayscale(1) brightness(0.82) contrast(1.06);
 	}
 
 	/* The first screen: the photograph fills it and the title sits on its foot. */
@@ -188,6 +193,34 @@
 	.heroi h1 .linha {
 		@apply block md:whitespace-nowrap;
 	}
+	/* Inner pages: the same idea, lower, with the far end of the arc. */
+	.heroi.interior {
+		@apply min-h-[68svh];
+	}
+	.heroi.interior h1 {
+		@apply max-w-[24ch];
+		font-size: clamp(3.25rem, 5.8vw, 6rem);
+	}
+	/* These photographs come already darkened (src/assets/fotos/topo), so the title reads on
+	   them; the veil only joins the foot to the page. */
+	.heroi.interior .fundo::after {
+		background: linear-gradient(to top, var(--color-night) 2%, transparent 45%);
+	}
+	.heroi.interior .figure img {
+		filter: grayscale(1);
+	}
+	.heroi.interior .arco {
+		@apply inset-y-0 h-full;
+	}
+	.heroi.interior {
+		@apply pb-0 md:pb-0;
+	}
+	.entrada {
+		@apply border-b border-line pt-8 pb-14 md:pb-20;
+	}
+	.entrada p {
+		@apply max-w-[52ch] text-[1.1875rem];
+	}
 	.heroi .lede {
 		@apply max-w-[46ch] text-[1.1875rem] text-ink;
 	}
@@ -209,7 +242,7 @@
 		@apply border-y border-line py-10 md:py-16;
 	}
 	.lema p {
-		@apply font-display text-[3rem] uppercase leading-[0.9] md:text-[6.5rem];
+		@apply font-display text-[2.25rem] uppercase leading-[0.9] md:text-[6.5rem];
 	}
 	.lema p + p {
 		@apply md:text-right;
@@ -230,22 +263,25 @@
 		@apply mt-12 border-t border-line md:mt-20;
 	}
 	.areas > li {
-		@apply grid gap-6 border-b border-line py-10 md:grid-cols-[5rem_1fr_1fr] md:gap-10 md:py-14 lg:grid-cols-[6rem_1.1fr_1fr_18rem];
+		@apply grid gap-8 border-b border-line py-10 md:py-14 lg:grid-cols-2 lg:items-center lg:gap-20;
+	}
+	.areas > li:nth-child(even) .figure {
+		@apply lg:order-2;
 	}
 	.areas .num {
-		@apply font-display text-[2.5rem] leading-none text-accent-soft md:text-[3.5rem];
+		@apply block font-display text-[2.5rem] leading-none text-accent-soft md:text-[3.5rem];
 	}
 	.areas h3 {
-		@apply text-[2.75rem] md:text-[4rem];
+		@apply mt-4 text-[2.75rem] md:text-[4.5rem];
 	}
 	.areas ul {
-		@apply grid content-start gap-2 text-[1rem];
+		@apply mt-8 grid max-w-[30rem] content-start gap-2 text-[1.0625rem];
 	}
 	.areas ul li {
 		@apply border-b border-line pb-2 font-bold;
 	}
 	.areas .figure {
-		@apply hidden aspect-[4/5] lg:block;
+		@apply aspect-[4/3] lg:aspect-[5/4];
 	}
 	.areas .figure img {
 		@apply transition-transform duration-700 ease-out;
@@ -265,15 +301,18 @@
 		@apply mt-12 grid gap-x-10 md:mt-20 md:grid-cols-2 lg:grid-cols-3;
 	}
 	.passos li {
-		@apply border-t border-line py-8;
+		@apply grid grid-cols-[4.5rem_1fr] items-baseline gap-x-4 border-t border-line py-8 md:block;
+	}
+	.passos p {
+		@apply col-start-2 mt-3 text-[1.0625rem] text-ink-2;
 	}
 	.passos .num {
-		@apply font-display text-[4.5rem] leading-none text-line;
+		@apply font-display text-[3.25rem] leading-none text-line md:text-[4.5rem];
 		-webkit-text-stroke: 1px var(--color-ink-2);
 		color: transparent;
 	}
 	.passos h3 {
-		@apply mt-4 text-[2.25rem];
+		@apply text-[2.25rem] md:mt-4;
 	}
 
 	.equipa {
@@ -385,7 +424,22 @@
 		@apply mt-8 max-w-[52ch] text-[1.1875rem] text-ink-2;
 	}
 	.chamada {
-		@apply border-t border-line py-16 md:py-24;
+		@apply bg-accent py-16 text-accent-ink md:py-24;
+	}
+	.chamada .botao-cheio {
+		@apply bg-night text-ink hover:bg-ink hover:text-night;
+	}
+	.pilares {
+		@apply mt-12 grid gap-10 border-t border-line pt-10 md:mt-16 md:grid-cols-3 lg:gap-16;
+	}
+	.pilares .num {
+		@apply font-display text-[2.5rem] leading-none text-accent-soft;
+	}
+	.pilares h3 {
+		@apply mt-4 text-[3rem] md:text-[4rem];
+	}
+	.pilares p {
+		@apply mt-4 text-[1.0625rem] text-ink-2;
 	}
 	.chamada .limite {
 		@apply flex flex-wrap items-center justify-between gap-8;
@@ -406,7 +460,7 @@
 	}
 	.compromissos li::before {
 		content: counter(compromisso, decimal-leading-zero);
-		@apply font-display text-[1.75rem] leading-none text-ink;
+		@apply font-display text-[1.75rem] leading-none text-accent-soft;
 	}
 
 	/* The services page: each area is a chapter, its name across the page. */
@@ -417,7 +471,16 @@
 		@apply bg-steel;
 	}
 	.area .cabeca {
-		@apply grid gap-6 lg:grid-cols-[6rem_1.4fr_1fr] lg:items-end lg:gap-10;
+		@apply grid gap-5 lg:grid-cols-[6rem_1fr] lg:items-baseline lg:gap-x-10;
+	}
+	.area .cabeca p {
+		@apply lg:col-start-2;
+	}
+	.area .corpo.inverso .figure {
+		@apply lg:order-2;
+	}
+	.area .corpo.inverso {
+		@apply lg:grid-cols-[1.4fr_1fr];
 	}
 	.area .num {
 		@apply font-display text-[2.5rem] leading-none text-accent-soft md:text-[3.5rem];
@@ -426,25 +489,25 @@
 		@apply text-[3.25rem] md:text-[6rem];
 	}
 	.area .cabeca p {
-		@apply max-w-[40ch] text-ink-2;
+		@apply max-w-[56ch] text-ink-2;
 	}
 	.area .corpo {
 		@apply mt-12 grid gap-10 md:mt-20 lg:grid-cols-[1fr_1.4fr] lg:gap-20;
 	}
 	.area .figure {
-		@apply aspect-[4/5] self-start;
+		@apply aspect-[4/3] self-start lg:aspect-[4/5];
 	}
 	.area dl {
 		@apply border-t border-line;
 	}
 	.area dl div {
-		@apply grid gap-3 border-b border-line py-7 md:grid-cols-[1fr_1.3fr] md:gap-10;
+		@apply grid gap-2 border-b border-line py-5 md:grid-cols-[1fr_1.3fr] md:gap-10 md:py-7;
 	}
 	.area dt {
-		@apply font-display text-[2rem] uppercase leading-[0.95] md:text-[2.5rem];
+		@apply font-display text-[1.75rem] uppercase leading-[0.95] md:text-[2.5rem];
 	}
 	.area dd {
-		@apply text-[1rem] text-ink-2;
+		@apply text-[1.0625rem] text-ink-2;
 	}
 
 	/* The team page: the three trades, side by side. */
@@ -454,14 +517,11 @@
 	.oficios-grandes .figure {
 		@apply aspect-[4/5];
 	}
-	.oficios-grandes li:nth-child(2) {
-		@apply md:mt-24;
-	}
 	.oficios-grandes h2 {
 		@apply mt-6 text-[3.5rem] md:text-[4.5rem];
 	}
 	.oficios-grandes p {
-		@apply mt-4 max-w-[36ch] text-[1rem] text-ink-2;
+		@apply mt-4 max-w-[36ch] text-[1.0625rem] text-ink-2;
 	}
 	.prosa {
 		@apply max-w-[38rem];

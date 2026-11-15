@@ -54,7 +54,7 @@ const pt = {
 		areas: [
 			{
 				name: "Consultoria Técnica e Orçamental",
-				text: "Análise técnica e orçamental para soluções eficientes e ajustadas a cada projeto.",
+				text: "Os custos de materiais, de produção e de mão de obra analisados ao detalhe, e cada etapa planeada antes de começar.",
 				items: [
 					"Orçamento técnico",
 					"Planeamento eficaz",
@@ -68,10 +68,10 @@ const pt = {
 			},
 			{
 				name: "Pré-fabricação",
-				text: "Produção de componentes e estruturas com rigor, precisão e qualidade.",
+				text: "Corte, dobragem, perfuração, fresagem, torneamento e soldadura em oficina, com proteção de superfícies e controlo de qualidade.",
 				items: [
 					"Preparação e maquinação",
-					"Soldadura e pré-montagem",
+					"Soldadura e pré‑montagem",
 					"Tratamento e proteção de superfícies",
 					"Controlo de qualidade",
 				],
@@ -84,7 +84,7 @@ const pt = {
 			},
 			{
 				name: "Construção Industrial",
-				text: "Execução de projetos industriais à medida, com precisão e robustez.",
+				text: "Estruturas, vigas e pilares, sistemas de tubagem e condutas, montados e soldados em obra, e a manutenção das instalações.",
 				items: [
 					"Estruturas metálicas",
 					"Montagem industrial",
@@ -221,6 +221,7 @@ const pt = {
 		seoTitle: "Mensagem enviada | DS Anox",
 		title: "Recebemos o seu pedido.",
 		text: "Vamos analisá-lo e responder para o email que indicou.",
+		call: "Para um assunto urgente, ligue para o",
 		back: "Voltar ao início",
 	},
 	notFound: {
@@ -230,7 +231,7 @@ const pt = {
 		back: "Voltar ao início",
 	},
 	footer: {
-		line: "Metalurgia de alta precisão",
+		line: "Tubagem, estruturas metálicas e montagem industrial.",
 		rights: "Todos os direitos reservados.",
 		privacy: "Política de privacidade",
 		cookies: "Política de cookies",

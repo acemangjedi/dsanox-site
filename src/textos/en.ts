@@ -41,7 +41,7 @@ const en: Textos = {
 		contact: "Contact",
 	},
 	hero: {
-		lines: ["Industrial piping,", "steel structures", "and on-site assembly."],
+		lines: ["Industrial piping,", "steel structures", "and on‑site assembly."],
 		lede: "From technical analysis and estimate to prefabrication and assembly on site, DS Anox delivers custom industrial projects from Vila Nova de Famalicão, Portugal.",
 		primary: "Request a quote",
 		secondary: "See our services",
@@ -56,7 +56,7 @@ const en: Textos = {
 		areas: [
 			{
 				name: "Technical and Budget Consulting",
-				text: "Technical and budgetary analysis for efficient solutions tailored to each project.",
+				text: "Material, production and labour costs analysed in detail, and every stage planned before work begins.",
 				items: [
 					"Technical estimate",
 					"Effective planning",
@@ -70,10 +70,10 @@ const en: Textos = {
 			},
 			{
 				name: "Prefabrication",
-				text: "Manufacturing of components and structures with rigour, precision and quality.",
+				text: "Cutting, bending, drilling, milling, turning and welding in the workshop, with surface protection and quality control.",
 				items: [
 					"Preparation and machining",
-					"Welding and pre-assembly",
+					"Welding and pre‑assembly",
 					"Surface treatment and protection",
 					"Quality control",
 				],
@@ -86,7 +86,7 @@ const en: Textos = {
 			},
 			{
 				name: "Industrial Construction",
-				text: "Custom industrial projects, executed with precision and built to last.",
+				text: "Structures, beams and columns, piping and ductwork systems, assembled and welded on site, and the maintenance of the facilities.",
 				items: [
 					"Steel structures",
 					"Industrial assembly",
@@ -222,6 +222,7 @@ const en: Textos = {
 		seoTitle: "Message sent | DS Anox",
 		title: "We have received your request.",
 		text: "We will look into it and reply to the email address you gave us.",
+		call: "For anything urgent, call",
 		back: "Back to the home page",
 	},
 	notFound: {
@@ -231,7 +232,7 @@ const en: Textos = {
 		back: "Back to the home page",
 	},
 	footer: {
-		line: "High-precision metalwork",
+		line: "Industrial piping, steel structures and on‑site assembly.",
 		rights: "All rights reserved.",
 		privacy: "Privacy policy",
 		cookies: "Cookie policy",

@@ -10,7 +10,9 @@ interface Props {
 	aviso: "thanks" | "notFound";
 }
 const { lang, aviso } = Astro.props;
-const t = textosDe(lang)[aviso];
+const todos = textosDe(lang);
+const t = todos[aviso];
+const tel = todos.contact.phone;
 ---
 
 <Layout lang={lang} title={t.seoTitle} description={t.text} pagina={aviso === "thanks" ? "thanks" : undefined} robots="noindex, follow">
@@ -18,7 +20,11 @@ const t = textosDe(lang)[aviso];
 		<div class="limite">
 			<h1>{t.title}</h1>
 			<p>{t.text}</p>
-			<a class="botao botao-cheio mt-10" href={rotas.home[lang]}>{t.back}</a>
+			{aviso === "thanks" && <p>{todos.thanks.call} <a class="ligacao" href={`tel:${tel.replaceAll(" ", "")}`}>{tel}</a>.</p>}
+			<div class="mt-10 flex flex-wrap gap-3">
+				<a class="botao botao-cheio" href={rotas.home[lang]}>{t.back}</a>
+				<a class="botao botao-linha" href={rotas.services[lang]}>{todos.hero.secondary}</a>
+			</div>
 		</div>
 	</section>
 </Layout>

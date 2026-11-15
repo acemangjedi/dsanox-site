@@ -1,8 +1,7 @@
 ---
-import f01 from "../assets/fotos/foto-01.jpg";
-import f07 from "../assets/fotos/foto-07.jpg";
+import f07 from "../assets/fotos/topo/foto-07.jpg";
 import Chamada from "../components/Chamada.astro";
-import Figure from "../core/blocks/Figure.astro";
+import Topo from "../components/Topo.astro";
 import type { Lang } from "../core/i18n";
 import Layout from "../layouts/Site.astro";
 import { textosDe } from "../textos";
@@ -16,17 +15,8 @@ const [lead, ...rest] = t.about.paragraphs;
 const q = t.about.quality;
 ---
 
-<Layout lang={lang} title={t.seo.about.title} description={t.seo.about.description} pagina="about">
-	<section class="topo">
-		<div class="limite">
-			<h1>{t.about.title}</h1>
-			<p>{lead}</p>
-		</div>
-	</section>
-
-	<div class="faixa">
-		<Figure src={f07} alt={t.alts.hall} priority widths={[480, 800, 1200]} sizes="100vw" />
-	</div>
+<Layout lang={lang} title={t.seo.about.title} description={t.seo.about.description} pagina="about" sobreposto>
+	<Topo src={f07} alt={t.alts.hall} title={t.about.title} text={lead} />
 
 	<section class="seccao">
 		<div class="limite grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
@@ -38,27 +28,25 @@ const q = t.about.quality;
 	</section>
 
 	<section class="seccao bg-steel">
-		<div class="limite equipa">
-			<Figure class="revela" src={f01} alt={t.alts.skid} widths={[480, 800, 1086]} sizes="(min-width: 1024px) 45vw, 100vw" />
-			<div>
-				<h2 class="revela medio">{t.about.pillarsTitle}</h2>
-				<ul class="oficios mt-8 border-t border-line">
-					{t.about.pillars.map((p) => (
-						<li class="revela">
-							<h3>{p.name}</h3>
-							<p class="mt-2 max-w-[52ch] text-[1rem] text-ink-2">{p.text}</p>
-						</li>
-					))}
-				</ul>
-			</div>
+		<div class="limite">
+			<h2 class="revela medio">{t.about.pillarsTitle}</h2>
+			<ul class="pilares">
+				{t.about.pillars.map((p, i) => (
+					<li class="revela">
+						<span class="num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+						<h3>{p.name}</h3>
+						<p>{p.text}</p>
+					</li>
+				))}
+			</ul>
 		</div>
 	</section>
 
 	<section class="seccao" id="qualidade">
 		<div class="limite grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
-			<div>
+			<div class="self-start lg:sticky lg:top-10">
 				<h2 class="revela medio">{q.title}</h2>
-				{q.note && <p class="mt-6 max-w-[40ch] text-[1rem] text-ink-2">{q.note}</p>}
+				{q.note && <p class="mt-6 max-w-[40ch] text-[1.0625rem] text-ink-2">{q.note}</p>}
 			</div>
 			<div>
 				{q.intro.map((p) => <p class="mb-4 max-w-[60ch]">{p}</p>)}

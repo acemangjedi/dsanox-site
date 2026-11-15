@@ -1,8 +1,10 @@
 ---
 import f01 from "../assets/fotos/foto-01.jpg";
-import f07 from "../assets/fotos/foto-07.jpg";
+import f02 from "../assets/fotos/foto-02.jpg";
 import f10 from "../assets/fotos/foto-10.jpg";
+import f04 from "../assets/fotos/topo/foto-04.jpg";
 import Chamada from "../components/Chamada.astro";
+import Topo from "../components/Topo.astro";
 import Figure from "../core/blocks/Figure.astro";
 import type { Lang } from "../core/i18n";
 import Layout from "../layouts/Site.astro";
@@ -15,19 +17,14 @@ const { lang } = Astro.props;
 const t = textosDe(lang);
 const n = (i: number) => String(i + 1).padStart(2, "0");
 const photos = [
-	{ src: f07, alt: t.alts.hall },
+	{ src: f02, alt: t.alts.plant },
 	{ src: f01, alt: t.alts.skid },
 	{ src: f10, alt: t.alts.lift },
 ];
 ---
 
-<Layout lang={lang} title={t.seo.services.title} description={t.seo.services.description} pagina="services">
-	<section class="topo">
-		<div class="limite">
-			<h1>{t.servicesPage.title}</h1>
-			<p>{t.services.intro}</p>
-		</div>
-	</section>
+<Layout lang={lang} title={t.seo.services.title} description={t.seo.services.description} pagina="services" sobreposto>
+	<Topo src={f04} alt={t.alts.pipes} title={t.servicesPage.title} text={t.services.intro} />
 
 	{t.services.areas.map((a, i) => (
 		<section class="area">
@@ -37,8 +34,8 @@ const photos = [
 					<h2 class="revela">{a.name}</h2>
 					<p>{a.text}</p>
 				</div>
-				<div class="corpo">
-					<Figure class="revela" src={photos[i].src} alt={photos[i].alt} priority={i === 0} widths={[480, 800, 1086]} sizes="(min-width: 1024px) 40vw, 100vw" />
+				<div class:list={["corpo", { inverso: i % 2 === 1 }]}>
+					<Figure class="revela" src={photos[i].src} alt={photos[i].alt} widths={[480, 800, 1086]} sizes="(min-width: 1024px) 40vw, 100vw" />
 					<dl>
 						{a.items.map((item, j) => (
 							<div class="revela">

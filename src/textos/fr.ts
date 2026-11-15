@@ -59,7 +59,7 @@ const fr: Textos = {
 		areas: [
 			{
 				name: "Conseil Technique et Budgétaire",
-				text: "Analyse technique et budgétaire pour des solutions efficaces et adaptées à chaque projet.",
+				text: "Les coûts des matériaux, de la production et de la main-d'œuvre analysés en détail, et chaque étape planifiée avant de commencer.",
 				items: [
 					"Devis technique",
 					"Planification efficace",
@@ -73,10 +73,10 @@ const fr: Textos = {
 			},
 			{
 				name: "Préfabrication",
-				text: "Fabrication de composants et de structures alliant rigueur, précision et qualité.",
+				text: "Découpe, pliage, perçage, fraisage, tournage et soudage en atelier, avec protection des surfaces et contrôle qualité.",
 				items: [
 					"Préparation et usinage",
-					"Soudage et pré-assemblage",
+					"Soudage et pré‑assemblage",
 					"Traitement et protection des surfaces",
 					"Contrôle qualité",
 				],
@@ -89,7 +89,7 @@ const fr: Textos = {
 			},
 			{
 				name: "Construction Industrielle",
-				text: "Réalisation de projets industriels sur mesure, alliant précision et robustesse.",
+				text: "Structures, poutres et poteaux, systèmes de tuyauterie et de conduites, montés et soudés sur chantier, et la maintenance des installations.",
 				items: [
 					"Structures métalliques",
 					"Montage industriel",
@@ -169,7 +169,7 @@ const fr: Textos = {
 		map: "Voir sur la carte",
 	},
 	about: {
-		title: "La métallurgie de haute précision, depuis Vila Nova de Famalicão.",
+		title: "Métallurgie de haute précision à Vila Nova de Famalicão.",
 		paragraphs: [
 			"Nous sommes spécialisés dans la métallurgie de haute précision et développons des solutions hautement performantes pour répondre aux défis les plus exigeants de l'industrie.",
 			"Nous allions technologie de pointe, ingénierie de précision et savoir-faire spécialisé pour transformer des exigences complexes en solutions efficaces, robustes et rigoureusement mises en œuvre.",
@@ -225,6 +225,7 @@ const fr: Textos = {
 		seoTitle: "Message envoyé | DS Anox",
 		title: "Nous avons bien reçu votre demande.",
 		text: "Nous allons l'étudier et vous répondre à l'adresse e-mail indiquée.",
+		call: "Pour une urgence, appelez le",
 		back: "Retour à l'accueil",
 	},
 	notFound: {
@@ -234,7 +235,7 @@ const fr: Textos = {
 		back: "Retour à l'accueil",
 	},
 	footer: {
-		line: "Métallurgie de haute précision",
+		line: "Tuyauterie, charpente métallique et montage industriel.",
 		rights: "Tous droits réservés.",
 		privacy: "Politique de confidentialité",
 		cookies: "Politique de cookies",
