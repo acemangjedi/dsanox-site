@@ -1,5 +1,6 @@
 ---
 import site from "../../../site.config";
+import { langOf, localeOf, siteLangs } from "../i18n";
 import { abs } from "../schema";
 
 interface Props {
@@ -18,6 +19,9 @@ interface Props {
 	articleModifiedTime?: string;
 	articleAuthor?: string;
 	jsonLd?: object;
+	// The same page in the site's other languages: { en: "/en/about/", fr: "/fr/a-propos/" }.
+	// The page's own language and the site's first language are added when missing.
+	alternates?: Partial<Record<string, string>>;
 }
 
 const {
@@ -34,7 +38,17 @@ const {
 	articleModifiedTime,
 	articleAuthor,
 	jsonLd,
+	alternates = {},
 } = Astro.props;
+
+const lang = langOf(Astro.url.pathname, site);
+const versions = siteLangs(site)
+	.map((l) => ({
+		...l,
+		path: l.lang === lang ? Astro.url.pathname : alternates[l.lang],
+	}))
+	.filter((l): l is typeof l & { path: string } => Boolean(l.path));
+const fallback = versions.find((v) => v.locale === site.lang);
 
 const ogImageType = ogImage.endsWith(".webp")
 	? "image/webp"
@@ -48,7 +62,9 @@ const ogImageType = ogImage.endsWith(".webp")
 <link rel="canonical" href={canonical} />
 <meta name="robots" content={robots} />
 <meta property="og:type" content={ogType} />
-<meta property="og:locale" content={site.lang.replace("-", "_")} />
+<meta property="og:locale" content={localeOf(lang, site).replace("-", "_")} />
+{versions.length > 1 && versions.map((v) => <link rel="alternate" hreflang={v.locale} href={abs(v.path)} />)}
+{versions.length > 1 && fallback && <link rel="alternate" hreflang="x-default" href={abs(fallback.path)} />}
 <meta property="og:site_name" content={site.name} />
 <meta property="og:title" content={ogTitle} />
 <meta property="og:description" content={ogDescription} />

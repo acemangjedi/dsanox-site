@@ -268,17 +268,6 @@ a:hover {
 	padding: var(--s-7) 0;
 }
 
-.eyebrow {
-	display: inline-block;
-	font-family: var(--font-body);
-	font-size: 0.72rem;
-	font-weight: 600;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	color: var(--accent);
-	margin-bottom: var(--s-3);
-}
-
 .section-title {
 	margin-bottom: var(--s-3);
 }
@@ -1325,10 +1314,6 @@ a[href*="wa.me"].btn {
 	margin-top: var(--s-3);
 	position: relative;
 }
-.cta-banner .eyebrow {
-	color: var(--accent);
-	position: relative;
-}
 .cta-banner .btn-outline {
 	border-color: var(--border-strong);
 	color: var(--ink);
@@ -1370,9 +1355,6 @@ a[href*="wa.me"].btn {
 	border-radius: 50%;
 	filter: blur(60px);
 	pointer-events: none;
-}
-.path-panel .eyebrow {
-	color: var(--accent);
 }
 .path-panel > h3 {
 	color: var(--ink);
@@ -1930,11 +1912,6 @@ html:not(.reveal-ready) .reveal {
 }
 
 /* --- Utility / Content Classes --- */
-.accent-text {
-	color: var(--accent);
-	font-style: normal;
-}
-
 .text-muted {
 	color: var(--muted);
 }

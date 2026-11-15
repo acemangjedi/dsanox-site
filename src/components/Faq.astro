@@ -7,7 +7,6 @@ interface FaqItem {
 interface Props {
 	items: FaqItem[];
 	title: string;
-	eyebrow?: string;
 	introText?: string;
 	ctaHref?: string;
 	ctaLabel?: string;
@@ -18,7 +17,6 @@ interface Props {
 const {
 	items,
 	title,
-	eyebrow,
 	introText,
 	ctaHref,
 	ctaLabel = "Falar connosco",
@@ -34,7 +32,6 @@ const split = !!ctaHref;
     {split ? (
       <div class="two-col two-col--faq">
         <div class="reveal">
-          {eyebrow && <span class="eyebrow">{eyebrow}</span>}
           <h2 class="section-title">{title}</h2>
           {introText && <p class="section-intro mb-6">{introText}</p>}
           <a href={ctaHref} target="_blank" rel="noopener noreferrer" class={ctaBtnClass}>
@@ -55,7 +52,6 @@ const split = !!ctaHref;
       <>
         <div class="section-header reveal">
           <div>
-            {eyebrow && <span class="eyebrow">{eyebrow}</span>}
             <h2 class="section-title">{title}</h2>
           </div>
         </div>

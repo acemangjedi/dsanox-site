@@ -1,53 +1,55 @@
 ---
 import site from "../../../site.config";
+import { langOf, pathOf, t } from "../i18n";
 
 interface Props {
 	// Name of the form in site.config.ts (forms), e.g. "contactos".
 	form: string;
 	submitLabel?: string;
 }
-const { form, submitLabel = "Enviar mensagem" } = Astro.props;
+const lang = langOf(Astro.url.pathname, site);
+const w = t(lang);
+const { form, submitLabel = w.send } = Astro.props;
 const key = site.forms[form];
 if (!key) throw new Error(`site.config.ts has no form named "${form}"`);
 const action = `${site.panel.url}/api/v1/forms/${key}`;
-const consentText =
-	"Aceito que os meus dados sejam usados para responder a este pedido, como descrito na Política de Privacidade.";
+const consentText = w.consent;
 const { email, phone, whatsapp } = site.contacts;
 ---
 
 <!-- Without JavaScript the panel answers with a redirect to /obrigado/. -->
-<form class="form lead-form" method="post" action={action} data-lead-form>
+<form class="form lead-form" method="post" action={action} data-lead-form data-thanks={pathOf("thanks", lang, site)} data-error={w.formError}>
 	<div class="form-group">
-		<label for={`${form}-name`}>Nome <span class="req">*</span></label>
+		<label for={`${form}-name`}>{w.name} <span class="req">*</span></label>
 		<input id={`${form}-name`} name="name" autocomplete="name" required maxlength="200" />
 	</div>
 	<div class="form-row">
 		<div class="form-group">
-			<label for={`${form}-email`}>Email <span class="req">*</span></label>
+			<label for={`${form}-email`}>{w.email} <span class="req">*</span></label>
 			<input id={`${form}-email`} name="email" type="email" autocomplete="email" required maxlength="254" />
 		</div>
 		<div class="form-group">
-			<label for={`${form}-phone`}>Telefone</label>
+			<label for={`${form}-phone`}>{w.phone}</label>
 			<input id={`${form}-phone`} name="phone" type="tel" autocomplete="tel" maxlength="50" />
 		</div>
 	</div>
 	<slot />
 	<div class="form-group">
-		<label for={`${form}-message`}>Mensagem <span class="req">*</span></label>
+		<label for={`${form}-message`}>{w.message} <span class="req">*</span></label>
 		<textarea id={`${form}-message`} name="message" required maxlength="5000"></textarea>
 	</div>
 	<label class="form-checkbox">
 		<input type="checkbox" name="consent" value="on" required />
-		<span>Aceito que os meus dados sejam usados para responder a este pedido, como descrito na <a href="/politica-de-privacidade/">Política de Privacidade</a>.</span>
+		<span>{w.consentBefore} <a href={pathOf("privacy", lang, site)}>{w.privacyLink}</a>.</span>
 	</label>
 	<input type="hidden" name="consent_text" value={consentText} />
 	<input type="hidden" name="form_ts" value="" />
 	<div class="lead-form-trap" aria-hidden="true">
-		<label>Não preencher <input name="website" tabindex="-1" autocomplete="off" /></label>
+		<label>{w.trap} <input name="website" tabindex="-1" autocomplete="off" /></label>
 	</div>
 	<p class="lead-form-error" role="alert" hidden></p>
 	<div class="lead-form-fallback" role="alert" hidden>
-		<p>Não foi possível enviar a mensagem agora. Fale connosco diretamente:</p>
+		<p>{w.formFallback}</p>
 		<ul>
 			<li><a href={`mailto:${email}`}>{email}</a></li>
 			{phone && <li><a href={`tel:${phone}`}>{phone}</a></li>}

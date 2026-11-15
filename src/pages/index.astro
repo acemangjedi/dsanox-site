@@ -50,8 +50,7 @@ const latest = site.blog ? (await getPosts()).slice(0, 3) : [];
 		<section class="hero">
 			<div class="container">
 				<div class="reveal">
-					<span class="eyebrow">Consultoria de gestão</span>
-					<h1>Empresas mais simples de <span class="accent-text">gerir</span>.</h1>
+					<h1>Empresas mais simples de gerir.</h1>
 					<p class="lead">Ajudamos pequenas e médias empresas a organizar processos, finanças e equipas, com planos curtos e resultados que se medem.</p>
 					<div class="hero-actions">
 						<a href="/contactos/" class="btn btn-accent btn-lg">Pedir proposta</a>
@@ -65,7 +64,6 @@ const latest = site.blog ? (await getPosts()).slice(0, 3) : [];
 			<div class="container">
 				<div class="section-header reveal">
 					<div>
-						<span class="eyebrow">Serviços</span>
 						<h2 class="section-title">Três áreas, um só plano</h2>
 					</div>
 				</div>
@@ -85,7 +83,6 @@ const latest = site.blog ? (await getPosts()).slice(0, 3) : [];
 				<div class="container">
 					<div class="section-header reveal">
 						<div>
-							<span class="eyebrow">Artigos</span>
 							<h2 class="section-title">Últimos artigos</h2>
 						</div>
 					</div>
@@ -101,7 +98,7 @@ const latest = site.blog ? (await getPosts()).slice(0, 3) : [];
 			</section>
 		)}
 
-		<Faq items={faq} title="Perguntas frequentes" eyebrow="Dúvidas" />
+		<Faq items={faq} title="Perguntas frequentes" />
 
 		<section class="section-tight">
 			<div class="container">

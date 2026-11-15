@@ -1,4 +1,5 @@
-// Sends LeadForm to the panel without leaving the page. Success goes to /obrigado/;
+// Sends LeadForm to the panel without leaving the page. Success goes to the thank-you
+// page of the form's language;
 // a field the panel refuses shows a message; anything else shows the business contacts.
 const UTM = [
 	"utm_source",
@@ -53,10 +54,9 @@ for (const form of document.querySelectorAll("form[data-lead-form]")) {
 		}
 		button.disabled = false;
 		if (res?.ok) {
-			location.assign("/obrigado/");
+			location.assign(form.dataset.thanks);
 		} else if (res?.status === 400) {
-			error.textContent =
-				"Verifique os campos: o email tem de ser válido e é preciso aceitar a política de privacidade.";
+			error.textContent = form.dataset.error;
 			error.hidden = false;
 		} else {
 			fallback.hidden = false;

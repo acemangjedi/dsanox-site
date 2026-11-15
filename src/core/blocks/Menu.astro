@@ -1,0 +1,47 @@
+---
+// Menu that opens from a button, for the phone navigation. Closed, it is out of the tab
+// order (inert); Escape or a link closes it and focus goes back to the button.
+// No look of its own: the site styles .menu-button, .menu-panel and [aria-expanded].
+//
+// <Menu id="menu" label="Menu"><nav aria-label="Menu principal">…</nav></Menu>
+interface Props {
+	id: string;
+	// The button's text, also read by screen readers.
+	label: string;
+	class?: string;
+}
+const { id, label, class: className } = Astro.props;
+---
+
+<div class:list={["menu", className]} data-menu>
+	<button type="button" class="menu-button" aria-expanded="false" aria-controls={id}>
+		<slot name="button">{label}</slot>
+	</button>
+	<div id={id} class="menu-panel" hidden>
+		<slot />
+	</div>
+</div>
+
+<script>
+	for (const root of document.querySelectorAll<HTMLElement>("[data-menu]")) {
+		const button = root.querySelector<HTMLButtonElement>(".menu-button");
+		const panel = root.querySelector<HTMLElement>(".menu-panel");
+		if (!button || !panel) continue;
+		const set = (open: boolean) => {
+			button.setAttribute("aria-expanded", String(open));
+			panel.hidden = !open;
+		};
+		button.addEventListener("click", () =>
+			set(button.getAttribute("aria-expanded") !== "true"),
+		);
+		panel.addEventListener("click", (e) => {
+			if ((e.target as HTMLElement).closest("a")) set(false);
+		});
+		root.addEventListener("keydown", (e) => {
+			if (e.key === "Escape" && !panel.hidden) {
+				set(false);
+				button.focus();
+			}
+		});
+	}
+</script>

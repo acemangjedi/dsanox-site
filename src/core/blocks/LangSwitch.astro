@@ -1,0 +1,37 @@
+---
+// Links to this page in the site's other languages. Pass the same alternates as to <Seo>.
+// No look of its own: the site styles .lang-switch and [aria-current].
+import site from "../../../site.config";
+import { langOf, root, siteLangs } from "../i18n";
+
+interface Props {
+	alternates?: Partial<Record<string, string>>;
+	class?: string;
+}
+const { alternates = {}, class: className } = Astro.props;
+const NAMES = { pt: "Português", en: "English", fr: "Français" };
+const current = langOf(Astro.url.pathname, site);
+const links = siteLangs(site).map((l) => ({
+	...l,
+	href:
+		l.lang === current
+			? Astro.url.pathname
+			: (alternates[l.lang] ?? root(l.lang, site)),
+}));
+---
+
+{links.length > 1 && (
+	<ul class:list={["lang-switch", className]}>
+		{links.map((l) => (
+			<li>
+				<a
+					href={l.href}
+					hreflang={l.locale}
+					lang={l.locale}
+					aria-current={l.lang === current ? "page" : undefined}
+					aria-label={NAMES[l.lang]}
+				>{l.lang.toUpperCase()}</a>
+			</li>
+		))}
+	</ul>
+)}

@@ -12,9 +12,11 @@ import {
 	cloudflareRedirects,
 	htaccessFiles,
 } from "./hosting";
+import { hiddenPaths, siteLangs } from "./i18n";
 
-// Pages that are not for search engines (plus the site's own, in site.config.ts).
-const HIDDEN = ["/obrigado/", "/404/", "/_preview/"];
+// Pages that are not for search engines (plus the thank-you page of each language and
+// the site's own, in site.config.ts).
+const HIDDEN = ["/404/", "/_preview/"];
 
 // Writes the build's files, except those the site ships itself in public/ (already in
 // dist/): a site moved to this template keeps its own .htaccess or robots.txt.
@@ -70,9 +72,18 @@ export function noindexed(pathname: string): boolean {
 
 // Everything every site does at build time: sitemap, robots.txt and the post-build steps.
 export default function core(site: SiteConfig): AstroIntegration[] {
-	const hidden = [...HIDDEN, ...site.hidden];
+	const hidden = [...HIDDEN, ...hiddenPaths(site), ...site.hidden];
+	const langs = siteLangs(site);
 	return [
 		sitemap({
+			// With more than one language, each address lists its versions (hreflang).
+			i18n:
+				langs.length > 1
+					? {
+							defaultLocale: langs[0].lang,
+							locales: Object.fromEntries(langs.map((l) => [l.lang, l.locale])),
+						}
+					: undefined,
 			filter: (page) =>
 				!hidden.some((p) => new URL(page).pathname === p) &&
 				!noindexed(new URL(page).pathname),
