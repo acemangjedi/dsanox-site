@@ -109,7 +109,7 @@ const areaPhotos = [
 						<a class="ligacao mt-5" href={rotas.projects[lang]}>{t.projects.all}</a>
 					</div>
 				</div>
-				<Mapa label={t.projects.map} places={projetos.flatMap((p) => p.coords ?? [])} />
+				<Mapa label={t.projects.map} places={projetos.flatMap((p) => (p.coords ? { ...p.coords, name: p.title, href: p.href } : []))} />
 				<ol class="locais">
 					{projetos.map((p) => (
 						<li>

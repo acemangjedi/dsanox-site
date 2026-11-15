@@ -1,21 +1,30 @@
 ---
 // The world in dots, with one mark for each place given. The marks come from the
-// projects, so the map follows them.
+// projects, so the map follows them. A place with a name and an address is a link:
+// the name shows when the pointer or the keyboard is on the mark.
 import { land, STEP, TOP } from "../dados/mundo";
 
 interface Props {
 	label: string;
-	places: { lat: number; lng: number }[];
+	places: { lat: number; lng: number; name?: string; href?: string }[];
 }
 const { label, places } = Astro.props;
+// The drawing is 148 by 58, starting at -2, -2.
+const onde = (p: { lat: number; lng: number }) =>
+	`left:${(((p.lng + 180) / STEP + 2) / 148) * 100}%;top:${(((TOP - p.lat) / STEP + 2) / 58) * 100}%`;
 ---
 
-<svg class="mapa" viewBox="-2 -2 148 58" role="img" aria-label={label}>
-	<path class="terra" d={land} />
-	{places.map((p) => (
-		<g transform={`translate(${(p.lng + 180) / STEP} ${(TOP - p.lat) / STEP})`}>
-			<circle class="halo" r="2.2" />
-			<circle class="pino" r="0.9" />
-		</g>
-	))}
-</svg>
+<div class="mapa">
+	<svg viewBox="-2 -2 148 58" role="img" aria-label={label}>
+		<path class="terra" d={land} />
+	</svg>
+	{places.map((p) =>
+		p.href ? (
+			<a class="marca" href={p.href} style={onde(p)}>
+				<span class="nome">{p.name}</span>
+			</a>
+		) : (
+			<span class="marca" style={onde(p)} />
+		),
+	)}
+</div>

@@ -577,6 +577,10 @@
 
 	/* The projects: the world in dots, a red mark on each place. */
 	.mapa {
+		@apply relative;
+		container-type: inline-size;
+	}
+	.mapa svg {
 		@apply block h-auto w-full;
 	}
 	.mapa .terra {
@@ -585,13 +589,31 @@
 		stroke-width: 0.44;
 		stroke-linecap: round;
 	}
-	.mapa .pino {
-		fill: var(--color-accent);
-		stroke: var(--color-ink);
-		stroke-width: 0.22;
+	/* A mark: the halo is the box, the pin is drawn in its middle. Sizes follow the
+	   width of the map (148 units), with a floor so a finger can find them. */
+	.mapa .marca {
+		@apply absolute grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full;
+		width: max(3cqw, 1.5rem);
+		height: max(3cqw, 1.5rem);
+		background: color-mix(in srgb, var(--color-accent) 28%, transparent);
 	}
-	.mapa .halo {
-		fill: color-mix(in srgb, var(--color-accent) 28%, transparent);
+	.mapa .marca::before {
+		content: "";
+		@apply rounded-full border border-ink bg-accent;
+		width: max(1.25cqw, 0.625rem);
+		height: max(1.25cqw, 0.625rem);
+	}
+	.mapa a.marca:hover,
+	.mapa a.marca:focus-visible {
+		@apply z-10;
+		background: color-mix(in srgb, var(--color-accent) 55%, transparent);
+	}
+	.mapa .nome {
+		@apply pointer-events-none invisible absolute bottom-full left-1/2 mb-2 w-max max-w-[16rem] -translate-x-1/2 bg-ink px-3 py-2 text-[0.875rem] leading-tight font-bold text-night;
+	}
+	.mapa a.marca:hover .nome,
+	.mapa a.marca:focus-visible .nome {
+		@apply visible;
 	}
 	.onde .mapa {
 		@apply mt-12 md:mt-16;
