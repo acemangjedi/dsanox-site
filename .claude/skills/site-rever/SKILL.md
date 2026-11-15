@@ -13,15 +13,16 @@ aprova na pré-visualização.
 
 ## Os portões
 
-`pnpm portao` corre os que se medem e escreve o relatório. Enquanto esse
-comando não existir no repositório, corre cada um à mão, pela ordem da
-tabela, e regista o resultado.
+`pnpm portao` corre os que se medem (1, 2, 3, 6 e 7), em todas as páginas, a
+1280 e 390 px, e escreve `docs/portao.md`. Quando um portão falha, corrige e
+volta a correr só esse (`pnpm portao tiques`, `pnpm portao lighthouse`); no
+fim corre tudo uma vez. Os portões 4, 5 e 8 fazes tu, como se explica abaixo.
 
 | | Portão | Como | Passa quando |
 |---|---|---|---|
-| 1 | Build e testes | `pnpm run ci`, `pnpm build:local`, `pnpm test:e2e` | Não há erros. |
-| 2 | Tiques de IA | `impeccable detect` sobre cada página aberta num browser (a página tem de estar renderizada), mais as frases de `frases.txt` procuradas no texto de `dist/` | Não encontra nenhum. |
-| 3 | Desenho | `npx @google/design.md lint DESIGN.md` | Sem erros nem avisos de contraste. |
+| 1 | Build e testes | `pnpm run ci` e `pnpm test:e2e` | Não há erros. |
+| 2 | Tiques de IA | O detetor do Impeccable sobre cada página aberta num browser, mais as frases de `frases.txt` procuradas no texto que o visitante lê | Não encontra nenhum. |
+| 3 | Desenho | O validador do `DESIGN.md` | Sem erros nem avisos de contraste. |
 | 4 | Factos | Cada número, preço, nome de cliente, testemunho e certificação das páginas tem origem em `docs/briefing.md` ou `docs/inventario.md` | Todos têm origem. |
 | 5 | Remake | Os factos e as ideias do inventário estão todos no site, não há factos novos, e cada endereço antigo responde ou redireciona | O que mudou no texto está nas Propostas, aceite pelo dono do projeto. |
 | 6 | Lighthouse | Em telemóvel, todas as páginas | Desempenho 95 ou mais; as outras notas a 100. |
@@ -31,8 +32,8 @@ tabela, e regista o resultado.
 
 Notas:
 
-- As páginas ocultas de propósito (`hidden` em `site.config.ts`) têm nota de
-  SEO baixa no Lighthouse por não serem indexadas. Não contam.
+- As páginas ocultas de propósito (`hidden` em `site.config.ts`) ficam de
+  fora. Nas de agradecimento, que não são indexadas, a nota de SEO não conta.
 - O portão 5 só existe num remake. O portão 4 lê-se página a página: é lento
   e é o que evita publicar um número que ninguém disse.
 - Um portão que falha corrige-se na causa. Baixar o limite, esconder a
@@ -67,8 +68,8 @@ no relatório porquê, em vez de o ignorar ou de lhe obedecer sem concordar.
 # Relatório de qualidade: <site>, <data>
 
 ## Resumo            (passa ou não, e o que falta)
-## Portões           (tabela: portão, resultado, medida)
-## Lighthouse        (tabela: página, as quatro notas, LCP, CLS, peso)
+## Portões           (os medidos vêm de docs/portao.md; junta os teus)
+## Lighthouse        (a tabela de docs/portao.md)
 ## Crítico           (ronda a ronda: notas, reparos, o que mudou)
 ## Diferenças aceites (remake)
 ## Por decidir       (perguntas em aberto, reparos de que discordas)

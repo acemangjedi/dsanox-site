@@ -1439,6 +1439,9 @@ a[href*="wa.me"].btn {
 	width: auto;
 	margin-top: 4px;
 }
+.form-checkbox a {
+	text-decoration: underline;
+}
 .form-help {
 	font-size: 0.8rem;
 	color: var(--muted);

@@ -17,6 +17,7 @@
 		"ci": "biome ci . && astro check && vitest run",
 		"build:local": "astro build",
 		"test:e2e": "playwright test --trace off",
+		"portao": "tsx src/core/build/portao.ts",
 		"core:update": "git fetch modelo main && git restore --source=modelo/main --staged --worktree src/core .claude/skills && git status --short src/core .claude/skills"
 	},
 	"dependencies": {
@@ -32,7 +33,10 @@
 		"@astrojs/check": "0.9.12",
 		"@axe-core/playwright": "^4.14.0",
 		"@biomejs/biome": "2.6.7",
+		"@google/design.md": "0.4.0",
 		"@playwright/test": "1.65.0",
+		"impeccable": "4.9.1",
+		"lighthouse": "13.6.0",
 		"tsx": "4.23.15",
 		"typescript": "5.9.3",
 		"vitest": "5.1.0"
