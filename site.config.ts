@@ -3,42 +3,38 @@ import { defineSite } from "./src/core/config";
 // Everything that changes from site to site, outside the pages and the design.
 // The build stops with a clear message if a field is missing or wrong.
 export default defineSite({
-	name: "Horizonte Consultoria",
-	url: "https://demo-hostinger.simplelife.uno/",
+	name: "DS Anox",
+	url: "https://dsanox.com/",
 	lang: "pt-PT",
+	locales: ["en-GB", "fr-FR"],
 	org: {
-		type: "ProfessionalService",
+		type: "Organization",
 		description:
-			"Consultoria de gestão para pequenas e médias empresas: processos, finanças e equipas.",
-		logo: "/assets/img/logo.svg",
+			"Metalurgia de alta precisão: consultoria técnica e orçamental, pré-fabricação e construção industrial.",
+		logo: "/assets/img/logo.png",
 		ogImage: "/assets/img/og-image.jpg",
 		address: {
-			street: "Rua do Exemplo 10",
-			locality: "Lisboa",
-			postalCode: "1000-001",
+			street: "Rua da Alegria, 11",
+			locality: "Louro, Vila Nova de Famalicão",
+			postalCode: "4760-530",
 			country: "PT",
 		},
-		hours: [
-			{
-				days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-				opens: "09:00",
-				closes: "18:00",
-			},
-		],
 	},
 	contacts: {
-		email: "geral@exemplo.pt",
-		phone: "+351210000000",
+		email: "geral@dsanox.com",
+		phone: "+351968782557",
 	},
 	analytics: {},
-	blog: true,
+	blog: false,
 	panel: {
 		url: "https://painel.simplelife.uno",
-		siteKey: "XPHFL70YEW8FGTSTcp6x5g",
+		// To fill in from the panel (Admin, client DS Anox, table of sites).
+		siteKey: "POR-PREENCHER",
 	},
 	forms: {
-		contactos: "XPHFL70YEW8FGTSTcp6x5g.c38rBb_mtkY_",
+		// To fill in from the panel (Formulários, "Contactos").
+		contactos: "POR-PREENCHER",
 	},
-	// Page that shows the core blocks; not for visitors.
-	hidden: ["/blocos/"],
+	// The three design directions, until one is chosen.
+	hidden: ["/direcoes/"],
 });

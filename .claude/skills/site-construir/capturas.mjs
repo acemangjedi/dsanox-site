@@ -30,6 +30,14 @@ for (const path of paths) {
 			reducedMotion: "reduce",
 		});
 		await page.goto(base + path, { waitUntil: "networkidle" });
+		// Go down the page first, so images that load late are there for the picture.
+		const height = await page.evaluate(() => document.documentElement.scrollHeight);
+		for (let y = 0; y < height; y += 600) {
+			await page.mouse.wheel(0, 600);
+			await page.waitForTimeout(100);
+		}
+		await page.evaluate(() => window.scrollTo(0, 0));
+		await page.waitForLoadState("networkidle");
 		const file = `${out}/${name}-${width}.png`;
 		await page.screenshot({ path: file, fullPage: true });
 		// A page wider than the screen is the most common fault on a phone.

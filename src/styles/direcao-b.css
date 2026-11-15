@@ -1,0 +1,333 @@
+/* Direção B, "Estaleiro": the site as the site of a job. Dark, the photographs at full
+   size, one red arc taken from the logo. */
+@import "tailwindcss";
+
+@font-face {
+	font-family: "Sofia Sans Extra Condensed";
+	font-weight: 800;
+	font-display: swap;
+	src: url(/fonts/sofia-xc-800.woff2) format("woff2");
+}
+@font-face {
+	font-family: "Sofia Sans";
+	font-weight: 400;
+	font-display: swap;
+	src: url(/fonts/sofia-400.woff2) format("woff2");
+}
+@font-face {
+	font-family: "Sofia Sans";
+	font-weight: 700;
+	font-display: swap;
+	src: url(/fonts/sofia-700.woff2) format("woff2");
+}
+
+@theme {
+	--color-night: #0c0d0f;
+	--color-steel: #17191c;
+	--color-ink: #f3f1ec;
+	--color-ink-2: #b4b6b9;
+	--color-line: #34373c;
+	--color-accent: #e2101b;
+	--color-accent-soft: #ff5a5f;
+	--color-accent-ink: #ffffff;
+	--font-display: "Sofia Sans Extra Condensed", "Arial Narrow", sans-serif;
+	--font-body: "Sofia Sans", system-ui, sans-serif;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+	body {
+		@apply bg-night text-ink font-body text-[1.125rem] leading-relaxed antialiased;
+	}
+	:focus-visible {
+		outline: 2px solid var(--color-accent-soft);
+		outline-offset: 4px;
+	}
+	h1,
+	h2,
+	h3 {
+		@apply font-display uppercase;
+		line-height: 0.86;
+		text-wrap: balance;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
+}
+
+@layer components {
+	.saltar {
+		@apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-night;
+	}
+	.limite {
+		@apply mx-auto w-full max-w-[90rem] px-5 md:px-10;
+	}
+	.cabecalho {
+		@apply absolute inset-x-0 top-0 z-40;
+	}
+	.cabecalho .limite {
+		@apply flex items-center justify-between gap-6 py-5;
+	}
+	.cabecalho img {
+		@apply h-12 w-auto md:h-16;
+	}
+	.cabecalho nav {
+		@apply hidden gap-9 text-[1rem] font-bold lg:flex;
+	}
+	.cabecalho nav a {
+		@apply relative py-2;
+	}
+	.cabecalho nav a::after {
+		content: "";
+		@apply absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-accent transition-transform duration-300;
+	}
+	.cabecalho nav a:hover::after,
+	.cabecalho nav a:focus-visible::after {
+		@apply scale-x-100;
+	}
+	.botao {
+		@apply inline-flex min-h-13 items-center justify-center px-7 text-[1rem] font-bold whitespace-nowrap transition-colors duration-200;
+	}
+	.botao-cheio {
+		@apply bg-accent text-accent-ink hover:bg-ink hover:text-night;
+	}
+	.botao-linha {
+		@apply border border-ink/60 hover:border-ink hover:bg-ink hover:text-night;
+	}
+	.figure {
+		@apply m-0 overflow-hidden;
+	}
+	.figure img {
+		@apply block h-full w-full object-cover grayscale;
+	}
+
+	/* The first screen: the photograph fills it and the title sits on its foot. */
+	.heroi {
+		@apply relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden pt-32 pb-10 md:pb-14;
+	}
+	.heroi .fundo {
+		@apply absolute inset-0 -z-10;
+	}
+	.heroi .fundo::after {
+		content: "";
+		@apply absolute inset-0;
+		background: linear-gradient(
+			to top,
+			var(--color-night) 4%,
+			color-mix(in srgb, var(--color-night) 55%, transparent) 45%,
+			color-mix(in srgb, var(--color-night) 35%, transparent)
+		);
+	}
+	.heroi h1 {
+		font-size: clamp(3.5rem, 7vw, 7.5rem);
+		letter-spacing: -0.01em;
+	}
+	.heroi h1 .linha {
+		@apply block md:whitespace-nowrap;
+	}
+	.heroi .lede {
+		@apply max-w-[46ch] text-[1.1875rem] text-ink;
+	}
+	/* The arc of the logo, drawn across the first screen. */
+	.arco {
+		@apply pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[70%] w-full;
+	}
+	.arco path {
+		fill: none;
+		stroke: var(--color-accent);
+		stroke-width: 5;
+		stroke-linecap: round;
+		vector-effect: non-scaling-stroke;
+		stroke-dasharray: 4000;
+		stroke-dashoffset: 0;
+	}
+
+	.lema {
+		@apply border-y border-line py-10 md:py-16;
+	}
+	.lema p {
+		@apply font-display text-[3rem] uppercase leading-[0.9] md:text-[6.5rem];
+	}
+	.lema p + p {
+		@apply text-accent-soft md:text-right;
+	}
+
+	.seccao {
+		@apply py-20 md:py-32;
+	}
+	.seccao h2 {
+		@apply text-[3.5rem] md:text-[7rem];
+	}
+
+	/* The three areas: wide rows; the photograph of the row comes in beside it. */
+	.areas {
+		@apply mt-12 border-t border-line md:mt-20;
+	}
+	.areas > li {
+		@apply grid gap-6 border-b border-line py-10 md:grid-cols-[5rem_1fr_1fr] md:gap-10 md:py-14 lg:grid-cols-[6rem_1.1fr_1fr_18rem];
+	}
+	.areas .num {
+		@apply font-display text-[2.5rem] leading-none text-accent-soft md:text-[3.5rem];
+	}
+	.areas h3 {
+		@apply text-[2.75rem] md:text-[4rem];
+	}
+	.areas ul {
+		@apply grid content-start gap-2 text-[1rem];
+	}
+	.areas ul li {
+		@apply border-b border-line pb-2 font-bold;
+	}
+	.areas .figure {
+		@apply hidden aspect-[4/5] lg:block;
+	}
+	.areas .figure img {
+		@apply transition-transform duration-700 ease-out;
+	}
+	.areas > li:hover .figure img {
+		@apply scale-105;
+	}
+
+	.faixa {
+		@apply relative h-[70svh] min-h-[26rem] overflow-hidden;
+	}
+	.faixa .figure {
+		@apply absolute inset-x-0 -top-[10%] h-[120%];
+	}
+
+	.passos {
+		@apply mt-12 grid gap-x-10 md:mt-20 md:grid-cols-2 lg:grid-cols-3;
+	}
+	.passos li {
+		@apply border-t border-line py-8;
+	}
+	.passos .num {
+		@apply font-display text-[4.5rem] leading-none text-line;
+		-webkit-text-stroke: 1px var(--color-ink-2);
+		color: transparent;
+	}
+	.passos h3 {
+		@apply mt-4 text-[2.25rem];
+	}
+
+	.equipa {
+		@apply grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20;
+	}
+	.equipa .figure {
+		@apply aspect-[4/5];
+	}
+	.oficios li {
+		@apply border-b border-line py-7;
+	}
+	.oficios h3 {
+		@apply text-[2.75rem];
+	}
+
+	.contacto {
+		@apply bg-accent py-20 text-accent-ink md:py-32;
+	}
+	.contacto h2 {
+		@apply max-w-[14ch] text-[3.75rem] md:text-[8rem];
+	}
+	.contacto dl {
+		@apply mt-14 grid gap-8 border-t border-accent-ink/40 pt-10 md:grid-cols-3;
+	}
+	.contacto dt {
+		@apply text-[0.9375rem] font-bold;
+	}
+	.contacto dd {
+		@apply mt-2 font-display text-[2rem] uppercase leading-none md:text-[2.5rem];
+	}
+	.contacto dd a {
+		@apply underline decoration-2 underline-offset-[6px] hover:decoration-4;
+	}
+	.rodape {
+		@apply py-8 text-[0.9375rem] text-ink-2;
+	}
+	.rodape .limite {
+		@apply flex flex-wrap items-center justify-between gap-4;
+	}
+	.rodape img {
+		@apply h-10 w-auto;
+	}
+}
+
+/* Movement, only for people who have not asked for less and browsers that can do it in
+   CSS. Without it everything is simply in place. */
+@media (prefers-reduced-motion: no-preference) {
+	.arco path {
+		animation: tracar 1.6s 0.2s cubic-bezier(0.65, 0, 0.35, 1) both;
+	}
+	.heroi h1 .linha {
+		animation: subir 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+	.heroi h1 .linha:nth-child(2) {
+		animation-delay: 0.12s;
+	}
+	.heroi h1 .linha:nth-child(3) {
+		animation-delay: 0.24s;
+	}
+	.heroi .fundo img {
+		animation: aproximar 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+	@supports (animation-timeline: view()) {
+		.revela {
+			animation: subir linear both;
+			animation-timeline: view();
+			animation-range: entry 0% entry 55%;
+		}
+		.faixa .figure {
+			animation: deslizar linear both;
+			animation-timeline: view();
+			animation-range: cover;
+		}
+		.lema p:first-child {
+			animation: da-esquerda linear both;
+			animation-timeline: view();
+			animation-range: entry 0% cover 45%;
+		}
+		.lema p + p {
+			animation: da-direita linear both;
+			animation-timeline: view();
+			animation-range: entry 0% cover 45%;
+		}
+	}
+}
+@keyframes tracar {
+	from {
+		stroke-dashoffset: 4000;
+	}
+}
+@keyframes subir {
+	from {
+		opacity: 0;
+		transform: translateY(2.5rem);
+	}
+}
+@keyframes aproximar {
+	from {
+		transform: scale(1.12);
+	}
+}
+@keyframes deslizar {
+	from {
+		transform: translateY(-8%);
+	}
+	to {
+		transform: translateY(8%);
+	}
+}
+@keyframes da-esquerda {
+	from {
+		transform: translateX(-12%);
+	}
+}
+@keyframes da-direita {
+	from {
+		transform: translateX(12%);
+	}
+}

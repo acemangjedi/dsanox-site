@@ -1,0 +1,141 @@
+---
+// Direção B, "Estaleiro".
+import { Image } from "astro:assets";
+import f02 from "../../assets/fotos/foto-02.jpg";
+import f04 from "../../assets/fotos/foto-04.jpg";
+import f06 from "../../assets/fotos/foto-06.jpg";
+import f08 from "../../assets/fotos/foto-08.jpg";
+import f10 from "../../assets/fotos/foto-10.jpg";
+import f11 from "../../assets/fotos/foto-11.jpg";
+import logo from "../../assets/logo-claro.png";
+import Figure from "../../core/blocks/Figure.astro";
+import Layout from "../../layouts/Direcao.astro";
+import css from "../../styles/direcao-b.css?url";
+import t from "../../textos/pt";
+
+const n = (i: number) => String(i + 1).padStart(2, "0");
+const areaPhotos = [
+	{ src: f06, alt: t.alts.weld },
+	{ src: f04, alt: t.alts.pipes },
+	{ src: f10, alt: t.alts.plant },
+];
+// The title, a line for each thing the company does.
+const lines = ["Tubagem,", "estruturas metálicas", "e montagem industrial."];
+---
+
+<Layout css={css} fonts={["sofia-xc-800", "sofia-400", "sofia-700"]} theme="#0c0d0f">
+<header class="cabecalho">
+	<div class="limite">
+		<a href="#conteudo" aria-label="DS Anox, início"><Image src={logo} alt="" width={200} loading="eager" /></a>
+		<nav aria-label="Principal">
+			{t.nav.map((l) => <a href={l.href}>{l.label}</a>)}
+		</nav>
+		<a class="botao botao-cheio" href="#contactos">{t.hero.primary}</a>
+	</div>
+</header>
+
+<main id="conteudo">
+	<section class="heroi">
+		<div class="fundo">
+			<Figure class="h-full" src={f11} alt={t.alts.plant} priority widths={[640, 1200, 2000]} sizes="100vw" />
+		</div>
+		<svg class="arco" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+			<path d="M -2 38 C 18 96, 62 104, 102 58" />
+		</svg>
+		<div class="limite">
+			<h1>{lines.map((l) => <span class="linha">{l} </span>)}</h1>
+			<div class="mt-8 flex flex-col gap-8 md:mt-10 md:flex-row md:items-end md:justify-between">
+				<p class="lede">{t.hero.lede}</p>
+				<div class="flex flex-wrap gap-3">
+					<a class="botao botao-cheio" href="#contactos">{t.hero.primary}</a>
+					<a class="botao botao-linha" href="#servicos">{t.hero.secondary}</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="lema overflow-hidden">
+		<div class="limite">
+			{t.motto.map((line) => <p>{line}</p>)}
+		</div>
+	</div>
+
+	<section class="seccao" id="servicos">
+		<div class="limite">
+			<div class="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+				<h2 class="revela">{t.services.title}</h2>
+				<p class="max-w-[48ch] text-ink-2">{t.services.intro}</p>
+			</div>
+			<ul class="areas">
+				{t.services.areas.map((a, i) => (
+					<li class="revela">
+						<span class="num" aria-hidden="true">{n(i)}</span>
+						<div>
+							<h3>{a.name}</h3>
+							<p class="mt-5 max-w-[40ch] text-ink-2">{a.text}</p>
+						</div>
+						<ul>{a.items.map((item) => <li>{item}</li>)}</ul>
+						<Figure src={areaPhotos[i].src} alt={areaPhotos[i].alt} widths={[400, 640]} sizes="18rem" />
+					</li>
+				))}
+			</ul>
+		</div>
+	</section>
+
+	<div class="faixa">
+		<Figure src={f02} alt={t.alts.plant} widths={[640, 1311]} sizes="100vw" />
+	</div>
+
+	<section class="seccao" id="processo">
+		<div class="limite">
+			<h2 class="revela">{t.process.title}</h2>
+			<ol class="passos">
+				{t.process.steps.map((s, i) => (
+					<li class="revela">
+						<span class="num" aria-hidden="true">{n(i)}</span>
+						<h3>{s.name}</h3>
+						<p class="mt-3 text-[1rem] text-ink-2">{s.text}</p>
+					</li>
+				))}
+			</ol>
+		</div>
+	</section>
+
+	<section class="seccao bg-steel" id="equipa">
+		<div class="limite equipa">
+			<Figure class="revela" src={f08} alt={t.hero.alt} widths={[480, 800, 1200]} sizes="(min-width: 1024px) 45vw, 100vw" />
+			<div>
+				<h2 class="revela !text-[3.5rem] md:!text-[5.5rem]">{t.team.title}</h2>
+				<p class="mt-6 max-w-[44ch] text-ink-2">{t.team.intro}</p>
+				<ul class="oficios mt-8 border-t border-line">
+					{t.team.roles.map((r) => (
+						<li class="revela">
+							<h3>{r.name}</h3>
+							<p class="mt-2 text-[1rem] text-ink-2">{r.text}</p>
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="contacto" id="contactos">
+		<div class="limite">
+			<h2 class="revela">{t.contact.title}</h2>
+			<p class="mt-8 max-w-[44ch] text-[1.1875rem]">{t.contact.text}</p>
+			<dl>
+				<div><dt>{t.contact.labels.phone}</dt><dd><a href={`tel:${t.contact.phone.replaceAll(" ", "")}`}>{t.contact.phone}</a></dd></div>
+				<div><dt>{t.contact.labels.email}</dt><dd><a href={`mailto:${t.contact.email}`}>{t.contact.email}</a></dd></div>
+				<div><dt>{t.contact.labels.address}</dt><dd class="!font-body !text-[1.125rem] !normal-case !leading-relaxed font-bold">{t.contact.address.map((l) => <span class="block">{l}</span>)}</dd></div>
+			</dl>
+		</div>
+	</section>
+</main>
+
+<footer class="rodape">
+	<div class="limite">
+		<Image src={logo} alt="DS Anox" width={120} />
+		<p>Metalurgia de alta precisão · Louro, Vila Nova de Famalicão</p>
+	</div>
+</footer>
+</Layout>
