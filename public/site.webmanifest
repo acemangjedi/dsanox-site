@@ -1,6 +1,8 @@
 {
 	"name": "DS Anox",
 	"short_name": "DS Anox",
+	"description": "Tubagem, estruturas metálicas e montagem industrial.",
+	"lang": "pt-PT",
 	"icons": [
 		{
 			"src": "/web-app-manifest-192x192.png",
