@@ -25,7 +25,7 @@ export default defineSite({
 		phone: "+351968782557",
 	},
 	analytics: {},
-	blog: false,
+	blog: true,
 	panel: {
 		url: "https://painel.simplelife.uno",
 		// To fill in from the panel (Admin, client DS Anox, table of sites).
