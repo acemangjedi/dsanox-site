@@ -1,0 +1,61 @@
+---
+// The frame of every page: head, header, footer and the core's own pieces.
+import site from "../../site.config";
+import Cabecalho from "../components/Cabecalho.astro";
+import Rodape from "../components/Rodape.astro";
+import Analytics from "../core/components/Analytics.astro";
+import CookieBanner from "../core/components/CookieBanner.astro";
+import Seo from "../core/components/Seo.astro";
+import Utm from "../core/components/Utm.astro";
+import { type Lang, localeOf } from "../core/i18n";
+import css from "../styles/site.css?url";
+import { textosDe } from "../textos";
+import { type Pagina, rotas } from "../textos/rotas";
+
+interface Props {
+	lang: Lang;
+	title: string;
+	description: string;
+	// The page, to link it to itself in the other languages.
+	pagina?: Pagina;
+	robots?: string;
+	// The first screen is a photograph: the header sits on top of it.
+	sobreposto?: boolean;
+}
+const {
+	lang,
+	title,
+	description,
+	pagina,
+	robots,
+	sobreposto = false,
+} = Astro.props;
+const t = textosDe(lang);
+const alternates = pagina ? rotas[pagina] : undefined;
+---
+
+<!DOCTYPE html>
+<html lang={localeOf(lang, site)}>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c0d0f">
+<Seo title={title} description={description} alternates={alternates} robots={robots} />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="stylesheet" href={css}>
+<link rel="preload" as="font" href="/fonts/sofia-xc-800.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="/fonts/sofia-400.woff2" type="font/woff2" crossorigin>
+<Analytics />
+</head>
+<body>
+<a href="#conteudo" class="saltar">{t.nav.skip}</a>
+<Cabecalho lang={lang} alternates={alternates} sobreposto={sobreposto} />
+<main id="conteudo">
+<slot />
+</main>
+<Rodape lang={lang} />
+<CookieBanner />
+<Utm />
+</body>
+</html>

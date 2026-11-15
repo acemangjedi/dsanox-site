@@ -1,4 +1,4 @@
-/* Direção B, "Estaleiro": the site as the site of a job. Dark, the photographs at full
+/* "Estaleiro" (see DESIGN.md): the site as the site of a job. Dark, the photographs at full
    size, one red arc taken from the logo. */
 @import "tailwindcss";
 
@@ -67,27 +67,71 @@
 		@apply mx-auto w-full max-w-[90rem] px-5 md:px-10;
 	}
 	.cabecalho {
-		@apply absolute inset-x-0 top-0 z-40;
+		@apply relative z-40 border-b border-line bg-night;
+	}
+	.cabecalho.sobreposto {
+		@apply absolute inset-x-0 top-0 border-0 bg-transparent;
 	}
 	.cabecalho .limite {
-		@apply flex items-center justify-between gap-6 py-5;
+		@apply flex items-center gap-6 py-5;
 	}
-	.cabecalho img {
+	.cabecalho .marca {
+		@apply mr-auto;
+	}
+	.cabecalho .marca img {
 		@apply h-12 w-auto md:h-16;
 	}
-	.cabecalho nav {
+	.cabecalho .principal {
 		@apply hidden gap-9 text-[1rem] font-bold lg:flex;
 	}
-	.cabecalho nav a {
+	.cabecalho .principal a {
 		@apply relative py-2;
 	}
-	.cabecalho nav a::after {
+	.cabecalho .principal a::after {
 		content: "";
 		@apply absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-accent transition-transform duration-300;
 	}
-	.cabecalho nav a:hover::after,
-	.cabecalho nav a:focus-visible::after {
+	.cabecalho .principal a:hover::after,
+	.cabecalho .principal a:focus-visible::after,
+	.cabecalho .principal a[aria-current="page"]::after {
 		@apply scale-x-100;
+	}
+	.lang-switch {
+		@apply flex gap-1 text-[0.9375rem] font-bold;
+	}
+	.lang-switch a {
+		@apply inline-flex min-h-11 min-w-11 items-center justify-center text-ink-2 hover:text-ink;
+	}
+	.lang-switch a[aria-current="page"] {
+		@apply text-ink underline decoration-accent decoration-2 underline-offset-[6px];
+	}
+	.cabecalho .linguas,
+	.cabecalho .pedir {
+		@apply hidden lg:flex;
+	}
+	.cabecalho .menu {
+		@apply lg:hidden;
+	}
+	.menu-button {
+		@apply inline-flex min-h-12 items-center border border-ink/60 px-5 text-[1rem] font-bold;
+	}
+	.menu-button[aria-expanded="true"] {
+		@apply bg-ink text-night;
+	}
+	.menu-panel {
+		@apply absolute inset-x-0 top-full border-y border-line bg-night px-5 py-6;
+	}
+	.menu-panel nav {
+		@apply grid;
+	}
+	.menu-panel nav a {
+		@apply border-b border-line py-4 font-display text-[2.25rem] uppercase leading-none;
+	}
+	.menu-panel .lang-switch {
+		@apply mt-5;
+	}
+	.ligacao {
+		@apply inline-flex min-h-11 items-center font-bold underline decoration-accent decoration-2 underline-offset-[6px] hover:decoration-4;
 	}
 	.botao {
 		@apply inline-flex min-h-13 items-center justify-center px-7 text-[1rem] font-bold whitespace-nowrap transition-colors duration-200;
@@ -153,7 +197,7 @@
 		@apply font-display text-[3rem] uppercase leading-[0.9] md:text-[6.5rem];
 	}
 	.lema p + p {
-		@apply text-accent-soft md:text-right;
+		@apply md:text-right;
 	}
 
 	.seccao {
@@ -161,6 +205,9 @@
 	}
 	.seccao h2 {
 		@apply text-[3.5rem] md:text-[7rem];
+	}
+	.seccao h2.medio {
+		@apply text-[3.5rem] md:text-[5.5rem];
 	}
 
 	/* The three areas: wide rows; the photograph of the row comes in beside it. */
@@ -227,33 +274,164 @@
 		@apply text-[2.75rem];
 	}
 
+	/* The red band that closes a page: the invitation on one side, the form on the other. */
 	.contacto {
-		@apply bg-accent py-20 text-accent-ink md:py-32;
+		@apply bg-accent py-20 text-accent-ink md:py-28;
 	}
+	.contacto > .limite {
+		@apply grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-20;
+	}
+	.contacto h1,
 	.contacto h2 {
-		@apply max-w-[14ch] text-[3.75rem] md:text-[8rem];
+		@apply max-w-[12ch] text-[3.75rem] md:text-[6.5rem];
 	}
 	.contacto dl {
-		@apply mt-14 grid gap-8 border-t border-accent-ink/40 pt-10 md:grid-cols-3;
+		@apply mt-12 grid gap-7 border-t border-accent-ink/40 pt-9;
 	}
 	.contacto dt {
 		@apply text-[0.9375rem] font-bold;
 	}
 	.contacto dd {
-		@apply mt-2 font-display text-[2rem] uppercase leading-none md:text-[2.5rem];
+		@apply mt-1 font-display text-[2rem] uppercase leading-none md:text-[2.5rem];
+	}
+	.contacto dd.morada {
+		@apply font-body text-[1.125rem] font-bold normal-case leading-relaxed;
+	}
+	.contacto dd.morada span {
+		@apply block;
 	}
 	.contacto dd a {
 		@apply underline decoration-2 underline-offset-[6px] hover:decoration-4;
 	}
+	.ficha {
+		@apply self-start bg-night p-6 text-ink md:p-10;
+	}
+	.ficha h3 {
+		@apply mb-8 text-[2.5rem];
+	}
+
+	/* The core's form. */
+	.form {
+		@apply grid gap-5;
+	}
+	.form-row {
+		@apply grid gap-5 sm:grid-cols-2;
+	}
+	.form-group {
+		@apply grid gap-2;
+	}
+	.form label {
+		@apply text-[0.9375rem] font-bold;
+	}
+	.form .req {
+		@apply text-accent-soft;
+	}
+	.form input:not([type="checkbox"]),
+	.form textarea {
+		@apply min-h-12 w-full border border-line bg-steel px-4 py-3 text-ink;
+	}
+	.form input:not([type="checkbox"]):focus-visible,
+	.form textarea:focus-visible {
+		@apply border-ink;
+	}
+	.form textarea {
+		@apply min-h-36 resize-y;
+	}
+	.form-checkbox {
+		@apply flex items-start gap-3 text-[0.9375rem] font-normal text-ink-2;
+	}
+	.form .form-checkbox {
+		@apply font-normal;
+	}
+	.form-checkbox input {
+		@apply mt-1 h-5 w-5 shrink-0 accent-[var(--color-accent)];
+	}
+	.form-checkbox a {
+		@apply text-ink underline underline-offset-4;
+	}
+	.btn {
+		@apply inline-flex min-h-13 cursor-pointer items-center justify-center bg-accent px-7 text-[1rem] font-bold text-accent-ink transition-colors duration-200 hover:bg-ink hover:text-night;
+	}
+	.lead-form-fallback a {
+		@apply underline underline-offset-4;
+	}
+
+	/* Inner pages: a plain title, then the content. */
+	.topo {
+		@apply border-b border-line py-16 md:py-24;
+	}
+	.topo h1 {
+		@apply max-w-[16ch] text-[3.5rem] md:text-[7rem];
+	}
+	.topo p {
+		@apply mt-8 max-w-[52ch] text-[1.1875rem] text-ink-2;
+	}
+	.chamada {
+		@apply border-t border-line py-16 md:py-24;
+	}
+	.chamada .limite {
+		@apply flex flex-wrap items-center justify-between gap-8;
+	}
+	.chamada h2 {
+		@apply text-[3rem] md:text-[5rem];
+	}
+	.prosa {
+		@apply max-w-[44rem];
+	}
+	.prosa h2 {
+		@apply mt-12 mb-4 text-[2.25rem];
+	}
+	.prosa p,
+	.prosa ul {
+		@apply mt-4 text-ink-2;
+	}
+	.prosa ul {
+		@apply list-disc pl-6;
+	}
+	.prosa a {
+		@apply text-ink underline underline-offset-4;
+	}
+
 	.rodape {
-		@apply py-8 text-[0.9375rem] text-ink-2;
+		@apply border-t border-line py-12 text-[0.9375rem] text-ink-2;
 	}
 	.rodape .limite {
-		@apply flex flex-wrap items-center justify-between gap-4;
+		@apply grid gap-10 md:grid-cols-[1.2fr_1fr_1fr];
 	}
 	.rodape img {
-		@apply h-10 w-auto;
+		@apply h-11 w-auto;
 	}
+	.rodape address,
+	.rodape nav {
+		@apply grid content-start gap-1 not-italic;
+	}
+	.rodape a {
+		@apply inline-flex min-h-9 items-center underline-offset-4 hover:text-ink hover:underline;
+	}
+}
+
+/* What the core's own components read. */
+:root {
+	--accent: var(--color-accent);
+	--accent-border: var(--color-accent);
+	--bg-deep: var(--color-night);
+	--surface: var(--color-steel);
+	--surface-2: var(--color-night);
+	--ink: var(--color-ink);
+	--ink-faint: var(--color-ink-2);
+	--muted: var(--color-ink-2);
+	--border: var(--color-line);
+	--border-strong: var(--color-ink-2);
+	--error: var(--color-accent-soft);
+	--r-sm: 0;
+	--r-lg: 0;
+	--r-full: 0;
+	--sh-lg: 0 20px 60px rgb(0 0 0 / 0.5);
+	--s-1: 0.25rem;
+	--s-2: 0.5rem;
+	--s-3: 0.75rem;
+	--s-4: 1rem;
+	--s-5: 1.5rem;
 }
 
 /* Movement, only for people who have not asked for less and browsers that can do it in

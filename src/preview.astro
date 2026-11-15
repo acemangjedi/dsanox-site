@@ -1,20 +1,12 @@
 ---
-import site from "../site.config";
 import Article from "./components/Article.astro";
 import Preview from "./core/components/Preview.astro";
-import Seo from "./core/components/Seo.astro";
-import BaseLayout from "./layouts/BaseLayout.astro";
+import Layout from "./layouts/Site.astro";
 
 // Served at /_preview/ by the core integration: the article page, filled in by the panel.
 ---
 
-<BaseLayout>
-	<Seo
-		slot="head"
-		title={`Pré-visualização — ${site.name}`}
-		description="Pré-visualização de um artigo."
-		robots="noindex, nofollow"
-	/>
+<Layout lang="pt" title="Pré-visualização" description="Pré-visualização de um artigo." robots="noindex, nofollow">
 	<Article title="" description="" pubDate={new Date()} author="" />
 	<Preview />
-</BaseLayout>
+</Layout>

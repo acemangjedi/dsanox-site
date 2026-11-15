@@ -1,0 +1,33 @@
+---
+// The red band that closes a page: the invitation, the contacts and the form.
+import LeadForm from "../core/components/LeadForm.astro";
+import type { Lang } from "../core/i18n";
+import { textosDe } from "../textos";
+
+interface Props {
+	lang: Lang;
+	// On the contact page this is the page's title.
+	principal?: boolean;
+}
+const { lang, principal = false } = Astro.props;
+const t = textosDe(lang).contact;
+const Titulo = principal ? "h1" : "h2";
+---
+
+<section class="contacto" id="contacto">
+	<div class="limite">
+		<div>
+			<Titulo class="revela">{t.title}</Titulo>
+			<p class="mt-8 max-w-[40ch] text-[1.1875rem]">{t.text}</p>
+			<dl>
+				<div><dt>{t.labels.phone}</dt><dd><a href={`tel:${t.phone.replaceAll(" ", "")}`}>{t.phone}</a></dd></div>
+				<div><dt>{t.labels.email}</dt><dd><a href={`mailto:${t.email}`}>{t.email}</a></dd></div>
+				<div><dt>{t.labels.address}</dt><dd class="morada">{t.address.map((l) => <span>{l}</span>)}</dd></div>
+			</dl>
+		</div>
+		<div class="ficha">
+			<h3>{t.formTitle}</h3>
+			<LeadForm form="contactos" submitLabel={t.send} />
+		</div>
+	</div>
+</section>

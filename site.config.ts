@@ -36,5 +36,5 @@ export default defineSite({
 		contactos: "POR-PREENCHER",
 	},
 	// The three design directions, until one is chosen.
-	hidden: ["/direcoes/"],
+	hidden: [],
 });

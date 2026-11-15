@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo-claro.png";
+import type { Lang } from "../core/i18n";
+import { textosDe } from "../textos";
+import { rotas } from "../textos/rotas";
+
+interface Props {
+	lang: Lang;
+}
+const { lang } = Astro.props;
+const t = textosDe(lang);
+const tel = t.contact.phone.replaceAll(" ", "");
+---
+
+<footer class="rodape">
+	<div class="limite">
+		<div>
+			<Image src={logo} alt="DS Anox" width={150} />
+			<p class="mt-4">{t.footer.line}</p>
+		</div>
+		<address>
+			{t.contact.address.map((l) => <span>{l}</span>)}
+			<a href={`tel:${tel}`}>{t.contact.phone}</a>
+			<a href={`mailto:${t.contact.email}`}>{t.contact.email}</a>
+		</address>
+		<nav aria-label={t.footer.legal}>
+			<a href={rotas.privacy[lang]}>{t.footer.privacy}</a>
+			<a href={rotas.cookies[lang]}>{t.footer.cookies}</a>
+			<a href={rotas.terms[lang]}>{t.footer.terms}</a>
+		</nav>
+	</div>
+</footer>
