@@ -12,6 +12,8 @@ interface Props {
 const { lang, principal = false } = Astro.props;
 const t = textosDe(lang).contact;
 const Titulo = principal ? "h1" : "h2";
+const Subtitulo = principal ? "h2" : "h3";
+const mapa = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(t.address.join(", "))}`;
 ---
 
 <section class="contacto" id="contacto">
@@ -22,11 +24,14 @@ const Titulo = principal ? "h1" : "h2";
 			<dl>
 				<div><dt>{t.labels.phone}</dt><dd><a href={`tel:${t.phone.replaceAll(" ", "")}`}>{t.phone}</a></dd></div>
 				<div><dt>{t.labels.email}</dt><dd><a href={`mailto:${t.email}`}>{t.email}</a></dd></div>
-				<div><dt>{t.labels.address}</dt><dd class="morada">{t.address.map((l) => <span>{l}</span>)}</dd></div>
+				<div><dt>{t.labels.address}</dt><dd class="morada">
+					{t.address.map((l) => <span>{l}</span>)}
+					<a class="mt-2 inline-flex min-h-11 items-center" href={mapa} target="_blank" rel="noopener noreferrer">{t.map}</a>
+				</dd></div>
 			</dl>
 		</div>
 		<div class="ficha">
-			<h3>{t.formTitle}</h3>
+			<Subtitulo class="titulo">{t.formTitle}</Subtitulo>
 			<LeadForm form="contactos" submitLabel={t.send} />
 		</div>
 	</div>

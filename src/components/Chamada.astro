@@ -1,0 +1,19 @@
+---
+// The closing line of an inner page: one question and the way to the contact page.
+import type { Lang } from "../core/i18n";
+import { textosDe } from "../textos";
+import { rotas } from "../textos/rotas";
+
+interface Props {
+	lang: Lang;
+}
+const { lang } = Astro.props;
+const t = textosDe(lang).cta;
+---
+
+<section class="chamada">
+	<div class="limite">
+		<h2 class="revela">{t.title}</h2>
+		<a class="botao botao-cheio" href={rotas.contact[lang]}>{t.button}</a>
+	</div>
+</section>

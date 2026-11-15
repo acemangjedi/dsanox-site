@@ -29,7 +29,7 @@ const links = siteLangs(site).map((l) => ({
 					hreflang={l.locale}
 					lang={l.locale}
 					aria-current={l.lang === current ? "page" : undefined}
-					aria-label={NAMES[l.lang]}
+					title={NAMES[l.lang]}
 				>{l.lang.toUpperCase()}</a>
 			</li>
 		))}

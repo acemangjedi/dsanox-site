@@ -1,0 +1,49 @@
+---
+import f03 from "../assets/fotos/foto-03.jpg";
+import f05 from "../assets/fotos/foto-05.jpg";
+import f08 from "../assets/fotos/foto-08.jpg";
+import f12 from "../assets/fotos/foto-12.jpg";
+import Chamada from "../components/Chamada.astro";
+import Figure from "../core/blocks/Figure.astro";
+import type { Lang } from "../core/i18n";
+import Layout from "../layouts/Site.astro";
+import { textosDe } from "../textos";
+
+interface Props {
+	lang: Lang;
+}
+const { lang } = Astro.props;
+const t = textosDe(lang);
+const photos = [
+	{ src: f08, alt: t.alts.close },
+	{ src: f12, alt: t.alts.tank },
+	{ src: f05, alt: t.alts.scaffold },
+];
+---
+
+<Layout lang={lang} title={t.seo.team.title} description={t.seo.team.description} pagina="team">
+	<section class="topo">
+		<div class="limite">
+			<h1>{t.teamPage.title}</h1>
+			<p>{t.team.intro}</p>
+		</div>
+	</section>
+
+	<section class="seccao">
+		<ul class="limite oficios-grandes">
+			{t.team.roles.map((r, i) => (
+				<li>
+					<Figure class="revela" src={photos[i].src} alt={photos[i].alt} priority={i === 0} widths={[480, 800, 1086]} sizes="(min-width: 768px) 30vw, 100vw" />
+					<h2 class="revela">{r.name}</h2>
+					<p>{r.text}</p>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<div class="faixa">
+		<Figure src={f03} alt={t.alts.heights} widths={[640, 1086]} sizes="100vw" />
+	</div>
+
+	<Chamada lang={lang} />
+</Layout>

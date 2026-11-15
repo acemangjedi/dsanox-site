@@ -1,0 +1,36 @@
+---
+import type { Lang } from "../core/i18n";
+import Layout from "../layouts/Site.astro";
+import { textosDe } from "../textos";
+
+interface Props {
+	lang: Lang;
+	doc: "privacy" | "cookies" | "terms";
+}
+const { lang, doc } = Astro.props;
+const t = textosDe(lang);
+const d = t.legal[doc];
+const sections: { h: string; p?: string[]; ul?: string[] }[] = d.sections;
+---
+
+<Layout lang={lang} title={`${d.title} | DS Anox`} description={d.description} pagina={doc}>
+	<section class="topo">
+		<div class="limite">
+			<h1>{d.title}</h1>
+			<p>{t.legal.updated}</p>
+		</div>
+	</section>
+	<section class="seccao">
+		<div class="limite">
+			<div class="prosa">
+				{sections.map((s) => (
+					<>
+						<h2>{s.h}</h2>
+						{s.p?.map((p) => <p>{p}</p>)}
+						{s.ul && <ul>{s.ul.map((li) => <li>{li}</li>)}</ul>}
+					</>
+				))}
+			</div>
+		</div>
+	</section>
+</Layout>

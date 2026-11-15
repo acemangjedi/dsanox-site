@@ -44,7 +44,8 @@ function panel(status = 200) {
 	return { fake, asked };
 }
 
-describe("sync", () => {
+// With the blog off there is nothing to bring from the panel.
+describe.runIf(site.blog)("sync", () => {
 	it("writes the articles, the images and build.json, and drops old articles", async () => {
 		mkdirSync(join(root, "src/content/blog"), { recursive: true });
 		writeFileSync(join(root, "src/content/blog/antigo.md"), "x");

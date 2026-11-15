@@ -161,6 +161,7 @@ const pt = {
 			"Vila Nova de Famalicão, Portugal",
 		],
 		labels: { phone: "Telefone", email: "Email", address: "Morada" },
+		map: "Ver no mapa",
 	},
 	about: {
 		title: "Metalurgia de alta precisão, em Vila Nova de Famalicão.",
@@ -170,6 +171,8 @@ const pt = {
 			"Cada projeto é desenvolvido com elevado rigor, assegurando qualidade, consistência e fiabilidade em cada detalhe.",
 			"Criamos soluções de engenharia à medida, orientadas para o desempenho, a durabilidade e a excelência, construindo relações de confiança baseadas na qualidade e na inovação.",
 		],
+		bodyTitle: "Do requisito complexo à solução executada.",
+		pillarsTitle: "Missão, visão e princípios",
 		pillars: [
 			{
 				name: "Missão",
@@ -200,6 +203,8 @@ const pt = {
 				"Incentivar a prevenção de erros, não conformidades e desperdícios;",
 				"Disponibilizar os recursos humanos, técnicos e organizacionais necessários ao bom funcionamento da empresa.",
 			],
+			// Only the translations carry a note.
+			note: "",
 		},
 	},
 	servicesPage: {
@@ -226,6 +231,7 @@ const pt = {
 	},
 	footer: {
 		line: "Metalurgia de alta precisão",
+		rights: "Todos os direitos reservados.",
 		privacy: "Política de privacidade",
 		cookies: "Política de cookies",
 		terms: "Termos e condições",
@@ -239,6 +245,119 @@ const pt = {
 		weld: "Soldador a trabalhar numa conduta de grande diâmetro",
 		outside: "Tubagem exterior ligada a um reservatório industrial",
 		skid: "Unidade pré-fabricada com reservatórios, plataforma e escada de acesso",
+		hall: "Nave industrial com uma conduta de grande diâmetro suspensa da cobertura",
+		lift: "Plataforma elevatória a trabalhar sob uma estrutura metálica em montagem",
+		scaffold:
+			"Técnico da DS Anox num andaime, junto a uma conduta de grande diâmetro",
+		heights: "Soldador a trabalhar em altura, entre linhas de tubagem em aço",
+		close: "Soldador com máscara a soldar uma peça em aço, visto de perto",
+		tank: "Tubagem em aço a contornar o topo de um reservatório exterior",
+	},
+	legal: {
+		updated: "Última atualização: novembro de 2026",
+		privacy: {
+			title: "Política de privacidade",
+			description:
+				"Como a DS Anox trata os dados pessoais que recebe pelo formulário de contacto deste site, ao abrigo do RGPD, e como pode exercer os seus direitos.",
+			sections: [
+				{
+					h: "Quem somos",
+					p: [
+						"O responsável pelo tratamento é a DS Anox, com sede na Rua da Alegria, 11, 4760-530 Louro, Vila Nova de Famalicão, Portugal. Para qualquer questão sobre esta política, escreva para geral@dsanox.com.",
+					],
+				},
+				{
+					h: "Que dados recolhemos",
+					ul: [
+						"O nome, o email e o telefone que nos envia no formulário;",
+						"A mensagem que escreve;",
+						"A origem da visita, quando chega através de uma ligação de campanha;",
+						"Dados técnicos básicos (endereço IP, tipo de navegador), para segurança.",
+					],
+				},
+				{
+					h: "Para que usamos os dados",
+					p: [
+						"Para responder ao seu pedido e, se for o caso, preparar um orçamento. Não enviamos publicidade sem o seu consentimento nem vendemos dados a terceiros.",
+					],
+				},
+				{
+					h: "Base legal",
+					p: [
+						"O consentimento que dá ao enviar o formulário e o interesse legítimo na segurança do site.",
+					],
+				},
+				{
+					h: "Quanto tempo guardamos",
+					p: [
+						"Os pedidos de contacto são guardados durante dois anos após o último contacto.",
+					],
+				},
+				{
+					h: "Os seus direitos",
+					p: [
+						"Pode pedir o acesso, a retificação, o apagamento, a limitação ou a portabilidade dos seus dados, e retirar o consentimento a qualquer momento, escrevendo para geral@dsanox.com. Pode também apresentar queixa à Comissão Nacional de Proteção de Dados (cnpd.pt).",
+					],
+				},
+				{
+					h: "Subcontratantes",
+					p: [
+						"Usamos um serviço de alojamento do site e um serviço de gestão de pedidos de contacto, ambos sujeitos ao RGPD.",
+					],
+				},
+			],
+		},
+		cookies: {
+			title: "Política de cookies",
+			description:
+				"Que cookies o site da DS Anox usa, para que servem e como pode mudar a sua escolha a qualquer momento.",
+			sections: [
+				{
+					h: "O que são cookies",
+					p: [
+						"São pequenos ficheiros guardados no seu navegador, que permitem a um site lembrar escolhas ou medir visitas.",
+					],
+				},
+				{
+					h: "Que cookies usamos",
+					ul: [
+						"Necessários: guardam a sua escolha sobre cookies. Não precisam de consentimento.",
+						"Análise: ferramentas de medição de visitas (Google Analytics e Microsoft Clarity), que só são carregadas depois de as aceitar.",
+					],
+				},
+				{
+					h: "Como mudar a sua escolha",
+					p: [
+						"Use a ligação «Definições de cookies», no fim de cada página. Pode também apagar os cookies nas definições do navegador.",
+					],
+				},
+			],
+		},
+		terms: {
+			title: "Termos e condições",
+			description:
+				"Condições de utilização do site da DS Anox: natureza da informação publicada, propriedade dos textos e das imagens e lei aplicável.",
+			sections: [
+				{
+					h: "Utilização do site",
+					p: [
+						"O conteúdo deste site é informativo e não constitui uma proposta contratual. As condições de cada trabalho são acordadas por escrito, no orçamento.",
+					],
+				},
+				{
+					h: "Propriedade intelectual",
+					p: [
+						"Os textos e as imagens pertencem à DS Anox, salvo indicação em contrário, e não podem ser reproduzidos sem autorização.",
+					],
+				},
+				{
+					h: "Lei aplicável",
+					p: [
+						"Este site rege-se pela lei portuguesa. Em caso de litígio, o consumidor pode recorrer a uma entidade de resolução alternativa de litígios de consumo (consumidor.gov.pt).",
+					],
+				},
+			],
+		},
 	},
 };
 

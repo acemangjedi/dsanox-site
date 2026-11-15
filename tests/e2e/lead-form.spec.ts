@@ -22,7 +22,7 @@ test("a message the panel accepts goes to the thank-you page, with its campaign"
 	await page.goto("/?utm_source=jornal&utm_campaign=outono");
 	await page.goto("/contactos/");
 	await fill(page);
-	await page.click("text=Enviar mensagem");
+	await page.click("text=Enviar pedido");
 	await expect(page).toHaveURL(/\/obrigado\/$/);
 	expect(Object.fromEntries(sent)).toMatchObject({
 		name: "Rita",
@@ -47,7 +47,7 @@ test("a visitor who lands on the contact page keeps its campaign too", async ({
 	});
 	await page.goto("/contactos/?utm_source=google");
 	await fill(page);
-	await page.click("text=Enviar mensagem");
+	await page.click("text=Enviar pedido");
 	await expect(page).toHaveURL(/\/obrigado\/$/);
 	expect(sent.get("utm_source")).toBe("google");
 });
@@ -60,7 +60,7 @@ test("a field the panel refuses shows what to fix and stays on the page", async 
 	);
 	await page.goto("/contactos/");
 	await fill(page);
-	await page.click("text=Enviar mensagem");
+	await page.click("text=Enviar pedido");
 	await expect(page.locator(".lead-form-error")).toContainText(
 		"Verifique os campos",
 	);
@@ -74,7 +74,7 @@ test("with the panel down the visitor sees the business contacts", async ({
 	await page.route(action, (route) => route.abort("connectionrefused"));
 	await page.goto("/contactos/");
 	await fill(page);
-	await page.click("text=Enviar mensagem");
+	await page.click("text=Enviar pedido");
 	const fallback = page.locator(".lead-form-fallback");
 	await expect(fallback).toBeVisible();
 	await expect(fallback).toContainText(site.contacts.email);
@@ -95,7 +95,7 @@ test("without JavaScript the form posts straight to the panel", async ({
 	});
 	await page.goto("/contactos/");
 	await fill(page);
-	await page.click("text=Enviar mensagem");
+	await page.click("text=Enviar pedido");
 	await expect(page).toHaveURL(/\/obrigado\/$/);
 	expect(method).toBe("POST");
 	await context.close();

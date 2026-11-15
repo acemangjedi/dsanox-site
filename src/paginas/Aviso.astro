@@ -1,0 +1,24 @@
+---
+// A page with one message and the way back: thank you, and page not found.
+import type { Lang } from "../core/i18n";
+import Layout from "../layouts/Site.astro";
+import { textosDe } from "../textos";
+import { rotas } from "../textos/rotas";
+
+interface Props {
+	lang: Lang;
+	aviso: "thanks" | "notFound";
+}
+const { lang, aviso } = Astro.props;
+const t = textosDe(lang)[aviso];
+---
+
+<Layout lang={lang} title={t.seoTitle} description={t.text} pagina={aviso === "thanks" ? "thanks" : undefined} robots="noindex, follow">
+	<section class="topo aviso">
+		<div class="limite">
+			<h1>{t.title}</h1>
+			<p>{t.text}</p>
+			<a class="botao botao-cheio mt-10" href={rotas.home[lang]}>{t.back}</a>
+		</div>
+	</section>
+</Layout>

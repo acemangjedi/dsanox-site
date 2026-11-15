@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/logo-claro.png";
-import type { Lang } from "../core/i18n";
+import { t as base, type Lang } from "../core/i18n";
 import { textosDe } from "../textos";
 import { rotas } from "../textos/rotas";
 
@@ -28,6 +28,8 @@ const tel = t.contact.phone.replaceAll(" ", "");
 			<a href={rotas.privacy[lang]}>{t.footer.privacy}</a>
 			<a href={rotas.cookies[lang]}>{t.footer.cookies}</a>
 			<a href={rotas.terms[lang]}>{t.footer.terms}</a>
+			<button type="button" class="cookie-settings-btn">{base(lang).cookieSettings}</button>
 		</nav>
 	</div>
+	<div class="limite"><p class="direitos">© {new Date().getFullYear()} DS Anox. {t.footer.rights}</p></div>
 </footer>

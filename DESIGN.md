@@ -60,7 +60,7 @@ Sofia Sans Extra Condensed 800 em maiúsculas, muito grande. Sofia Sans no texto
 
 ## Cor
 
-Fundo quase preto, texto branco quente. O vermelho do logótipo no arco, nos botões e na faixa de contacto; uma versão mais clara para números e destaques sobre o escuro.
+Fundo quase preto, texto branco quente. O vermelho do logótipo no arco, nos botões e na faixa de contacto; uma versão mais clara só para os números das secções e o foco do teclado. Os títulos têm sempre uma só cor.
 
 ## Imagem
 

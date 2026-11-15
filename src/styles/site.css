@@ -21,6 +21,21 @@
 	src: url(/fonts/sofia-700.woff2) format("woff2");
 }
 
+/* Stand-ins with the widths of the site's letters, so the text keeps its place while they
+   load. */
+@font-face {
+	font-family: "Sofia XC Fallback";
+	src:
+		local("Arial Bold"), local("Arial"), local("Liberation Sans Bold"),
+		local("Liberation Sans");
+	size-adjust: 62%;
+}
+@font-face {
+	font-family: "Sofia Fallback";
+	src: local("Arial"), local("Liberation Sans");
+	size-adjust: 96%;
+}
+
 @theme {
 	--color-night: #0c0d0f;
 	--color-steel: #17191c;
@@ -30,8 +45,8 @@
 	--color-accent: #e2101b;
 	--color-accent-soft: #ff5a5f;
 	--color-accent-ink: #ffffff;
-	--font-display: "Sofia Sans Extra Condensed", "Arial Narrow", sans-serif;
-	--font-body: "Sofia Sans", system-ui, sans-serif;
+	--font-display: "Sofia Sans Extra Condensed", "Sofia XC Fallback", sans-serif;
+	--font-body: "Sofia Sans", "Sofia Fallback", system-ui, sans-serif;
 }
 
 @layer base {
@@ -285,6 +300,9 @@
 	.contacto h2 {
 		@apply max-w-[12ch] text-[3.75rem] md:text-[6.5rem];
 	}
+	.contacto h1 {
+		@apply max-w-[18ch] md:text-[5rem];
+	}
 	.contacto dl {
 		@apply mt-12 grid gap-7 border-t border-accent-ink/40 pt-9;
 	}
@@ -306,7 +324,7 @@
 	.ficha {
 		@apply self-start bg-night p-6 text-ink md:p-10;
 	}
-	.ficha h3 {
+	.ficha .titulo {
 		@apply mb-8 text-[2.5rem];
 	}
 
@@ -361,7 +379,7 @@
 		@apply border-b border-line py-16 md:py-24;
 	}
 	.topo h1 {
-		@apply max-w-[16ch] text-[3.5rem] md:text-[7rem];
+		@apply max-w-[20ch] text-[3.25rem] md:text-[5.5rem];
 	}
 	.topo p {
 		@apply mt-8 max-w-[52ch] text-[1.1875rem] text-ink-2;
@@ -375,8 +393,78 @@
 	.chamada h2 {
 		@apply text-[3rem] md:text-[5rem];
 	}
+	.topo.aviso {
+		@apply border-0 py-28 md:py-44;
+	}
+	.compromissos {
+		@apply mt-8 border-t border-line;
+		counter-reset: compromisso;
+	}
+	.compromissos li {
+		@apply grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-5 text-ink-2;
+		counter-increment: compromisso;
+	}
+	.compromissos li::before {
+		content: counter(compromisso, decimal-leading-zero);
+		@apply font-display text-[1.75rem] leading-none text-ink;
+	}
+
+	/* The services page: each area is a chapter, its name across the page. */
+	.area {
+		@apply border-b border-line py-16 md:py-28;
+	}
+	.area:nth-of-type(odd) {
+		@apply bg-steel;
+	}
+	.area .cabeca {
+		@apply grid gap-6 lg:grid-cols-[6rem_1.4fr_1fr] lg:items-end lg:gap-10;
+	}
+	.area .num {
+		@apply font-display text-[2.5rem] leading-none text-accent-soft md:text-[3.5rem];
+	}
+	.area h2 {
+		@apply text-[3.25rem] md:text-[6rem];
+	}
+	.area .cabeca p {
+		@apply max-w-[40ch] text-ink-2;
+	}
+	.area .corpo {
+		@apply mt-12 grid gap-10 md:mt-20 lg:grid-cols-[1fr_1.4fr] lg:gap-20;
+	}
+	.area .figure {
+		@apply aspect-[4/5] self-start;
+	}
+	.area dl {
+		@apply border-t border-line;
+	}
+	.area dl div {
+		@apply grid gap-3 border-b border-line py-7 md:grid-cols-[1fr_1.3fr] md:gap-10;
+	}
+	.area dt {
+		@apply font-display text-[2rem] uppercase leading-[0.95] md:text-[2.5rem];
+	}
+	.area dd {
+		@apply text-[1rem] text-ink-2;
+	}
+
+	/* The team page: the three trades, side by side. */
+	.oficios-grandes {
+		@apply grid gap-14 md:grid-cols-3 md:gap-8 lg:gap-12;
+	}
+	.oficios-grandes .figure {
+		@apply aspect-[4/5];
+	}
+	.oficios-grandes li:nth-child(2) {
+		@apply md:mt-24;
+	}
+	.oficios-grandes h2 {
+		@apply mt-6 text-[3.5rem] md:text-[4.5rem];
+	}
+	.oficios-grandes p {
+		@apply mt-4 max-w-[36ch] text-[1rem] text-ink-2;
+	}
 	.prosa {
-		@apply max-w-[44rem];
+		@apply max-w-[38rem];
 	}
 	.prosa h2 {
 		@apply mt-12 mb-4 text-[2.25rem];
@@ -395,7 +483,7 @@
 	.rodape {
 		@apply border-t border-line py-12 text-[0.9375rem] text-ink-2;
 	}
-	.rodape .limite {
+	.rodape .limite:first-child {
 		@apply grid gap-10 md:grid-cols-[1.2fr_1fr_1fr];
 	}
 	.rodape img {
@@ -405,15 +493,23 @@
 	.rodape nav {
 		@apply grid content-start gap-1 not-italic;
 	}
-	.rodape a {
-		@apply inline-flex min-h-9 items-center underline-offset-4 hover:text-ink hover:underline;
+	.rodape a,
+	.rodape button {
+		@apply inline-flex min-h-9 cursor-pointer items-center justify-self-start underline-offset-4 hover:text-ink hover:underline;
+	}
+	.rodape .direitos {
+		@apply mt-10 border-t border-line pt-6;
+	}
+	/* The core's cookie notice: the link apart from the sentence before it. */
+	.cb-bar p a {
+		@apply ml-1;
 	}
 }
 
 /* What the core's own components read. */
 :root {
-	--accent: var(--color-accent);
-	--accent-border: var(--color-accent);
+	--accent: var(--color-accent-soft);
+	--accent-border: var(--color-line);
 	--bg-deep: var(--color-night);
 	--surface: var(--color-steel);
 	--surface-2: var(--color-night);

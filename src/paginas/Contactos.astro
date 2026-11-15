@@ -1,0 +1,16 @@
+---
+import Contacto from "../components/Contacto.astro";
+import type { Lang } from "../core/i18n";
+import Layout from "../layouts/Site.astro";
+import { textosDe } from "../textos";
+
+interface Props {
+	lang: Lang;
+}
+const { lang } = Astro.props;
+const t = textosDe(lang);
+---
+
+<Layout lang={lang} title={t.seo.contact.title} description={t.seo.contact.description} pagina="contact">
+	<Contacto lang={lang} principal />
+</Layout>

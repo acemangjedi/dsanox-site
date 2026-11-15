@@ -1,6 +1,6 @@
 {
-	"name": "Horizonte Consultoria",
-	"short_name": "Horizonte",
+	"name": "DS Anox",
+	"short_name": "DS Anox",
 	"icons": [
 		{
 			"src": "/web-app-manifest-192x192.png",
@@ -13,7 +13,7 @@
 			"type": "image/png"
 		}
 	],
-	"theme_color": "#07111f",
-	"background_color": "#07111f",
+	"theme_color": "#0c0d0f",
+	"background_color": "#0c0d0f",
 	"display": "standalone"
 }

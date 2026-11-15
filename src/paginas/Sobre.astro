@@ -1,0 +1,73 @@
+---
+import f01 from "../assets/fotos/foto-01.jpg";
+import f07 from "../assets/fotos/foto-07.jpg";
+import Chamada from "../components/Chamada.astro";
+import Figure from "../core/blocks/Figure.astro";
+import type { Lang } from "../core/i18n";
+import Layout from "../layouts/Site.astro";
+import { textosDe } from "../textos";
+
+interface Props {
+	lang: Lang;
+}
+const { lang } = Astro.props;
+const t = textosDe(lang);
+const [lead, ...rest] = t.about.paragraphs;
+const q = t.about.quality;
+---
+
+<Layout lang={lang} title={t.seo.about.title} description={t.seo.about.description} pagina="about">
+	<section class="topo">
+		<div class="limite">
+			<h1>{t.about.title}</h1>
+			<p>{lead}</p>
+		</div>
+	</section>
+
+	<div class="faixa">
+		<Figure src={f07} alt={t.alts.hall} priority widths={[480, 800, 1200]} sizes="100vw" />
+	</div>
+
+	<section class="seccao">
+		<div class="limite grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+			<h2 class="revela medio">{t.about.bodyTitle}</h2>
+			<div class="grid content-start gap-6 text-ink-2">
+				{rest.map((p) => <p class="max-w-[52ch]">{p}</p>)}
+			</div>
+		</div>
+	</section>
+
+	<section class="seccao bg-steel">
+		<div class="limite equipa">
+			<Figure class="revela" src={f01} alt={t.alts.skid} widths={[480, 800, 1086]} sizes="(min-width: 1024px) 45vw, 100vw" />
+			<div>
+				<h2 class="revela medio">{t.about.pillarsTitle}</h2>
+				<ul class="oficios mt-8 border-t border-line">
+					{t.about.pillars.map((p) => (
+						<li class="revela">
+							<h3>{p.name}</h3>
+							<p class="mt-2 max-w-[52ch] text-[1rem] text-ink-2">{p.text}</p>
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="seccao" id="qualidade">
+		<div class="limite grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
+			<div>
+				<h2 class="revela medio">{q.title}</h2>
+				{q.note && <p class="mt-6 max-w-[40ch] text-[1rem] text-ink-2">{q.note}</p>}
+			</div>
+			<div>
+				{q.intro.map((p) => <p class="mb-4 max-w-[60ch]">{p}</p>)}
+				<ol class="compromissos">
+					{q.points.map((p) => <li>{p}</li>)}
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<Chamada lang={lang} />
+</Layout>

@@ -89,9 +89,11 @@ que o dono do projeto rejeita uma frase.
   da frase; pontos de exclamação; emojis; maiúsculas em todas as palavras de
   um título.
 - **Perguntas retóricas em títulos,** fora das perguntas frequentes.
-- **A etiqueta pequena por cima de cada título,** a palavra a cor no meio do
-  título e a seta em todas as ligações: são tiques de desenho, mas nascem do
-  texto.
+- **A etiqueta pequena por cima de cada título,** o título a duas cores (uma
+  palavra ou uma linha noutra cor, como em «Precisão em cada detalhe.
+  **Excelência em cada projeto.**») e a seta em todas as ligações: são tiques
+  de desenho, mas nascem do texto. Um título tem uma só cor; o destaque
+  faz-se com o tamanho, o peso ou a posição.
 
 O verificador apanha os chavões e os moldes. Um texto correto e vazio só o
 apanha quem lê, por isso lê a página inteira em voz alta, do princípio ao
