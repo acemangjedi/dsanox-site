@@ -33,10 +33,10 @@ const areaPhotos = [
 		<div class="fundo">
 			<Figure class="h-full" src={f11} alt={t.alts.plant} priority widths={[480, 800, 1200, 2000]} sizes="100vw" />
 		</div>
-		<svg class="arco" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-			<path d="M -2 38 C 18 90, 62 96, 102 58" />
-		</svg>
-		<div class="limite">
+		<div class="limite relative">
+			<svg class="arco no-titulo" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+				<path d="M -2 38 C 18 90, 62 96, 102 58" />
+			</svg>
 			<h1>{t.hero.lines.map((l) => <span class="linha">{l} </span>)}</h1>
 			<div class="mt-8 flex flex-col gap-8 md:mt-10 md:flex-row md:items-end md:justify-between">
 				<p class="lede">{t.hero.lede}</p>

@@ -232,6 +232,12 @@
 	.arco {
 		@apply pointer-events-none absolute inset-x-0 top-[10%] -z-10 h-[34%] w-full md:h-[40%];
 	}
+	/* On the home page the arc hangs from the title, so it sits just above it in a
+	   window of any shape. */
+	.arco.no-titulo {
+		@apply top-auto bottom-full left-1/2 w-screen -translate-x-1/2;
+		height: clamp(11rem, 25vw, 24rem);
+	}
 	.arco path {
 		fill: none;
 		stroke: var(--color-accent);

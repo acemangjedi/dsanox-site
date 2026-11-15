@@ -20,7 +20,7 @@ const onde = (p: { lat: number; lng: number }) =>
 	</svg>
 	{places.map((p) =>
 		p.href ? (
-			<a class="marca" href={p.href} style={onde(p)}>
+			<a class="marca" href={p.href} aria-label={p.name} style={onde(p)}>
 				<span class="nome">{p.name}</span>
 			</a>
 		) : (
