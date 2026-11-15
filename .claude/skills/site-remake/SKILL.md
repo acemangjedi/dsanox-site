@@ -1,13 +1,21 @@
 ---
 name: site-remake
-description: Usar quando o cliente já tem um site e o quer refeito. Percorre o site antigo e o material entregue, e escreve docs/inventario.md e docs/briefing.md. O conteúdo fica igual; só muda o desenho.
+description: Usar quando o cliente já tem um site e o quer refeito. Percorre o site antigo e o material entregue, e escreve docs/inventario.md e docs/briefing.md. Os factos do cliente mantêm-se; o desenho, o texto e o SEO saem melhores.
 ---
 
 # Remake de um site existente
 
-Num remake o cliente já disse o que quer dizer: está no site que tem. O teu
-trabalho é levar esse conteúdo inteiro para um desenho melhor. O inventário é a
-prova de que nada se perdeu e a fonte de todos os factos do site novo.
+Um remake não é uma cópia com outra roupa. O cliente pede um site novo porque
+o antigo já não o representa, e isso costuma valer para o texto tanto como
+para o desenho: páginas com meia dúzia de títulos, uma apresentação comercial
+bem mais rica do que o site, nada pensado para quem procura no Google.
+
+O teu trabalho tem duas metades. A primeira é recolher tudo o que o cliente
+já disse, em todas as fontes, sem perder nada: é o inventário, e é dele que
+saem os factos. A segunda é fazer melhor com esse material: escolher a versão
+mais rica, organizar, escrever o que falta para ligar as partes, e pôr o site
+a responder ao que as pessoas procuram. O que se mantém são os factos e o
+sentido. As palavras podem e devem melhorar.
 
 ## Percorrer
 
@@ -28,20 +36,48 @@ escreve-a no topo do inventário e aplica-a sempre. A regra habitual: vale a
 fonte mais recente e mais bem escrita, e as exceções ficam assinaladas uma a
 uma.
 
-## O que não se mexe, e o que se propõe
+## O que se mantém e o que melhoras
 
-- **O texto do cliente fica como está.** As regras de escrita da skill
-  `site-construir` valem para texto novo, e num remake quase não há texto novo.
-- **Gralhas e erros** vão para uma lista de propostas («garantir e
-  longevidade» → «garantir a longevidade»). O dono do projeto aceita ou
-  recusa cada uma.
-- **Texto que falta numa língua** traduz-se e fica marcado «a rever pelo
-  cliente».
-- **Endereços** mantêm-se. Onde a estrutura nova obrigar a mudar um, o antigo
-  fica redirecionado em `site.config.ts`. Juntar ou dividir páginas é uma
-  proposta, com a razão ao lado.
-- **Imagens** do cliente reaproveitam-se. As de origem desconhecida (bancos de
-  imagens, outras marcas) ficam numa lista para decisão.
+**Mantém-se, sempre:**
+
+- **Os factos.** Nomes, moradas, contactos, serviços, números, certificações.
+  O que o cliente não afirma em nenhuma fonte, o site novo não afirma.
+- **O sentido e o tom.** A missão reescrita continua a ser a missão deles.
+- **Textos formais** (política da qualidade, termos, declarações): ficam
+  palavra a palavra, e traduzem-se quando falta uma língua.
+- **Os endereços** que têm tráfego ou ligações de fora. Onde a estrutura nova
+  obrigar a mudar um, o antigo fica redirecionado em `site.config.ts`.
+
+**Melhoras, e mostras o que fizeste:**
+
+- **Texto.** Segue [escrita.md](../site-construir/escrita.md): títulos que
+  dizem o que a empresa faz, frases concretas, botões claros. Onde o cliente
+  escreveu bem, fica. Onde uma lista de palavras soltas pode ser uma frase
+  que explica o serviço com os factos do inventário, escreve-a.
+- **Estrutura.** Juntar páginas que se repetem, dividir uma que mistura
+  assuntos, dar uma página própria a um serviço que as pessoas procuram pelo
+  nome.
+- **SEO.** Para cada página, o que procura quem precisa disto e em que
+  palavras («soldadura de tubagem inox», «estruturas metálicas Famalicão»).
+  Essas palavras entram no título, na descrição, no título principal e no
+  primeiro parágrafo, de forma natural. Cada página tem um assunto, um título
+  e uma descrição próprios. Ligações internas entre páginas relacionadas,
+  texto alternativo que descreve as fotografias, dados estruturados do
+  negócio, e cada língua com as suas pesquisas e não uma tradução das
+  palavras-chave portuguesas.
+- **Conteúdo novo que os factos permitem.** Perguntas frequentes tiradas do
+  que a apresentação responde, uma explicação de como decorre um trabalho,
+  uma página por área de serviço. Só com o que as fontes dizem; o que faltar
+  é uma pergunta em aberto, e uma boa pergunta ao cliente também é valor.
+- **Gralhas e erros** corrigem-se («garantir e longevidade» → «garantir a
+  longevidade»).
+- **Imagens.** As do cliente reaproveitam-se, com melhor corte e tamanho. As
+  de origem desconhecida ficam numa lista para decisão.
+
+O dono do projeto vê o que mudou. Em `docs/inventario.md`, a secção
+**Propostas** lista cada melhoria com o antes, o depois e a razão, em três
+grupos: texto reescrito, estrutura e SEO, conteúdo novo. Ele aceita, recusa
+ou afina, e o cliente final aprova o texto que é seu.
 
 ## O que deixar
 
@@ -59,7 +95,7 @@ Fontes e regra de escolha entre elas.
 ## O que não existe e não se inventa
 ## Imagens
 ## Identidade atual      (logótipo, cores, letra, tipo de fotografia)
-## Propostas de correção
+## Propostas             (texto reescrito; estrutura e SEO; conteúdo novo)
 ## Perguntas em aberto
 ```
 
@@ -73,7 +109,8 @@ os tem, por muito que o desenho peça uma faixa de números.
 
 ## No fim
 
-Compara o site novo com o inventário antes de o propor: todo o texto original
-está lá, todos os endereços respondem ou redirecionam, todas as imagens do
-cliente têm lugar ou uma razão para terem saído. As diferenças que sobrarem
-mostram-se ao dono do projeto, que as aceita uma a uma.
+Compara o site novo com o inventário antes de o propor: todos os factos e
+todas as ideias do cliente estão lá, nenhum facto novo apareceu, todos os
+endereços respondem ou redirecionam, todas as imagens do cliente têm lugar ou
+uma razão para terem saído. O que mudou está nas Propostas, aceite pelo dono
+do projeto.
