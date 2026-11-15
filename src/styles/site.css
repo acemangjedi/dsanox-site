@@ -609,16 +609,14 @@
 		width: max(1.25cqw, 0.625rem);
 		height: max(1.25cqw, 0.625rem);
 	}
-	.mapa a.marca:hover,
-	.mapa a.marca:focus-visible {
+	.mapa a.marca:hover {
 		@apply z-10;
 		background: color-mix(in srgb, var(--color-accent) 55%, transparent);
 	}
 	.mapa .nome {
 		@apply pointer-events-none invisible absolute bottom-full left-1/2 mb-2 w-max max-w-[16rem] -translate-x-1/2 bg-ink px-3 py-2 text-[0.875rem] leading-tight font-bold text-night;
 	}
-	.mapa a.marca:hover .nome,
-	.mapa a.marca:focus-visible .nome {
+	.mapa a.marca:hover .nome {
 		@apply visible;
 	}
 	.onde .mapa {

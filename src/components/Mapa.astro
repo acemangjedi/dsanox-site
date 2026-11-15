@@ -1,7 +1,8 @@
 ---
 // The world in dots, with one mark for each place given. The marks come from the
 // projects, so the map follows them. A place with a name and an address is a link:
-// the name shows when the pointer or the keyboard is on the mark.
+// the name shows when the pointer is on the mark. The marks are for the pointer
+// only: the same links are in the list under the map, for keyboard and readers.
 import { land, STEP, TOP } from "../dados/mundo";
 
 interface Props {
@@ -20,7 +21,7 @@ const onde = (p: { lat: number; lng: number }) =>
 	</svg>
 	{places.map((p) =>
 		p.href ? (
-			<a class="marca" href={p.href} aria-label={p.name} style={onde(p)}>
+			<a class="marca" href={p.href} tabindex="-1" aria-hidden="true" style={onde(p)}>
 				<span class="nome">{p.name}</span>
 			</a>
 		) : (
