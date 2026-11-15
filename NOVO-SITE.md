@@ -4,6 +4,14 @@ Cada site é um repositório próprio, copiado deste. A pasta `src/core/` é igu
 todos os sites e vem sempre deste modelo; o resto (cores, textos, páginas,
 imagens) é de cada site.
 
+## Feito por IA
+
+O modelo traz cinco skills em `.claude/skills/`, que qualquer sessão do Claude
+aberta no repositório do site usa, por esta ordem: `site-briefing` (ou
+`site-remake` quando já existe um site), `site-direcoes`, `site-construir` e
+`site-rever`. Os passos abaixo continuam a valer; as skills dizem como fazer
+bem o passo 3.
+
 ## 1. No painel
 
 1. Em **Admin → Clientes**, crie o cliente (ou abra o que já existe).
@@ -64,7 +72,7 @@ enviar alterações suas, faça `git pull`, porque o painel também faz commits.
 Quando o modelo tiver correções em `src/core/`:
 
 ```sh
-pnpm core:update   # traz src/core/ do modelo (ramo main)
+pnpm core:update   # traz src/core/ e .claude/skills/ do modelo (ramo main)
 pnpm run ci        # confirma que o site continua bem
 git commit -am "Atualizar o núcleo"
 ```

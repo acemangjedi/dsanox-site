@@ -1,0 +1,58 @@
+# Frases e formas que o portão procura no texto dos sites, uma por linha.
+# Minúsculas, sem pontuação final. Linhas com # são comentários.
+# Cada parte [pt], [en], [fr] só se aplica às páginas dessa língua.
+# Cresce sempre que o dono do projeto rejeita uma frase numa revisão.
+
+[pt]
+# Chavões
+de excelência
+líder de mercado
+líderes de mercado
+paixão por
+apaixonados por
+apaixonada pelo que faz
+próximo nível
+num mundo cada vez mais
+potenciar
+alavancar
+experiência única
+qualidade e profissionalismo
+soluções inovadoras
+soluções à medida das suas necessidades
+à medida das suas necessidades
+transformar o seu negócio
+bem-vindo ao nosso site
+bem-vindos ao nosso site
+clientes satisfeitos
+o seu parceiro de confiança
+fazemos a diferença
+descubra como
+
+# Formas brasileiras
+contato
+equipe
+celular
+tela
+usuário
+cadastro
+arquivo
+planejamento
+estamos preparando
+
+[en]
+cutting-edge
+world-class
+seamless
+unlock
+elevate your
+take it to the next level
+passionate about
+tailored solutions
+welcome to our website
+
+[fr]
+solutions innovantes
+solutions sur mesure adaptées à vos besoins
+passionnés par
+leader du marché
+bienvenue sur notre site
