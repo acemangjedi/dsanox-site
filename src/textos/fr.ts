@@ -52,7 +52,7 @@ const fr: Textos = {
 		"L'excellence dans chaque projet.",
 	],
 	services: {
-		title: "Trois métiers, du devis au chantier",
+		title: "Trois métiers, du devis au chantier",
 		more: "Voir les services en détail",
 		intro:
 			"Nous prenons en charge le projet entier ou seulement la partie dont vous avez besoin : l'étude et le devis, la fabrication en atelier ou le montage sur site.",
@@ -76,7 +76,7 @@ const fr: Textos = {
 				text: "Découpe, pliage, perçage, fraisage, tournage et soudage en atelier, avec protection des surfaces et contrôle qualité.",
 				items: [
 					"Préparation et usinage",
-					"Soudage et pré‑assemblage",
+					"Soudage et pré⁠-⁠assemblage",
 					"Traitement et protection des surfaces",
 					"Contrôle qualité",
 				],
@@ -135,7 +135,7 @@ const fr: Textos = {
 		],
 	},
 	team: {
-		title: "Soudeurs, tuyauteurs et monteurs",
+		title: "Soudeurs, tuyauteurs et monteurs",
 		intro:
 			"Nous disposons d'une équipe de professionnels qualifiés, dédiés à la réalisation de votre projet.",
 		roles: [
@@ -177,7 +177,7 @@ const fr: Textos = {
 			"Nous créons des solutions d'ingénierie sur mesure, axées sur la performance, la durabilité et l'excellence, en établissant des relations de confiance fondées sur la qualité et l'innovation.",
 		],
 		bodyTitle: "De l'exigence complexe à la solution réalisée.",
-		pillarsTitle: "Mission, vision et principes",
+		pillarsTitle: "Ce qui nous guide",
 		pillars: [
 			{
 				name: "Mission",
@@ -215,7 +215,7 @@ const fr: Textos = {
 		title: "Du devis technique au montage sur chantier.",
 	},
 	teamPage: {
-		title: "Soudeurs, tuyauteurs et monteurs.",
+		title: "Soudeurs, tuyauteurs et monteurs.",
 	},
 	cta: {
 		title: "Un projet à chiffrer ?",

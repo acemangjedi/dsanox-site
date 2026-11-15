@@ -176,14 +176,18 @@
 	.heroi .fundo {
 		@apply absolute inset-0 -z-10;
 	}
+	/* The photographs of a first screen come already darkened (src/assets/fotos/topo). */
+	.heroi .figure img {
+		filter: grayscale(1);
+	}
 	.heroi .fundo::after {
 		content: "";
 		@apply absolute inset-0;
 		background: linear-gradient(
 			to top,
 			var(--color-night) 4%,
-			color-mix(in srgb, var(--color-night) 55%, transparent) 45%,
-			color-mix(in srgb, var(--color-night) 35%, transparent)
+			color-mix(in srgb, var(--color-night) 30%, transparent) 45%,
+			transparent
 		);
 	}
 	.heroi h1 {
@@ -206,11 +210,10 @@
 	.heroi.interior .fundo::after {
 		background: linear-gradient(to top, var(--color-night) 2%, transparent 45%);
 	}
-	.heroi.interior .figure img {
-		filter: grayscale(1);
-	}
+
+	/* The arc crosses the photograph above the title. */
 	.heroi.interior .arco {
-		@apply inset-y-0 h-full;
+		@apply top-[12%] bottom-auto h-[46%];
 	}
 	.heroi.interior {
 		@apply pb-0 md:pb-0;
@@ -226,7 +229,7 @@
 	}
 	/* The arc of the logo, drawn across the first screen. */
 	.arco {
-		@apply pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[70%] w-full;
+		@apply pointer-events-none absolute inset-x-0 top-[10%] -z-10 h-[34%] w-full md:top-auto md:bottom-0 md:h-[70%];
 	}
 	.arco path {
 		fill: none;
@@ -242,7 +245,7 @@
 		@apply border-y border-line py-10 md:py-16;
 	}
 	.lema p {
-		@apply font-display text-[2.25rem] uppercase leading-[0.9] md:text-[6.5rem];
+		@apply font-display text-[2.25rem] uppercase leading-[0.9] md:text-[5rem];
 	}
 	.lema p + p {
 		@apply md:text-right;
@@ -263,10 +266,17 @@
 		@apply mt-12 border-t border-line md:mt-20;
 	}
 	.areas > li {
-		@apply grid gap-8 border-b border-line py-10 md:py-14 lg:grid-cols-2 lg:items-center lg:gap-20;
+		@apply grid gap-8 border-b border-line py-10 md:py-14 lg:grid-cols-[1.35fr_1fr] lg:items-center lg:gap-16;
+	}
+	.areas > li:nth-child(even) {
+		@apply lg:grid-cols-[1fr_1.35fr];
+	}
+	/* The photograph of each area runs to the edge of the page. */
+	.areas > li:nth-child(odd) .figure {
+		@apply -mx-5 md:-ml-10 md:mr-0;
 	}
 	.areas > li:nth-child(even) .figure {
-		@apply lg:order-2;
+		@apply -mx-5 md:ml-0 md:-mr-10 lg:order-2;
 	}
 	.areas .num {
 		@apply block font-display text-[2.5rem] leading-none text-accent-soft md:text-[3.5rem];
@@ -281,7 +291,7 @@
 		@apply border-b border-line pb-2 font-bold;
 	}
 	.areas .figure {
-		@apply aspect-[4/3] lg:aspect-[5/4];
+		@apply aspect-[4/3] lg:aspect-[16/11];
 	}
 	.areas .figure img {
 		@apply transition-transform duration-700 ease-out;
@@ -330,7 +340,15 @@
 
 	/* The red band that closes a page: the invitation on one side, the form on the other. */
 	.contacto {
-		@apply bg-accent py-20 text-accent-ink md:py-28;
+		@apply bg-accent pb-20 text-accent-ink md:pb-28;
+	}
+	/* The top edge of a red band is the curve of the logo. */
+	.curva {
+		@apply mb-12 block h-16 w-full md:mb-16 md:h-32;
+		fill: var(--color-night);
+	}
+	.bg-steel + .contacto .curva {
+		fill: var(--color-steel);
 	}
 	.contacto > .limite {
 		@apply grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-20;
@@ -424,7 +442,7 @@
 		@apply mt-8 max-w-[52ch] text-[1.1875rem] text-ink-2;
 	}
 	.chamada {
-		@apply bg-accent py-16 text-accent-ink md:py-24;
+		@apply bg-accent pb-16 text-accent-ink md:pb-24;
 	}
 	.chamada .botao-cheio {
 		@apply bg-night text-ink hover:bg-ink hover:text-night;
@@ -436,7 +454,7 @@
 		@apply font-display text-[2.5rem] leading-none text-accent-soft;
 	}
 	.pilares h3 {
-		@apply mt-4 text-[3rem] md:text-[4rem];
+		@apply mt-4 text-[2.5rem] md:text-[3rem];
 	}
 	.pilares p {
 		@apply mt-4 text-[1.0625rem] text-ink-2;

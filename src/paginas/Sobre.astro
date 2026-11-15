@@ -1,7 +1,9 @@
 ---
+import f03 from "../assets/fotos/foto-03.jpg";
 import f07 from "../assets/fotos/topo/foto-07.jpg";
 import Chamada from "../components/Chamada.astro";
 import Topo from "../components/Topo.astro";
+import Figure from "../core/blocks/Figure.astro";
 import type { Lang } from "../core/i18n";
 import Layout from "../layouts/Site.astro";
 import { textosDe } from "../textos";
@@ -41,6 +43,10 @@ const q = t.about.quality;
 			</ul>
 		</div>
 	</section>
+
+	<div class="faixa">
+		<Figure src={f03} alt={t.alts.heights} widths={[640, 1086]} sizes="100vw" />
+	</div>
 
 	<section class="seccao" id="qualidade">
 		<div class="limite grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-20">

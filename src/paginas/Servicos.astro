@@ -1,6 +1,6 @@
 ---
-import f01 from "../assets/fotos/foto-01.jpg";
-import f02 from "../assets/fotos/foto-02.jpg";
+import f06 from "../assets/fotos/foto-06.jpg";
+import f07 from "../assets/fotos/foto-07.jpg";
 import f10 from "../assets/fotos/foto-10.jpg";
 import f04 from "../assets/fotos/topo/foto-04.jpg";
 import Chamada from "../components/Chamada.astro";
@@ -9,6 +9,7 @@ import Figure from "../core/blocks/Figure.astro";
 import type { Lang } from "../core/i18n";
 import Layout from "../layouts/Site.astro";
 import { textosDe } from "../textos";
+import { rotas } from "../textos/rotas";
 
 interface Props {
 	lang: Lang;
@@ -17,8 +18,8 @@ const { lang } = Astro.props;
 const t = textosDe(lang);
 const n = (i: number) => String(i + 1).padStart(2, "0");
 const photos = [
-	{ src: f02, alt: t.alts.plant },
-	{ src: f01, alt: t.alts.skid },
+	{ src: f07, alt: t.alts.hall },
+	{ src: f06, alt: t.alts.weld },
 	{ src: f10, alt: t.alts.lift },
 ];
 ---
@@ -33,6 +34,7 @@ const photos = [
 					<span class="num" aria-hidden="true">{n(i)}</span>
 					<h2 class="revela">{a.name}</h2>
 					<p>{a.text}</p>
+					<a class="ligacao lg:col-start-2" href={rotas.contact[lang]}>{t.cta.button}</a>
 				</div>
 				<div class:list={["corpo", { inverso: i % 2 === 1 }]}>
 					<Figure class="revela" src={photos[i].src} alt={photos[i].alt} widths={[480, 800, 1086]} sizes="(min-width: 1024px) 40vw, 100vw" />

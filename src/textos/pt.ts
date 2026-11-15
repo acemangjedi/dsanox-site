@@ -71,7 +71,7 @@ const pt = {
 				text: "Corte, dobragem, perfuração, fresagem, torneamento e soldadura em oficina, com proteção de superfícies e controlo de qualidade.",
 				items: [
 					"Preparação e maquinação",
-					"Soldadura e pré‑montagem",
+					"Soldadura e pré⁠-⁠montagem",
 					"Tratamento e proteção de superfícies",
 					"Controlo de qualidade",
 				],
@@ -130,7 +130,7 @@ const pt = {
 		],
 	},
 	team: {
-		title: "Soldadores, tubistas e montadores",
+		title: "Soldadores, tubistas e montadores",
 		intro:
 			"Dispomos de uma equipa de profissionais qualificados, dedicados à realização do seu projeto.",
 		roles: [
@@ -149,7 +149,7 @@ const pt = {
 		],
 	},
 	contact: {
-		title: "Vamos falar sobre o seu próximo projeto.",
+		title: "Vamos falar sobre o seu próximo projeto.",
 		formTitle: "Pedir orçamento",
 		send: "Enviar pedido",
 		text: "Estamos disponíveis para analisar as suas necessidades e desenvolver a solução mais adequada ao seu projeto.",
@@ -172,7 +172,7 @@ const pt = {
 			"Criamos soluções de engenharia à medida, orientadas para o desempenho, a durabilidade e a excelência, construindo relações de confiança baseadas na qualidade e na inovação.",
 		],
 		bodyTitle: "Do requisito complexo à solução executada.",
-		pillarsTitle: "Missão, visão e princípios",
+		pillarsTitle: "O que nos orienta",
 		pillars: [
 			{
 				name: "Missão",
@@ -208,10 +208,10 @@ const pt = {
 		},
 	},
 	servicesPage: {
-		title: "Do orçamento técnico à montagem em obra.",
+		title: "Do orçamento técnico à montagem em obra.",
 	},
 	teamPage: {
-		title: "Soldadores, tubistas e montadores.",
+		title: "Soldadores, tubistas e montadores.",
 	},
 	cta: {
 		title: "Tem um projeto para orçamentar?",
@@ -219,7 +219,7 @@ const pt = {
 	},
 	thanks: {
 		seoTitle: "Mensagem enviada | DS Anox",
-		title: "Recebemos o seu pedido.",
+		title: "Recebemos o seu pedido.",
 		text: "Vamos analisá-lo e responder para o email que indicou.",
 		call: "Para um assunto urgente, ligue para o",
 		back: "Voltar ao início",

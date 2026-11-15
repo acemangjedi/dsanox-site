@@ -41,7 +41,7 @@ const en: Textos = {
 		contact: "Contact",
 	},
 	hero: {
-		lines: ["Industrial piping,", "steel structures", "and on‑site assembly."],
+		lines: ["Industrial piping,", "steel structures", "and on⁠-⁠site assembly."],
 		lede: "From technical analysis and estimate to prefabrication and assembly on site, DS Anox delivers custom industrial projects from Vila Nova de Famalicão, Portugal.",
 		primary: "Request a quote",
 		secondary: "See our services",
@@ -73,7 +73,7 @@ const en: Textos = {
 				text: "Cutting, bending, drilling, milling, turning and welding in the workshop, with surface protection and quality control.",
 				items: [
 					"Preparation and machining",
-					"Welding and pre‑assembly",
+					"Welding and pre⁠-⁠assembly",
 					"Surface treatment and protection",
 					"Quality control",
 				],
@@ -132,7 +132,7 @@ const en: Textos = {
 		],
 	},
 	team: {
-		title: "Welders, pipefitters and assemblers",
+		title: "Welders, pipefitters and assemblers",
 		intro:
 			"We have a team of qualified professionals, dedicated to carrying out your project.",
 		roles: [
@@ -174,7 +174,7 @@ const en: Textos = {
 			"We create customised engineering solutions focused on performance, durability and excellence, building relationships of trust based on quality and innovation.",
 		],
 		bodyTitle: "From a complex requirement to the finished solution.",
-		pillarsTitle: "Mission, vision and principles",
+		pillarsTitle: "What guides us",
 		pillars: [
 			{
 				name: "Mission",
@@ -212,7 +212,7 @@ const en: Textos = {
 		title: "From technical estimate to assembly on site.",
 	},
 	teamPage: {
-		title: "Welders, pipefitters and assemblers.",
+		title: "Welders, pipefitters and assemblers.",
 	},
 	cta: {
 		title: "Have a project to quote?",
@@ -232,7 +232,7 @@ const en: Textos = {
 		back: "Back to the home page",
 	},
 	footer: {
-		line: "Industrial piping, steel structures and on‑site assembly.",
+		line: "Industrial piping, steel structures and on⁠-⁠site assembly.",
 		rights: "All rights reserved.",
 		privacy: "Privacy policy",
 		cookies: "Cookie policy",

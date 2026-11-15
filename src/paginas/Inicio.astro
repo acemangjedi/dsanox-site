@@ -1,10 +1,10 @@
 ---
 import f01 from "../assets/fotos/foto-01.jpg";
 import f02 from "../assets/fotos/foto-02.jpg";
-import f06 from "../assets/fotos/foto-06.jpg";
+import f08 from "../assets/fotos/foto-08.jpg";
 import f09 from "../assets/fotos/foto-09.jpg";
-import f10 from "../assets/fotos/foto-10.jpg";
-import f11 from "../assets/fotos/foto-11.jpg";
+import f12 from "../assets/fotos/foto-12.jpg";
+import f11 from "../assets/fotos/topo/foto-11.jpg";
 import Contacto from "../components/Contacto.astro";
 import Figure from "../core/blocks/Figure.astro";
 import type { Lang } from "../core/i18n";
@@ -21,7 +21,7 @@ const n = (i: number) => String(i + 1).padStart(2, "0");
 const areaPhotos = [
 	{ src: f02, alt: t.alts.plant },
 	{ src: f01, alt: t.alts.skid },
-	{ src: f10, alt: t.alts.lift },
+	{ src: f09, alt: t.alts.outside },
 ];
 ---
 
@@ -77,7 +77,7 @@ const areaPhotos = [
 	</section>
 
 	<div class="faixa">
-		<Figure src={f09} alt={t.alts.outside} widths={[640, 1086]} sizes="100vw" />
+		<Figure src={f12} alt={t.alts.tank} widths={[640, 1200, 1800]} sizes="100vw" />
 	</div>
 
 	<section class="seccao">
@@ -97,7 +97,7 @@ const areaPhotos = [
 
 	<section class="seccao bg-steel">
 		<div class="limite equipa">
-			<Figure class="revela" src={f06} alt={t.alts.weld} widths={[480, 800, 1200]} sizes="(min-width: 1024px) 45vw, 100vw" />
+			<Figure class="revela" src={f08} alt={t.alts.close} widths={[480, 800, 1200]} sizes="(min-width: 1024px) 45vw, 100vw" />
 			<div>
 				<h2 class="revela medio">{t.team.title}</h2>
 				<p class="mt-6 max-w-[44ch] text-ink-2">{t.team.intro}</p>
