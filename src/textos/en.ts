@@ -210,6 +210,35 @@ const en: Textos = {
 	},
 	servicesPage: {
 		title: "From technical estimate to assembly on site.",
+		see: "See this area",
+		others: "The other areas",
+		all: "All services",
+		areas: [
+			{
+				seoTitle: "Technical and budget consulting for industrial projects",
+				seoDescription:
+					"A technical estimate with material, production and labour costs, planning of every stage and execution with control of costs and deadlines.",
+				title: "Technical estimates and planning for industrial projects.",
+				intro:
+					"Before work begins, we analyse material, production and labour costs and plan every stage. The estimate you receive is accurate and transparent, and the deadlines are set from the start.",
+			},
+			{
+				seoTitle: "Prefabrication of steel components and structures",
+				seoDescription:
+					"Cutting, bending, drilling, milling, turning, welding and pre-assembly in the workshop, with surface treatment and quality control.",
+				title: "Prefabrication of steel components and structures.",
+				intro:
+					"We prepare and machine the materials, weld and pre-assemble the components and protect the surfaces against corrosion. Every part is inspected against the specifications, the standards and the project requirements.",
+			},
+			{
+				seoTitle: "Industrial construction: structures, piping, assembly",
+				seoDescription:
+					"Manufacturing of steel structures, industrial assembly on site, piping and ductwork systems, and preventive and corrective maintenance of facilities.",
+				title: "Steel structures, piping and industrial assembly on site.",
+				intro:
+					"We manufacture structures, beams and columns; we lift, position and weld on site; we install piping and ductwork systems; and we carry out preventive and corrective maintenance of the facilities.",
+			},
+		],
 	},
 	teamPage: {
 		title: "Welders, pipefitters and assemblers.",

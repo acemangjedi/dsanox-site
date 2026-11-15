@@ -64,7 +64,7 @@
 	h2,
 	h3 {
 		@apply font-display uppercase;
-		line-height: 0.86;
+		line-height: 0.93;
 		text-wrap: balance;
 	}
 	@media (prefers-reduced-motion: reduce) {
@@ -191,7 +191,8 @@
 		);
 	}
 	.heroi h1 {
-		font-size: clamp(3.5rem, 7vw, 7.5rem);
+		font-size: clamp(3.5rem, 6.8vw, 7.5rem);
+		line-height: 0.9;
 		letter-spacing: -0.01em;
 	}
 	.heroi h1 .linha {
@@ -229,7 +230,7 @@
 	}
 	/* The arc of the logo, drawn across the first screen. */
 	.arco {
-		@apply pointer-events-none absolute inset-x-0 top-[10%] -z-10 h-[34%] w-full md:top-auto md:bottom-0 md:h-[70%];
+		@apply pointer-events-none absolute inset-x-0 top-[10%] -z-10 h-[34%] w-full md:h-[40%];
 	}
 	.arco path {
 		fill: none;
@@ -382,7 +383,7 @@
 		@apply self-start bg-night p-6 text-ink md:p-10;
 	}
 	.ficha .titulo {
-		@apply mb-8 text-[2.5rem];
+		@apply mb-8 max-w-none text-[2.5rem] md:text-[2.5rem];
 	}
 
 	/* The core's form. */
@@ -514,6 +515,19 @@
 	}
 	.area .figure {
 		@apply aspect-[4/3] self-start lg:aspect-[4/5];
+	}
+	.area .itens {
+		@apply border-t border-line;
+	}
+	.area .itens li {
+		@apply border-b border-line py-5 font-display text-[2rem] uppercase leading-[0.95] md:py-7 md:text-[3rem];
+	}
+	/* The way to the other areas: their names, large, one to a line. */
+	.outras {
+		@apply mt-10 border-t border-line;
+	}
+	.outras a {
+		@apply flex min-h-11 items-center border-b border-line py-6 font-display text-[2.25rem] uppercase leading-[0.95] underline-offset-8 hover:underline hover:decoration-accent md:text-[3.5rem];
 	}
 	.area dl {
 		@apply border-t border-line;

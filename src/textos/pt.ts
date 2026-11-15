@@ -2,7 +2,7 @@
 const pt = {
 	seo: {
 		home: {
-			title: "DS Anox | Tubagem industrial, estruturas metálicas e montagem",
+			title: "DS Anox | Tubagem, estruturas metálicas, montagem industrial",
 			description:
 				"Metalurgia de precisão em Vila Nova de Famalicão: orçamento técnico, pré-fabricação, soldadura, tubagem e montagem industrial em obra.",
 		},
@@ -209,6 +209,36 @@ const pt = {
 	},
 	servicesPage: {
 		title: "Do orçamento técnico à montagem em obra.",
+		see: "Ver esta área",
+		others: "As outras áreas",
+		all: "Todos os serviços",
+		// One page for each area, in the order of services.areas.
+		areas: [
+			{
+				seoTitle: "Consultoria técnica e orçamental para projetos industriais",
+				seoDescription:
+					"Orçamento técnico com os custos de materiais, produção e mão de obra, planeamento de cada etapa e execução com controlo de custos e de prazos.",
+				title: "Orçamento técnico e planeamento de projetos industriais.",
+				intro:
+					"Antes de começar, analisamos os custos de materiais, de produção e de mão de obra e planeamos cada etapa. O orçamento que recebe é rigoroso e transparente, e os prazos ficam definidos à partida.",
+			},
+			{
+				seoTitle: "Pré-fabricação de componentes e estruturas metálicas",
+				seoDescription:
+					"Corte, dobragem, perfuração, fresagem, torneamento, soldadura e pré-montagem em oficina, com tratamento de superfícies e controlo de qualidade.",
+				title: "Pré-fabricação de componentes e estruturas metálicas.",
+				intro:
+					"Preparamos e maquinamos os materiais, soldamos e pré-montamos os componentes e protegemos as superfícies contra a corrosão. Cada peça é inspecionada de acordo com as especificações, as normas e os requisitos do projeto.",
+			},
+			{
+				seoTitle: "Construção industrial: estruturas, tubagem e montagem",
+				seoDescription:
+					"Fabrico de estruturas metálicas, montagem industrial em obra, sistemas de tubagem e condutas e manutenção preventiva e corretiva de instalações.",
+				title: "Estruturas metálicas, tubagem e montagem industrial em obra.",
+				intro:
+					"Fabricamos estruturas, vigas e pilares; elevamos, posicionamos e soldamos em obra; instalamos sistemas de tubagem e condutas; e asseguramos a manutenção preventiva e corretiva das instalações.",
+			},
+		],
 	},
 	teamPage: {
 		title: "Soldadores, tubistas e montadores.",

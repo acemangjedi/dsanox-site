@@ -32,9 +32,7 @@ export default defineSite({
 		siteKey: "POR-PREENCHER",
 	},
 	forms: {
-		// To fill in from the panel (Formulários, "Contactos").
-		contactos: "POR-PREENCHER",
+		contactos: "kRKcjPazjjxdfooN81PxFQ.ueWJq995nmEi",
 	},
-	// The three design directions, until one is chosen.
 	hidden: [],
 });

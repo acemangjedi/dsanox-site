@@ -9,7 +9,7 @@ import Figure from "../core/blocks/Figure.astro";
 import type { Lang } from "../core/i18n";
 import Layout from "../layouts/Site.astro";
 import { textosDe } from "../textos";
-import { rotas } from "../textos/rotas";
+import { areas, rotas } from "../textos/rotas";
 
 interface Props {
 	lang: Lang;
@@ -34,18 +34,13 @@ const photos = [
 					<span class="num" aria-hidden="true">{n(i)}</span>
 					<h2 class="revela">{a.name}</h2>
 					<p>{a.text}</p>
-					<a class="ligacao lg:col-start-2" href={rotas.contact[lang]}>{t.cta.button}</a>
+					<a class="ligacao lg:col-start-2" href={rotas[areas[i]][lang]}>{t.servicesPage.see}</a>
 				</div>
 				<div class:list={["corpo", { inverso: i % 2 === 1 }]}>
 					<Figure class="revela" src={photos[i].src} alt={photos[i].alt} widths={[480, 800, 1086]} sizes="(min-width: 1024px) 40vw, 100vw" />
-					<dl>
-						{a.items.map((item, j) => (
-							<div class="revela">
-								<dt>{item}</dt>
-								<dd>{a.details[j]}</dd>
-							</div>
-						))}
-					</dl>
+					<ul class="itens">
+						{a.items.map((item) => <li class="revela">{item}</li>)}
+					</ul>
 				</div>
 			</div>
 		</section>

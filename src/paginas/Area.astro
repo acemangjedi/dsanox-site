@@ -1,0 +1,75 @@
+---
+// The page of one service area: what it covers, item by item, and the form to ask for it.
+import f06 from "../assets/fotos/foto-06.jpg";
+import f07 from "../assets/fotos/foto-07.jpg";
+import f09 from "../assets/fotos/foto-09.jpg";
+import t01 from "../assets/fotos/topo/foto-01.jpg";
+import t02 from "../assets/fotos/topo/foto-02.jpg";
+import t10 from "../assets/fotos/topo/foto-10.jpg";
+import Contacto from "../components/Contacto.astro";
+import Topo from "../components/Topo.astro";
+import Figure from "../core/blocks/Figure.astro";
+import type { Lang } from "../core/i18n";
+import Layout from "../layouts/Site.astro";
+import { textosDe } from "../textos";
+import { areas, rotas } from "../textos/rotas";
+
+interface Props {
+	lang: Lang;
+	// Which of the three areas, in the order of the texts.
+	i: 0 | 1 | 2;
+}
+const { lang, i } = Astro.props;
+const t = textosDe(lang);
+const a = t.services.areas[i];
+const p = t.servicesPage.areas[i];
+const topo = [
+	{ src: t02, alt: t.alts.plant },
+	{ src: t01, alt: t.alts.skid },
+	{ src: t10, alt: t.alts.lift },
+][i];
+const foto = [
+	{ src: f07, alt: t.alts.hall },
+	{ src: f06, alt: t.alts.weld },
+	{ src: f09, alt: t.alts.outside },
+][i];
+const outras = areas
+	.map((key, j) => ({ key, name: t.services.areas[j].name }))
+	.filter((_, j) => j !== i);
+---
+
+<Layout lang={lang} title={p.seoTitle} description={p.seoDescription} pagina={areas[i]} sobreposto>
+	<Topo src={topo.src} alt={topo.alt} title={p.title} text={p.intro} />
+
+	<section class="area">
+		<div class="limite">
+			<div class="cabeca">
+				<span class="num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+				<h2 class="revela">{a.name}</h2>
+			</div>
+			<div class:list={["corpo", { inverso: i % 2 === 1 }]}>
+				<Figure class="revela" src={foto.src} alt={foto.alt} widths={[480, 800, 1086]} sizes="(min-width: 1024px) 40vw, 100vw" />
+				<dl>
+					{a.items.map((item, j) => (
+						<div class="revela">
+							<dt>{item}</dt>
+							<dd>{a.details[j]}</dd>
+						</div>
+					))}
+				</dl>
+			</div>
+		</div>
+	</section>
+
+	<section class="seccao">
+		<div class="limite">
+			<h2 class="revela medio">{t.servicesPage.others}</h2>
+			<ul class="outras">
+				{outras.map((o) => <li><a href={rotas[o.key][lang]}>{o.name}</a></li>)}
+				<li><a href={rotas.services[lang]}>{t.servicesPage.all}</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<Contacto lang={lang} />
+</Layout>

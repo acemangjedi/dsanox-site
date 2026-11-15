@@ -213,6 +213,35 @@ const fr: Textos = {
 	},
 	servicesPage: {
 		title: "Du devis technique au montage sur chantier.",
+		see: "Voir ce métier",
+		others: "Les autres métiers",
+		all: "Tous les services",
+		areas: [
+			{
+				seoTitle: "Conseil technique et budgétaire pour projets industriels",
+				seoDescription:
+					"Devis technique avec les coûts des matériaux, de la production et de la main-d'œuvre, la planification de chaque étape et la maîtrise des coûts et des délais.",
+				title: "Devis technique et planification de projets industriels.",
+				intro:
+					"Avant de commencer, nous analysons les coûts des matériaux, de la production et de la main-d'œuvre et nous planifions chaque étape. Le devis que vous recevez est précis et transparent, et les délais sont fixés dès le départ.",
+			},
+			{
+				seoTitle: "Préfabrication de composants et de structures métalliques",
+				seoDescription:
+					"Découpe, pliage, perçage, fraisage, tournage, soudage et pré-assemblage en atelier, avec traitement des surfaces et contrôle qualité.",
+				title: "Préfabrication de composants et de structures métalliques.",
+				intro:
+					"Nous préparons et usinons les matériaux, nous soudons et pré-assemblons les composants et nous protégeons les surfaces contre la corrosion. Chaque pièce est contrôlée au regard des spécifications, des normes et des exigences du projet.",
+			},
+			{
+				seoTitle: "Construction industrielle : structures, tuyauterie, montage",
+				seoDescription:
+					"Fabrication de structures métalliques, montage industriel sur chantier, systèmes de tuyauterie et de conduites, maintenance préventive et corrective.",
+				title: "Structures métalliques, tuyauterie et montage sur chantier.",
+				intro:
+					"Nous fabriquons des structures, des poutres et des poteaux ; nous levons, positionnons et soudons sur chantier ; nous installons des systèmes de tuyauterie et de conduites ; et nous assurons la maintenance préventive et corrective des installations.",
+			},
+		],
 	},
 	teamPage: {
 		title: "Soudeurs, tuyauteurs et monteurs.",

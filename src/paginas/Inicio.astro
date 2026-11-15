@@ -10,7 +10,7 @@ import Figure from "../core/blocks/Figure.astro";
 import type { Lang } from "../core/i18n";
 import Layout from "../layouts/Site.astro";
 import { textosDe } from "../textos";
-import { rotas } from "../textos/rotas";
+import { areas, rotas } from "../textos/rotas";
 
 interface Props {
 	lang: Lang;
@@ -69,6 +69,7 @@ const areaPhotos = [
 							<h3>{a.name}</h3>
 							<p class="mt-5 max-w-[44ch] text-ink-2">{a.text}</p>
 							<ul>{a.items.map((item) => <li>{item}</li>)}</ul>
+							<a class="ligacao mt-6" href={rotas[areas[i]][lang]}>{t.servicesPage.see}</a>
 						</div>
 					</li>
 				))}

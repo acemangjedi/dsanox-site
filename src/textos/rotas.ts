@@ -6,6 +6,21 @@ export const rotas = {
 	about: { pt: "/sobre-nos/", en: "/en/about/", fr: "/fr/a-propos/" },
 	services: { pt: "/servicos/", en: "/en/services/", fr: "/fr/services/" },
 	team: { pt: "/equipa/", en: "/en/team/", fr: "/fr/equipe/" },
+	consulting: {
+		pt: "/servicos/consultoria-tecnica-e-orcamental/",
+		en: "/en/services/technical-and-budget-consulting/",
+		fr: "/fr/services/conseil-technique-et-budgetaire/",
+	},
+	prefab: {
+		pt: "/servicos/pre-fabricacao/",
+		en: "/en/services/prefabrication/",
+		fr: "/fr/services/prefabrication/",
+	},
+	construction: {
+		pt: "/servicos/construcao-industrial/",
+		en: "/en/services/industrial-construction/",
+		fr: "/fr/services/construction-industrielle/",
+	},
 	contact: { pt: "/contactos/", en: "/en/contact/", fr: "/fr/contact/" },
 	privacy: {
 		pt: "/politica-de-privacidade/",
@@ -26,3 +41,6 @@ export const rotas = {
 } satisfies Record<string, Record<Lang, string>>;
 
 export type Pagina = keyof typeof rotas;
+
+// The three service areas, in the order of the texts (services.areas).
+export const areas = ["consulting", "prefab", "construction"] as const;
