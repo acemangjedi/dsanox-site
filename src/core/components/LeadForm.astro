@@ -42,6 +42,11 @@ const { email, phone, whatsapp } = site.contacts;
 		<input type="checkbox" name="consent" value="on" required />
 		<span>{w.consentBefore} <a href={pathOf("privacy", lang, site)}>{w.privacyLink}</a>.</span>
 	</label>
+	<!-- A box of its own: only who ticks it gets the site's campaigns from the panel. -->
+	<label class="form-checkbox">
+		<input type="checkbox" name="news" value="on" />
+		<span>{w.news.replace("{site}", site.name)}</span>
+	</label>
 	<input type="hidden" name="consent_text" value={consentText} />
 	<input type="hidden" name="form_ts" value="" />
 	<div class="lead-form-trap" aria-hidden="true">

@@ -80,3 +80,8 @@ Feito a <data>, com <quem respondeu>.
 
 No fim, mostra o briefing à pessoa e pede que confirme os factos. Depois
 segue-se `site-direcoes`.
+
+Se `site.config.ts` ainda tiver o nome e as chaves do modelo, o site ainda não
+existe no painel: a skill `site-painel` cria o cliente, o site e o formulário
+com o que o briefing já diz (nome, domínio, email dos contactos), sem pedir ao
+dono do projeto que o faça.

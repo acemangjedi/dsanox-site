@@ -14,6 +14,7 @@ const strings = {
 		consentBefore:
 			"Aceito que os meus dados sejam usados para responder a este pedido, como descrito na",
 		privacyLink: "Política de Privacidade",
+		news: "Quero receber novidades de {site} por email. Posso sair quando quiser.",
 		trap: "Não preencher",
 		formError:
 			"Verifique os campos: o email tem de ser válido e é preciso aceitar a política de privacidade.",
@@ -60,6 +61,7 @@ const strings = {
 		consentBefore:
 			"I agree that my data may be used to answer this request, as described in the",
 		privacyLink: "Privacy Policy",
+		news: "I would like to get news from {site} by email. I can leave whenever I want.",
 		trap: "Do not fill in",
 		formError:
 			"Please check the fields: the email must be valid and the privacy policy must be accepted.",
@@ -105,6 +107,7 @@ const strings = {
 		consentBefore:
 			"J'accepte que mes données soient utilisées pour répondre à cette demande, comme décrit dans la",
 		privacyLink: "Politique de confidentialité",
+		news: "Je souhaite recevoir les nouvelles de {site} par e-mail. Je peux me désinscrire à tout moment.",
 		trap: "Ne pas remplir",
 		formError:
 			"Vérifiez les champs : l'e-mail doit être valide et la politique de confidentialité doit être acceptée.",

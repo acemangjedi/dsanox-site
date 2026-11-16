@@ -1,0 +1,11 @@
+{
+	"mcpServers": {
+		"painel": {
+			"type": "http",
+			"url": "https://painel.simplelife.uno/api/v1/mcp",
+			"headers": {
+				"Authorization": "Bearer ${PAINEL_API_KEY:-}"
+			}
+		}
+	}
+}
