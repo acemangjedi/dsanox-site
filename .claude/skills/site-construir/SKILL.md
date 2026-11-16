@@ -33,7 +33,9 @@ para este cliente que o site deixa de parecer um modelo.
 ## Preparar
 
 1. `site.config.ts`: nome, endereço, línguas (`lang` e `locales`), morada,
-   contactos, chaves do painel e do formulário.
+   contactos, chaves do painel e do formulário. As chaves vão-se buscar ao
+   painel com a skill `site-painel`, que também lá define as línguas e os
+   campos extra dos artigos.
 2. O tema: `src/styles/site.css` com `@import "tailwindcss"`, os `@font-face`
    e o `@theme` gerado do DESIGN.md
    (`npx @google/design.md export --format css-tailwind DESIGN.md`). Liga as
