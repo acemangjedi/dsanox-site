@@ -18,7 +18,7 @@ gallery:
 
 - src: "../../../assets/fotos/foto-06.jpg"
   alt: "Soldador a trabalhar numa conduta de grande diâmetro"
-- src: "../../../assets/fotos/foto-08.jpg"
+- src: "../../../assets/fotos/foto-08.webp"
   alt: "Soldador com máscara a soldar uma peça em aço, visto de perto"
 
 ---

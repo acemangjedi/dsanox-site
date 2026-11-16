@@ -18,7 +18,7 @@ gallery:
 
 - src: "../../../assets/fotos/foto-06.jpg"
   alt: "Welder working on a large-diameter duct"
-- src: "../../../assets/fotos/foto-08.jpg"
+- src: "../../../assets/fotos/foto-08.webp"
   alt: "Welder in a mask welding a steel part, seen from close up"
 
 ---

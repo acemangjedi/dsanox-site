@@ -18,7 +18,7 @@ gallery:
 
 - src: "../../../assets/fotos/foto-06.jpg"
   alt: "Soudeur travaillant sur une conduite de grand diamètre"
-- src: "../../../assets/fotos/foto-08.jpg"
+- src: "../../../assets/fotos/foto-08.webp"
   alt: "Soudeur masqué soudant une pièce en acier, vu de près"
 
 ---
